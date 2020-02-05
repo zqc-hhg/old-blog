@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		分治 | 
+		5分治 | 
 	 
 	Max
 	</title>
@@ -121,7 +121,7 @@
 <div class="article-meta">
 	
 		<span>
-			阅读量:<span id="/2020/02/04/%E5%88%86%E6%B2%BB/" class="leancloud_visitors" data-flag-title="分治"></span>
+			阅读量:<span id="/2020/02/04/%E5%88%86%E6%B2%BB/" class="leancloud_visitors" data-flag-title="5分治"></span>
 		</span>
 	
 	<span>max</span>
@@ -142,7 +142,7 @@
 </div>
 
 <div id="article-content">
-	<h2 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h2><pre><code>分治法可以通俗的解释为：把一片领土分解，分解为若干块小部分，然后一块块地占领征服，被分解的可以是不同的政治派别或是其他什么，然后让他们彼此异化。</code></pre><p>****        分治法的精髓：</p>
+	<pre><code>分治法可以通俗的解释为：把一片领土分解，分解为若干块小部分，然后一块块地占领征服，被分解的可以是不同的政治派别或是其他什么，然后让他们彼此异化。</code></pre><h3 id="5-1精髓"><a href="#5-1精髓" class="headerlink" title="5.1精髓"></a>5.1精髓</h3><p>​      分治法的精髓：</p>
 <ul>
 <li><p>分–将问题分解为规模更小的子问题；</p>
 </li>
@@ -151,7 +151,7 @@
 <li><p>合–将已解决的子问题合并，最终得出“母”问题的解；</p>
 </li>
 </ul>
-<p>​       分治法所能解决的问题一般具有以下几个特征：</p>
+<h3 id="5-2问题特征"><a href="#5-2问题特征" class="headerlink" title="5.2问题特征"></a>5.2问题特征</h3><p>​       分治法所能解决的问题一般具有以下几个<strong>特征</strong>：</p>
 <ol>
 <li><p>该问题的规模缩小到一定的程度就可以容易地解决</p>
 </li>
@@ -160,8 +160,35 @@
 <li><p>利用该问题分解出的子问题的解可以合并为该问题的解；</p>
 </li>
 <li><p>该问题所分解出的各个子问题是相互独立的，即子问题之间不包含公共的子问题。</p>
-</li>
+<h3 id="5-3具体问题"><a href="#5-3具体问题" class="headerlink" title="5.3具体问题"></a>5.3具体问题</h3></li>
 </ol>
+<p>（1）二分搜索</p>
+<p>（2）大整数乘法</p>
+<p>（3）Strassen矩阵乘法</p>
+<p>（4）棋盘覆盖</p>
+<p>（5）归并排序</p>
+<p>（6）快速排序</p>
+<p>（7）线性时间选择</p>
+<p>（8）最接近点对问题</p>
+<p>（9）循环赛日程表</p>
+<p>（10）汉诺塔</p>
+<h4 id="5-3-5-棋盘覆盖"><a href="#5-3-5-棋盘覆盖" class="headerlink" title="5.3.5 棋盘覆盖"></a>5.3.5 棋盘覆盖</h4><h5 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h5><p> 有一个n*n（n是2的整数次方）的方格棋盘，恰有一个方格是黑色的，其他为白色。你的任务是用包含3个方格的L型牌覆盖所有白色方格。黑色方格不能被覆盖，且任意一个白色方格不能同时被两个或更多牌覆盖。如图所示为L型牌的4种旋转方式。</p>
+<p>  <img src="https://s2.ax1x.com/2020/01/28/1MAyUx.jpg" alt="1MAyUx.jpg"></p>
+<h5 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h5><p>分治三步骤</p>
+<ul>
+<li>划分问题：将2k∗2k2k∗2k的棋盘划分为2k−1∗2k−12k−1∗2k−1这样的子棋盘4块。</li>
+<li>递归求解：递归填充各个格子，填充分为四个情况，在下面会有解释，递归出口为k=0k=0也就是子棋盘方格数为1。</li>
+<li>合并问题：不需要合并子问题。</li>
+</ul>
+<p>递归填充的四种情况<br>      如果黑方块在左上子棋盘，则递归填充左上子棋盘；否则填充左上子棋盘的右下角，将右下角看做黑色方块，然后递归填充左上子棋盘。<br>      如果黑方块在右上子棋盘，则递归填充右上子棋盘；否则填充右上子棋盘的左下角，将左下角看做黑色方块，然后递归填充右上子棋盘。<br>      如果黑方块在左下子棋盘，则递归填充左下子棋盘；否则填充左下子棋盘的右上角，将右上角看做黑色方块，然后递归填充左下子棋盘。<br>      如果黑方块在右下子棋盘，则递归填充右下子棋盘；否则填充右下子棋盘的右下角，将左上角看做黑色方块，然后递归填充右下子棋盘。</p>
+<img src="https://s2.ax1x.com/2020/01/28/1MAgPK.png" alt="1MAgPK.png" style="zoom:67%;" />
+
+<h5 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max 1024</span></span><br><span class="line"><span class="keyword">int</span> cb[<span class="built_in">max</span>][<span class="built_in">max</span>];<span class="comment">//最大棋盘</span></span><br><span class="line"><span class="keyword">int</span> id=<span class="number">0</span>;<span class="comment">//覆盖标志位</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">chessboard</span><span class="params">(<span class="keyword">int</span> tr,<span class="keyword">int</span> tc,<span class="keyword">int</span> dr,<span class="keyword">int</span> dc,<span class="keyword">int</span> <span class="built_in">size</span>)</span><span class="comment">//tr，tc代表棋盘左上角的位置，dr ,dc代表棋盘不可覆盖点的位置,size是棋盘大小</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">size</span>==<span class="number">1</span>)<span class="comment">//如果递归到某个时候，棋盘大小为1，则结束递归</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> s=<span class="built_in">size</span>/<span class="number">2</span>;<span class="comment">//使得新得到的棋盘为原来棋盘大小的四分之一</span></span><br><span class="line">    <span class="keyword">int</span> t=id++;</span><br><span class="line">    <span class="keyword">if</span>(dr&lt;tr+s&amp;&amp;dc&lt;tc+s)<span class="comment">//如果不可覆盖点在左上角，就对这个棋盘左上角的四分之一重新进行棋盘覆盖</span></span><br><span class="line">    &#123;</span><br><span class="line">        chessboard(tr,tc,dr,dc,s);</span><br><span class="line">    &#125;<span class="keyword">else</span><span class="comment">//因为不可覆盖点不在左上角，所以我们要在左上角构造一个不可覆盖点</span></span><br><span class="line">    &#123;</span><br><span class="line">        cb[tr+s<span class="number">-1</span>][tc+s<span class="number">-1</span>]=t;<span class="comment">//构造完毕</span></span><br><span class="line">        chessboard(tr,tc,tr+s<span class="number">-1</span>,tc+s<span class="number">-1</span>,s);<span class="comment">//在我们构造完不可覆盖点之后，棋盘的左上角的四分之一又有了不可覆盖点，所以就对左上角棋盘的四分之一进行棋盘覆盖</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(dr&lt;tr+s&amp;&amp;dc&gt;=tc+s)<span class="comment">//如果不可覆盖点在右上角，就对这个棋盘右上角的四分之一重新进行棋盘覆盖</span></span><br><span class="line">    &#123;</span><br><span class="line">        chessboard(tr,tc+s,dr,dc,s);</span><br><span class="line">    &#125;<span class="keyword">else</span><span class="comment">//因为不可覆盖点不在右上角，所以我们要在右上角构造一个不可覆盖点</span></span><br><span class="line">    &#123;</span><br><span class="line">        cb[tr+s<span class="number">-1</span>][tc+s]=t;</span><br><span class="line">        chessboard(tr,tc+s,tr+s<span class="number">-1</span>,tc+s,s);<span class="comment">//在我们构造完不可覆盖点之后，棋盘的右上角的四分之一又有了不可覆盖点，所以就对右上角棋盘的四分之一进行棋盘覆盖</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     <span class="keyword">if</span>(dr&gt;=tr+s&amp;&amp;dc&lt;tc+s)<span class="comment">//如果不可覆盖点在左下角，就对这个棋盘左下角的四分之一重新进行棋盘覆盖</span></span><br><span class="line">    &#123;</span><br><span class="line">        chessboard(tr+s,tc,dr,dc,s);</span><br><span class="line">    &#125;<span class="keyword">else</span><span class="comment">//因为不可覆盖点不在左下角，所以我们要在左下角构造一个不可覆盖点</span></span><br><span class="line">    &#123;</span><br><span class="line">        cb[tr+s][tc+s<span class="number">-1</span>]=t;</span><br><span class="line">        chessboard(tr+s,tc,tr+s,tc+s<span class="number">-1</span>,s);<span class="comment">//在我们构造完不可覆盖点之后，棋盘的左下角的四分之一又有了不可覆盖点，所以就对左下角棋盘的四分之一进行棋盘覆盖</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(dr&gt;=tr+s&amp;&amp;dc&gt;=tc+s)<span class="comment">//如果不可覆盖点在右下角，就对这个棋盘右下角的四分之一重新进行棋盘覆盖</span></span><br><span class="line">    &#123;</span><br><span class="line">        chessboard(tr+s,tc+s,dr,dc,s);</span><br><span class="line">    &#125;<span class="keyword">else</span><span class="comment">//因为不可覆盖点不在右下角，所以我们要在右下角构造一个不可覆盖点</span></span><br><span class="line">    &#123;</span><br><span class="line">        cb[tr+s][tc+s]=t;</span><br><span class="line">        chessboard(tr+s,tc+s,tr+s,tc+s,s);<span class="comment">//在我们构造完不可覆盖点之后，棋盘的右下角的四分之一又有了不可覆盖点，所以就对右下角棋盘的四分之一进行棋盘覆盖</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//后面的四个步骤都跟第一个类似</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入正方形棋盘的大小（行数）:\n"</span>);</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入在%d*%d棋盘上不可覆盖点的位置:\n"</span>,n,n);</span><br><span class="line">    <span class="keyword">int</span> i,j,k,l;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;i,&amp;j);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"不可覆盖点位置输入完毕，不可覆盖点的值为-1\n"</span>);</span><br><span class="line">    cb[i][j]=<span class="number">-1</span>;</span><br><span class="line">    chessboard(<span class="number">0</span>,<span class="number">0</span>,i,j,n);</span><br><span class="line">    <span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;n;k++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%2d"</span>,cb[k][<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span>(l=<span class="number">1</span>;l&lt;n;l++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">" %2d"</span>,cb[k][l]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 
 </div>
 
