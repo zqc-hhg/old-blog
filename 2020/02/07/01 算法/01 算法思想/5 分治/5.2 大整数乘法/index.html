@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		5.5 归并排序 | 
+		5.2 大整数乘法 | 
 	 
 	Max
 	</title>
@@ -139,7 +139,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.2%20%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/">
 										5.2 大整数乘法
 									</a>
@@ -166,7 +166,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file active">
+								<li class="file">
 									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.5%20%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
 										5.5 归并排序
 									</a>
@@ -232,23 +232,23 @@
 	<div id="content">
 		<h1 id="article-title">
 
-	5.5 归并排序
+	5.2 大整数乘法
 </h1>
 <div class="article-meta">
 	
 		<span>
-			阅读量:<span id="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.5%20%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="leancloud_visitors" data-flag-title="5.5 归并排序"></span>
+			阅读量:<span id="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.2%20%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/" class="leancloud_visitors" data-flag-title="5.2 大整数乘法"></span>
 		</span>
 	
 	<span>max</span>
-	<span>2020-02-06 14:46:43</span>
+	<span>2020-02-07 14:14:22</span>
     
 		<div id="article-categories">
             
                 
                     <span>
                         <i class="fa fa-folder" aria-hidden="true"></i>
-                        <a href="/categories/算法/">算法</a>
+                        <a href="/categories/01-算法/">01 算法</a>
 						
 							>
 						
@@ -258,7 +258,7 @@
                 
                     <span>
                         <i class="fa fa-folder" aria-hidden="true"></i>
-                        <a href="/categories/算法/算法思想/">算法思想</a>
+                        <a href="/categories/01-算法/01-算法思想/">01 算法思想</a>
 						
 							>
 						
@@ -268,7 +268,7 @@
                 
                     <span>
                         <i class="fa fa-folder" aria-hidden="true"></i>
-                        <a href="/categories/算法/算法思想/5-分治/">5 分治</a>
+                        <a href="/categories/01-算法/01-算法思想/5-分治/">5 分治</a>
 						
                     </span>
                 
@@ -278,31 +278,42 @@
 </div>
 
 <div id="article-content">
-	<h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">归并排序（MERGE-SORT）是建立在归并操作上的一种有效的排序算法,该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为二路归并。归并排序是一种稳定的排序方法。</span><br></pre></td></tr></table></figure>
+	<h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>​        由于整型数的位数有限，因此整型数不能满足大整数（超长整数）的运算要求 。大整数计算是利用字符串来表示大整数，即用字符串的一位字符表示大整数的一位数值，然后根据乘法的运算法则进行运算（其实加减乘除原理差不多）。</p>
+<h4 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h4><p><img src="https://images2015.cnblogs.com/blog/735729/201609/735729-20160917194014805-981210405.png" alt=""></p>
+<p>由上面可以看出，result的数据为result[100] = {0, 18, 27, 9}</p>
+<p>接下来就处理进位，注意看，巧妙的地方来了：</p>
+<p>有result末尾到首位计算：</p>
+<p>第一次：result[3] = 9; result[2] = 27;</p>
+<p>A.先将result[3]除个位以外的数加给前一位，也就是result[2]：result[2] = result[2]+result[3]/10 = 27 + [9/10]=27; 注：数学里面的[]为取整符。如[0.9] = 0</p>
+<p>B.然后把result[3]的个位保存到result[3]：</p>
+<p>&gt;&gt; result[3] = result[3]%10 = 9;</p>
+<p>第二次，向前一位，result[2] = 27, result[1] = 18;</p>
+<p>重复第一次的A、B步骤，求得result[1] = result[1]+result[2] / 10=18+[27/10] = 20;</p>
+<p>&gt;&gt; result[2] = result[2] % 10 = 7</p>
+<p>第三次，再向前一位，result[1] = 20, result[0] = 0</p>
+<p>重复之前的步骤,</p>
+<p>&gt;&gt; result[0] = result[0]+result[1]/10=0+[20]/10=2</p>
+<p>&gt;&gt; result[1] = result[1] % 10 = 0;</p>
+<p>至此，已经算到首位，result此时的结果为：result[100] = {2, 0, 7, 9}可以知道这就是结果：99×21=2079;</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;//为了动态分配内存</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;//为了使用strlen();</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_LEN 200</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> inputA[MAX_LEN + <span class="number">1</span>];<span class="comment">//用于存放输入的数据 +1 给‘\0'留位置</span></span><br><span class="line">    <span class="keyword">char</span> inputB[MAX_LEN + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> i,j;<span class="comment">//循环变量，因为OJ编译器版本问题，没办法在循环中直接定义循环变量</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s%s"</span>,inputA,inputB);</span><br><span class="line">    <span class="keyword">int</span> lenA = <span class="built_in">strlen</span>(inputA);</span><br><span class="line">    <span class="keyword">int</span> lenB = <span class="built_in">strlen</span>(inputB);</span><br><span class="line">    <span class="keyword">int</span> maxLen = lenA + lenB;<span class="comment">//最大的结果位数</span></span><br><span class="line">    <span class="keyword">int</span>* arrayA = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * lenA);</span><br><span class="line">    <span class="keyword">int</span>* arrayB = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * lenB);</span><br><span class="line">    <span class="keyword">int</span>* result = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * maxLen);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; lenA; i++)&#123;<span class="comment">//倒序并转换</span></span><br><span class="line">        arrayA[i] = inputA[lenA - <span class="number">1</span> -i] - <span class="string">'0'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; lenB; i++)&#123;<span class="comment">//倒序并转换</span></span><br><span class="line">        arrayB[i] = inputB[lenB - <span class="number">1</span> -i] - <span class="string">'0'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; lenA; i++)&#123;<span class="comment">//模拟计算的过程</span></span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; lenB; j++)&#123;</span><br><span class="line">            result[i+j] += arrayA[i] * arrayB[j];<span class="comment">//刷新每一个结果位上的结果</span></span><br><span class="line">            result[i+j+i] += (result[i+j]) / <span class="number">10</span>;<span class="comment">//求出进位数</span></span><br><span class="line">            result[i+j] = result[i+j] % <span class="number">10</span>;<span class="comment">//进位后原位不需要使用+=</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">while</span>(maxLen - <span class="number">1</span> &gt; <span class="number">0</span> &amp;&amp; result[maxLen - <span class="number">1</span>] == <span class="number">0</span>)&#123;<span class="comment">//去除前导0</span></span><br><span class="line">        maxLen--;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">for</span>(i = maxLen - <span class="number">1</span>; i &gt;=<span class="number">0</span>; i--)&#123;<span class="comment">//输出结果</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>,result[i]);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h4><p><img src="https://s2.ax1x.com/2020/01/28/1MANCT.png" alt="1MANCT.png"></p>
-<p>归并排序其实要做两件事（如图所示）：</p>
-<p>（1）“分解”——将序列每次<strong>折半划分（递归实现）</strong></p>
-<p>（2）“合并”——将划分后的序列段<strong>两两合并后排序</strong></p>
-<h4 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LEN 8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> start, <span class="keyword">int</span> mid, <span class="keyword">int</span> <span class="built_in">end</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n1 = mid - start + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> n2 = <span class="built_in">end</span> - mid;</span><br><span class="line">    <span class="keyword">int</span> left[n1], right[n2];</span><br><span class="line">    <span class="keyword">int</span> i, j, k;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n1; i++) </span><br><span class="line">        left[i] = a[start+i];</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; n2; j++) <span class="comment">/*分解*/</span></span><br><span class="line">        right[j] = a[mid+<span class="number">1</span>+j];</span><br><span class="line"></span><br><span class="line">    i = j = <span class="number">0</span>;</span><br><span class="line">    k = start;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; n1 &amp;&amp; j &lt; n2)   </span><br><span class="line">        <span class="keyword">if</span> (left[i] &lt; right[j])</span><br><span class="line">            a[k++] = left[i++];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            a[k++] = right[j++]; <span class="comment">//排序</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (i &lt; n1) </span><br><span class="line">        a[k++] = left[i++];</span><br><span class="line">    <span class="keyword">while</span> (j &lt; n2) </span><br><span class="line">        a[k++] = right[j++];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// merge_sort()：先排序，再合并</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> start, <span class="keyword">int</span> <span class="built_in">end</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mid;</span><br><span class="line">    <span class="keyword">if</span> (start &lt; <span class="built_in">end</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        mid = (start + <span class="built_in">end</span>) / <span class="number">2</span>;</span><br><span class="line">        <span class="comment">// 分解 + 解决：Divide + Conquer</span></span><br><span class="line">        merge_sort(a, start, mid); <span class="comment">// 递归划分原数组左半边array[start...mid]</span></span><br><span class="line">        merge_sort(a, mid+<span class="number">1</span>, <span class="built_in">end</span>); <span class="comment">// 递归划分array[mid+1...end]</span></span><br><span class="line">        <span class="comment">// 合并：Combine</span></span><br><span class="line">        merge(a, start, mid, <span class="built_in">end</span>); <span class="comment">// 合并</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"merge (%d-%d, %d-%d) to %d %d %d %d %d %d %d %d\n"</span>,</span><br><span class="line">               start, mid, mid+<span class="number">1</span>, <span class="built_in">end</span>,</span><br><span class="line">               a[<span class="number">0</span>], a[<span class="number">1</span>], a[<span class="number">2</span>], a[<span class="number">3</span>], a[<span class="number">4</span>], a[<span class="number">5</span>], a[<span class="number">6</span>], a[<span class="number">7</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[LEN] = &#123; <span class="number">5</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span> &#125;;</span><br><span class="line">    merge_sort(a, <span class="number">0</span>, LEN<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
 </div>
 
 
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.6%20%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
+              <a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.3%20Strassen%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/">
                   <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  5.6 快速排序
+                  5.3 Strassen矩阵乘法
               </a>
             
         </div>
         <div class="item right">
             
-              <a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.4%20%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96/">
-                5.4 棋盘覆盖
+              <a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.1%20%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/">
+                5.1 二分搜索
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
               </a>
             
