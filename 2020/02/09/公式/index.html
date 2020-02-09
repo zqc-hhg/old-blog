@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		5.1 二分搜索 | 
+		公式 | 
 	 
 	Max
 	</title>
@@ -130,7 +130,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file active">
+								<li class="file">
 									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.1%20%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/">
 										5.1 二分搜索
 									</a>
@@ -225,7 +225,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/02/09/%E5%85%AC%E5%BC%8F/">
 										公式
 									</a>
@@ -241,44 +241,45 @@
 	<div id="content">
 		<h1 id="article-title">
 
-	5.1 二分搜索
+	公式
 </h1>
 <div class="article-meta">
 	
 		<span>
-			阅读量:<span id="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.1%20%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/" class="leancloud_visitors" data-flag-title="5.1 二分搜索"></span>
+			阅读量:<span id="/2020/02/09/%E5%85%AC%E5%BC%8F/" class="leancloud_visitors" data-flag-title="公式"></span>
 		</span>
 	
 	<span>max</span>
-	<span>2020-02-06 21:05:27</span>
+	<span>2020-02-09 12:16:25</span>
     
 		<div id="article-categories">
+            
+                
+                    <span>
+                        <i class="fa fa-folder" aria-hidden="true"></i>
+                        <a href="/categories/其他/">其他</a>
+						
+                    </span>
+                
             
 		</div>
     
 </div>
 
 <div id="article-content">
-	<h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>​        二分搜索法，是一种在有序数组中查找某一特定元素的搜索算法。搜索过程从数组的中间元素开始，如果中间元素正好是要查找的元素，则搜索过程结束；如果某一特定元素大于或者小于中间元素，则在数组大于或小于中间元素的那一半中查找，而且跟开始一样从中间元素开始比较。如果在某一步骤数组为空，则代表找不到。这种搜索算法每一次比较都使搜索范围缩小一半。</p>
-<h4 id="算法要求"><a href="#算法要求" class="headerlink" title="算法要求"></a>算法要求</h4><p>1.必须采用顺序存储结构。</p>
-<p>2.必须按关键字大小有序排列。</p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binary_search</span><span class="params">(<span class="keyword">int</span> key,<span class="keyword">int</span> a[],<span class="keyword">int</span> n)</span> <span class="comment">//自定义函数binary_search()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> low,high,mid,count=<span class="number">0</span>,count1=<span class="number">0</span>;</span><br><span class="line">    low=<span class="number">0</span>;</span><br><span class="line">    high=n<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(low&lt;high)    <span class="comment">//査找范围不为0时执行循环体语句</span></span><br><span class="line">    &#123;</span><br><span class="line">        count++;    <span class="comment">//count记录査找次数</span></span><br><span class="line">        mid=(low+high)/<span class="number">2</span>;    <span class="comment">//求中间位置</span></span><br><span class="line">        <span class="keyword">if</span>(key&lt;a[mid])    <span class="comment">//key小于中间值时</span></span><br><span class="line">            high=mid<span class="number">-1</span>;    <span class="comment">//确定左子表范围</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(key&gt;a[mid])    <span class="comment">//key 大于中间值时</span></span><br><span class="line">            low=mid+<span class="number">1</span>;    <span class="comment">//确定右子表范围</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(key==a[mid])    <span class="comment">//当key等于中间值时，证明查找成功</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"查找成功!\n 查找 %d 次!a[%d]=%d"</span>,count,mid,key);    <span class="comment">//输出査找次数及所査找元素在数组中的位置</span></span><br><span class="line">            count1++;    <span class="comment">//count1记录查找成功次数</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(count1==<span class="number">0</span>)    <span class="comment">//判断是否查找失敗</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"查找失敗!"</span>);    <span class="comment">//査找失敗输出no found</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,key,a[<span class="number">100</span>],n;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入数组的长度：\n"</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);    <span class="comment">//输入数组元素个数</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入数组元素：\n"</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);    <span class="comment">//输入有序数列到数组a中</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入你想查找的元素：\n"</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;key);    <span class="comment">//输入要^找的关键字</span></span><br><span class="line">    binary_search(key,a,n);    <span class="comment">//调用自定义函数</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+	<p>$$<br>Zn+1=(Zn)^2+C<br>$$</p>
+
 </div>
 
 
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.2%20%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/">
-                  <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  5.2 大整数乘法
-              </a>
-            
         </div>
         <div class="item right">
             
-              <a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.6%20%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
-                5.6 快速排序
+              <a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.3%20Strassen%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/">
+                01 算法
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
               </a>
             
