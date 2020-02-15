@@ -8,6 +8,8 @@
 	<!-- title -->
 	
 	<title>
+	
+		7.0 动态规划概述 | 
 	 
 	Max
 	</title>
@@ -193,7 +195,7 @@
 									</a>
 									
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/02/09/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/7%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/7.0%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A6%82%E8%BF%B0/">
 										7.0 动态规划概述
 									</a>
@@ -288,62 +290,156 @@
 
 	<!-- 引入正文 -->
 	<div id="content">
-		<div id="index">
+		<h1 id="article-title">
+
+	7.0 动态规划概述
+</h1>
+<div class="article-meta">
 	
-		<div class="index-li">
-			<a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.2%20%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/">
-				<h2 class="index-title">
-					5.2 大整数乘法
-				</h2>
-				<div class="index-brief">
-					问题描述​        由于整型数的位数有限，因此整型数不能满足大整数（超长整数）的运算要求 。大整数计算是利用字符串来表示大整数，即用字符串的一位字符表示大整数的一位数值，然后根据乘法的运算法则进行运算（其实加减乘除原理差不多）。
-解决思路
-由上面可以看出，result的数据为result[10
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2020-02-07</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/01-算法/">01 算法</a>
-										
-											>
-										
-                                    </span>
-                                
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/01-算法/01-算法思想/">01 算法思想</a>
-										
-											>
-										
-                                    </span>
-                                
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/01-算法/01-算法思想/5-分治/">5 分治</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
+		<span>
+			阅读量:<span id="/2020/02/09/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/7%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/7.0%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A6%82%E8%BF%B0/" class="leancloud_visitors" data-flag-title="7.0 动态规划概述"></span>
+		</span>
 	
-	
-	<div id="index-paginator">
-		
-	</div>
+	<span>max</span>
+	<span>2020-02-09 20:04:13</span>
+    
+		<div id="article-categories">
+            
+                
+                    <span>
+                        <i class="fa fa-folder" aria-hidden="true"></i>
+                        <a href="/categories/算法/">算法</a>
+						
+							>
+						
+                    </span>
+                
+            
+                
+                    <span>
+                        <i class="fa fa-folder" aria-hidden="true"></i>
+                        <a href="/categories/算法/算法思想/">算法思想</a>
+						
+							>
+						
+                    </span>
+                
+            
+                
+                    <span>
+                        <i class="fa fa-folder" aria-hidden="true"></i>
+                        <a href="/categories/算法/算法思想/7-动态规划/">7 动态规划</a>
+						
+                    </span>
+                
+            
+		</div>
+    
 </div>
 
+<div id="article-content">
+	<blockquote>
+<p>动态规划(dynamic programming)是运筹学的一个分支，是求解决策过程(decision process)最优化的数学方法。20世纪50年代初美国数学家R.E.Bellman等人在研究多阶段决策过程(multistep decision process)的优化问题时，提出了著名的最优化原理(principle of optimality)，把多阶段过程转化为一系列单阶段问题，利用各阶段之间的关系，逐个求解，创立了解决这类过程优化问题的新方法——动态规划。</p>
+</blockquote>
+<h4 id="精髓"><a href="#精髓" class="headerlink" title="精髓"></a>精髓</h4><ul>
+<li><p>划分阶段——按照问题的时间或空间特征，把问题分为若干个阶段。在划分阶段时，注意划分后的阶段一定要是有序的或者是可排序的，否则问题就无法求解。</p>
+</li>
+<li><p>确定状态和状态变量——将问题发展到各个阶段时所处于的各种客观情况用不同的状态表示出来。当然，状态的选择要满足无后效性。</p>
+</li>
+<li><p>确定决策并写出状态转移方程——因为决策和状态转移有着天然的联系，状态转移就是根据上一阶段的状态和决策来导出本阶段的状态。所以如果确定了决策，状态转移方程也就可写出。但事实上常常是反过来做，根据相邻两个阶段的状态之间的关系来确定决策方法和状态转移方程。</p>
+</li>
+<li><p>寻找边界条件——给出的状态转移方程是一个递推式，需要一个递推的终止条件或边界条件。</p>
+</li>
+</ul>
+<h4 id="问题特征"><a href="#问题特征" class="headerlink" title="问题特征"></a>问题特征</h4><p>能采用动态规划求解的问题的一般要具有3个性质：</p>
+<p>1.最优化原理：假设问题的最优解所包括的子问题的解也是最优的，就称该问题具有最优子结构，即满足最优化原理。</p>
+<p>2.无后效性：即某阶段状态一旦确定。就不受这个状态以后决策的影响。也就是说，某状态以后的过程不会影响曾经的状态。仅仅与当前状态有关；</p>
+<p>3.有重叠子问题：即子问题之间是不独立的，一个子问题在下一阶段决策中可能被多次使用到（该性质并非动态规划适用的必要条件，可是假设没有这条性质。动态规划算法同其它算法相比就不具备优势）。</p>
+<h4 id="具体问题"><a href="#具体问题" class="headerlink" title="具体问题"></a>具体问题</h4><p>1.背包问题</p>
+<p>2.硬币找零问题</p>
+<p>3.最长上身子序列问题</p>
+<p>4.编辑距离问题</p>
+<p>5.最长公共子序列问题</p>
+<p>6.旅行商问题</p>
+<p>7.斐波拉契数列问题</p>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+              <a href="/2020/02/14/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/00%20OSI%E6%A8%A1%E5%9E%8B%E7%AE%80%E4%BB%8B/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  
+              </a>
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.3%20Strassen%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/">
+                5.3 Strassen矩阵乘法
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: 'SPu2VRL8GBwy0tz4XPGRVVM8-gzGzoHsz',
+			appKey: 'wmFJLexGHhIBOmhlio1SFhCt',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+    // 显示次数
+		function showTime(Counter) {
+			var query = new AV.Query("Counter");
+			if($(".leancloud_visitors").length > 0){
+				var url = $(".leancloud_visitors").attr('id').trim();
+				// where field
+				query.equalTo("words", url);
+				// count
+				query.count().then(function (number) {
+					// There are number instances of MyClass where words equals url.
+					$(document.getElementById(url)).text(number?  number : '--');
+				}, function (error) {
+					// error is an instance of AVError.
+				});
+			}
+		}
+		// 追加pv
+		function addCount(Counter) {
+			var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'wujun234.github.io';
+			var Counter = AV.Object.extend("Counter");
+			var query = new Counter;
+			query.save({
+				words: url
+			}).then(function (object) {
+			})
+		}
+		$(function () {
+			var Counter = AV.Object.extend("Counter");
+			addCount(Counter);
+			showTime(Counter);
+		});
+	
+</script>
 	</div>
 	<div id="footer" style="display: none">
 	<p>

@@ -8,6 +8,8 @@
 	<!-- title -->
 	
 	<title>
+	
+		01 网络基础知识 | 
 	 
 	Max
 	</title>
@@ -214,7 +216,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/02/15/01%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
 										01 网络基础知识
 									</a>
@@ -288,62 +290,118 @@
 
 	<!-- 引入正文 -->
 	<div id="content">
-		<div id="index">
+		<h1 id="article-title">
+
+	01 网络基础知识
+</h1>
+<div class="article-meta">
 	
-		<div class="index-li">
-			<a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.2%20%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/">
-				<h2 class="index-title">
-					5.2 大整数乘法
-				</h2>
-				<div class="index-brief">
-					问题描述​        由于整型数的位数有限，因此整型数不能满足大整数（超长整数）的运算要求 。大整数计算是利用字符串来表示大整数，即用字符串的一位字符表示大整数的一位数值，然后根据乘法的运算法则进行运算（其实加减乘除原理差不多）。
-解决思路
-由上面可以看出，result的数据为result[10
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2020-02-07</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/01-算法/">01 算法</a>
-										
-											>
-										
-                                    </span>
-                                
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/01-算法/01-算法思想/">01 算法思想</a>
-										
-											>
-										
-                                    </span>
-                                
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/01-算法/01-算法思想/5-分治/">5 分治</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
+		<span>
+			阅读量:<span id="/2020/02/15/01%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="leancloud_visitors" data-flag-title="01 网络基础知识"></span>
+		</span>
 	
-	
-	<div id="index-paginator">
-		
-	</div>
+	<span>max</span>
+	<span>2020-02-15 19:13:14</span>
+    
+		<div id="article-categories">
+            
+                
+                    <span>
+                        <i class="fa fa-folder" aria-hidden="true"></i>
+                        <a href="/categories/02-网络/">02 网络</a>
+						
+							>
+						
+                    </span>
+                
+            
+                
+                    <span>
+                        <i class="fa fa-folder" aria-hidden="true"></i>
+                        <a href="/categories/02-网络/01-TCP-IP/">01 TCP IP</a>
+						
+                    </span>
+                
+            
+		</div>
+    
 </div>
 
+<div id="article-content">
+	<p><img src="https://img2018.cnblogs.com/blog/1522304/201811/1522304-20181123212225246-1592561240.png" alt=""></p>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/02/14/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/00%20OSI%E6%A8%A1%E5%9E%8B%E7%AE%80%E4%BB%8B/">
+                02 网络
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: 'SPu2VRL8GBwy0tz4XPGRVVM8-gzGzoHsz',
+			appKey: 'wmFJLexGHhIBOmhlio1SFhCt',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+    // 显示次数
+		function showTime(Counter) {
+			var query = new AV.Query("Counter");
+			if($(".leancloud_visitors").length > 0){
+				var url = $(".leancloud_visitors").attr('id').trim();
+				// where field
+				query.equalTo("words", url);
+				// count
+				query.count().then(function (number) {
+					// There are number instances of MyClass where words equals url.
+					$(document.getElementById(url)).text(number?  number : '--');
+				}, function (error) {
+					// error is an instance of AVError.
+				});
+			}
+		}
+		// 追加pv
+		function addCount(Counter) {
+			var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'wujun234.github.io';
+			var Counter = AV.Object.extend("Counter");
+			var query = new Counter;
+			query.save({
+				words: url
+			}).then(function (object) {
+			})
+		}
+		$(function () {
+			var Counter = AV.Object.extend("Counter");
+			addCount(Counter);
+			showTime(Counter);
+		});
+	
+</script>
 	</div>
 	<div id="footer" style="display: none">
 	<p>
