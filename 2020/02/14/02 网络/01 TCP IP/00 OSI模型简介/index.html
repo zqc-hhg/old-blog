@@ -216,15 +216,6 @@
 							</ul>
 			
 							<ul>
-								<li class="file">
-									<a href="/2020/02/15/01%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
-										01 网络基础知识
-									</a>
-								</li>
-								<div class="article-toc" style="display: none;"></div>
-							</ul>
-			
-							<ul>
 								<li class="directory">
 									<a href="#" class="directory">
 										<i class="fa fa-plus-square-o"></i>
@@ -242,6 +233,15 @@
 								<li class="file active">
 									<a href="/2020/02/14/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/00%20OSI%E6%A8%A1%E5%9E%8B%E7%AE%80%E4%BB%8B/">
 										00 OSI模型简介
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/15/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/01%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+										01 网络基础知识
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -328,7 +328,21 @@
 </div>
 
 <div id="article-content">
-	<p><img src="C:\Users\86152\AppData\Roaming\Typora\typora-user-images\image-20200215124954518.png" alt="image-20200215124954518"></p>
+	<p><img src="http://image.mamicode.com/info/201809/20180908145440016670.png" alt="image-20200215124954518"></p>
+<p>​        <strong>应用层</strong></p>
+<p>​    为应用程序提供服务并规定应用程序中通信相关的细节。包括文件传输、电子邮件、远程登录（虚拟终端）等协议。</p>
+<p>​        <strong>表示层</strong></p>
+<p>​    将应用处理的信息转换为适合网络传输的格式，或将来自下一层的数据转换为上层能够处理的格式。因此它主要负责数据格式的转换。具体来说，就是将设备固有的数据格式转换为网络标准传输格式。不同设备对同一比特流解释的结果可能会不同。因此，使它们保持一致是这一层的主要作用。</p>
+<p>　　<strong>会话层</strong></p>
+<p>​    负责建立和断开通信连接（数据流动的逻辑通路），以及数据的分割等数据传输相关的管理。</p>
+<p>​    　<strong>传输层</strong></p>
+<p>​    起着可靠传输的作用。只在通信双方节点上进行处理，而无需在路由器上处理。</p>
+<p>　　<strong>网络层</strong></p>
+<p>​    将数据传输到目标地址。目标地址可以是多个网络通过路由器连接而成的某一个地址。因此这一层主要负责寻址和路由选择。</p>
+<p>　　<strong>数据链路层</strong></p>
+<p>​    负责物理层面上互连的、节点之间的通信传输。例如与 个以太网相连个节点之间的通信。序列划分为具有意义的数据帧传送给对端（数据帧的生成与接收）。</p>
+<p>　 　<strong>物理层</strong></p>
+<p>​    负责 比特流（ 序列）与电压的高低、光的闲灭之间的互换。</p>
 
 </div>
 
@@ -336,9 +350,9 @@
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2020/02/15/01%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+              <a href="/2020/02/15/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/01%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
                   <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  
+                  01 网络基础知识
               </a>
             
         </div>
@@ -435,20 +449,5 @@
 	document.getElementById('footerYear').innerHTML = new Date().getFullYear() + '';
 </script>
 	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
