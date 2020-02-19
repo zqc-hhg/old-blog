@@ -345,6 +345,7 @@
 <h3 id="二、TCP-IP协议分层模型"><a href="#二、TCP-IP协议分层模型" class="headerlink" title="二、TCP/IP协议分层模型"></a>二、TCP/IP协议分层模型</h3><p><img src="https://images2015.cnblogs.com/blog/381412/201610/381412-20161022170401951-1540683083.png" alt=""></p>
 <p><img src="https://img-blog.csdn.net/20171214113545111" alt=""></p>
 <h4 id="1-应用层"><a href="#1-应用层" class="headerlink" title="1.应用层"></a>1.应用层</h4><p>  <strong>* WWW</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20181026175502669.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpZ3VwZW5nNzkyOQ==,size_27,color_FFFFFF,t_70" alt=""></p>
 <p>   WWW可以说是互联网能够如此普及的一个重要的原动力。用户可以在浏览器上可以看到远端服务器的各种信息。浏览器与服务端之间的通信协议时HTTP，所传输数据的主要格式是HTML。WWW中HTTP属于OSI应用层协议。HTML属于表示层的协议。</p>
 <p>  <strong>*电子邮件（E-mail）</strong></p>
 <p>  电子邮件就是在网络上发送信件，用到的协议是（STMP）。</p>
@@ -353,6 +354,7 @@
 <p>  <strong>*远程登陆（TELNET或SSH）</strong></p>
 <p>  远程登陆是指登陆到远程的计算机上，使那台计算机上的程序得以运行的一种功能，TCP/IP网络中远程登录常用TELNET和SSH两种协议。</p>
 <p>  <strong>*网络管理协议（SNMP）</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20181026181342662.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpZ3VwZW5nNzkyOQ==,size_27,color_FFFFFF,t_70" alt=""></p>
 <p>   TCP/IP中进行网络管理时，采用SNMP协议。使用SNMP管理的主机、网桥、路由器称作SNMP代理。而进行管理的那一段叫做管理器。</p>
 <h4 id="2-传输层"><a href="#2-传输层" class="headerlink" title="2.传输层"></a>2.传输层</h4><p>  <strong>*TCP</strong></p>
 <p>  TCP是一种面向有连接的传输协议。可以保证两端通信主机之间的通信可达。TCP能够正确处理传输过程中的丢包、传输顺序错乱、等异常情况。TCP还能有效利用带宽，环节网络拥堵。然而为了建立和断开连接，有时他需要至少七次发包收包，导致网络流量的浪费。为了提高网络的利用率，TCP协议中规定了各种各样的复杂的规范，因此不利于视频会议。</p>
@@ -471,20 +473,5 @@
 	document.getElementById('footerYear').innerHTML = new Date().getFullYear() + '';
 </script>
 	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
