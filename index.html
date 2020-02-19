@@ -245,6 +245,15 @@
 								<div class="article-toc" style="display: none;"></div>
 							</ul>
 			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/18/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/02%20TCP%20IP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+										02 TCP IP基础知识
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
 								</li>
 								
 							</ul>
@@ -291,6 +300,46 @@
 		<div id="index">
 	
 		<div class="index-li">
+			<a href="/2020/02/18/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/02%20TCP%20IP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+				<h2 class="index-title">
+					02 TCP IP基础知识
+				</h2>
+				<div class="index-brief">
+					一、TCP/IP 标准化（1）具体含义
+　　很多人都会认为TCP/IP是指TCP与IP两种协议，实际生活中有时也确实就是指这两种协议。然后，很多情况下，它只是利用IP进行通信时所必须使用到的协议群的统称。
+
+　（2）标准化
+　　由于TCP/IP尽早地制定了可行性较强的协议，提出了应对技术快速革新的协
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2020-02-18</span>
+                    
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/02-网络/">02 网络</a>
+										
+											>
+										
+                                    </span>
+                                
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/02-网络/01-TCP-IP/">01 TCP IP</a>
+										
+                                    </span>
+                                
+                            
+                    
+                </div>
+		</div>	
+	
+		<div class="index-li">
 			<a href="/2020/02/15/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/01%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
 				<h2 class="index-title">
 					01 网络基础知识
@@ -334,10 +383,10 @@
 				</h2>
 				<div class="index-brief">
 					
-​        应用层
-​    为应用程序提供服务并规定应用程序中通信相关的细节。包括文件传输、电子邮件、远程登录（虚拟终端）等协议。
-​        表示层
-​    将应用处理的信息转换为适合网络传输的格式，或将来自下一层的数据转换为上层能够处理的格式。因此它主要负责数据格式的转换。具体
+​         应用层
+​        为应用程序提供服务并规定应用程序中通信相关的细节。包括文件传输、电子邮件、远程登录（虚拟终端）等协议。
+​      表示层
+​        将应用处理的信息转换为适合网络传输的格式，或将来自下一层的数据转换为上层能够处理的格式。因此它主要负责数据格
 					...
 				</div>
 			</a>
@@ -676,32 +725,6 @@
                 </div>
 		</div>	
 	
-		<div class="index-li">
-			<a href="/2020/02/05/03%20%E5%85%B6%E4%BB%96/hello-world/">
-				<h2 class="index-title">
-					hello-world
-				</h2>
-				<div class="index-brief">
-					Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2020-02-05</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/其他/">其他</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
 	
 	<div id="index-paginator">
 		
@@ -738,5 +761,20 @@
 	document.getElementById('footerYear').innerHTML = new Date().getFullYear() + '';
 </script>
 	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
