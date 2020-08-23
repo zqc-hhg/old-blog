@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#202020"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  
+    <meta name="keywords" content="" />
+  
+
+  
+    <meta name="description" content="03 Linux/鸟叔的linux私房菜/00  帮助" />
+  
+  
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <title>03 Linux/鸟叔的linux私房菜/00  帮助 [ Max&#39;s Blog ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
+    
+      <link rel="stylesheet" href="/css/microb.css">
+    
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <nav class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+  <ul class="pure-menu-list float-r clearfix">
+    
+      <li class="pure-menu-item toc-menu">
+        <a id="menu-main-post" class="pure-menu-link" href="javascript:;">
+          <img class="menu-icon" src="/logo.png" alt="MENU">
+        </a>
+      </li>
+    
+  </ul>  
+  <a class="pure-menu-heading" href="/">
+      <h1 class="title">Max&#39;s Blog</h1>
+      <!-- <span></span> -->
+  </a>
+  <!-- 
+  <img class="logo" id="logo" src="/logo.png" alt="logo">
+   -->
+</nav>
+
+  <div class="container" id="content-outer">
+    <div class="inner" id="content-inner">
+      <article class="post" id="post">
+  <header class="post-header text-center">
+    <h1 class="title">
+      03 Linux/鸟叔的linux私房菜/00  帮助
+    </h1>
+    
+    <time class="time" datetime="2020-03-16T03:01:57.071Z">
+      2020-03-16
+    </time>
+    
+    <hr>
+  </header>
+  <div class="post-content">
+    <h3 id="man命令"><a href="#man命令" class="headerlink" title="man命令"></a>man命令</h3><!--man命令是Linux下的帮助指令，通过man指令可以查看Linux中的指令帮助、配置文件帮助和编程帮助等信息。-->
+<p><strong>语法</strong></p>
+<blockquote>
+<p>man(选项)(参数)</p>
+</blockquote>
+<p><strong>选项</strong></p>
+<blockquote>
+<p>-a：在所有的man帮助手册中搜索；<br>-f：等价于whatis指令，显示给定关键字的简短描述信息；<br>-P：指定内容时使用分页程序；<br>-M：指定man手册搜索的路径。</p>
+</blockquote>
+<p><strong>参数</strong></p>
+<ul>
+<li><p>数字：指定从哪本man手册</p>
+</li>
+<li><p>关键字：指定要搜索的路径</p>
+</li>
+</ul>
+<p><strong>实例</strong></p>
+<p>​        我们输入<code>man ls</code>，它会在最左上角显示“LS（1）”，在这里，“LS”表示手册名称，而“（1）”表示该手册位于第一节章，</p>
+<p><img src="C:\Users\10557\AppData\Roaming\Typora\typora-user-images\image-20200316113432425.png" alt="image-20200316113432425"></p>
+<p>中文：</p>
+<p><img src="https://img-blog.csdnimg.cn/20181121225720588.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYTY0NzYwMDM=,size_16,color_FFFFFF,t_70" alt=""></p>
+<p>有些还可以查看具体的文献：</p>
+<p><img src="C:\Users\10557\AppData\Roaming\Typora\typora-user-images\image-20200316125820466.png" alt="image-20200316125820466"></p>
+<p>执行命令</p>
+<blockquote>
+<p>man 8 pam</p>
+</blockquote>
+<p><strong>当然 man命令给出的解释比较详细，一般需要简单的介绍，就只需要help就够了</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>结构名称</th>
+<th>代表意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td>
+<td>命令的名称</td>
+</tr>
+<tr>
+<td>SYNOPSIS</td>
+<td>参数的大致使用方法</td>
+</tr>
+<tr>
+<td>DESCRIPTION</td>
+<td>介绍说明</td>
+</tr>
+<tr>
+<td>EXAMPLES</td>
+<td>演示（附带简单说明）</td>
+</tr>
+<tr>
+<td>OVERVIEW</td>
+<td>概述</td>
+</tr>
+<tr>
+<td>DEFAULTS</td>
+<td>默认的功能</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>具体的可用选项（带介绍）</td>
+</tr>
+<tr>
+<td>ENVIRONMENT</td>
+<td>环境变量</td>
+</tr>
+<tr>
+<td>FILES</td>
+<td>用到的文件</td>
+</tr>
+<tr>
+<td>SEE ALSO</td>
+<td>相关的资料</td>
+</tr>
+<tr>
+<td>HISTORY</td>
+<td>维护历史与联系方式</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>命令查看：</p>
+<p><a href="http://c.biancheng.net/linux_tutorial/" target="_blank" rel="noopener">C语言中文网</a></p>
+<p><a href="https://www.linuxprobe.com/" target="_blank" rel="noopener">Linux就这么学</a></p>
+<p><a href="https://www.linuxcool.com/" target="_blank" rel="noopener">Linux命令大全</a></p>
+
+
+    <!-- 显示photos -->
+    
+
+  </div>
+  <div class="post-tags">
+    
+  </div>
+</article>
+  
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <a href="/2020/03/07/03%20Linux/02%20%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" rel="next" title="03 Linux/02 文件管理">
+            <span>〈 </span> 03 Linux/02 文件管理
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+        
+          <a href="/2020/03/18/03%20Linux/%E7%AE%A1%E9%81%93%E7%AC%A6%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" rel="prev" title="03 Linux/管道符、重定向与环境变量">
+            03 Linux/管道符、重定向与环境变量 <span>〉</span>
+          </a>
+        
+      </div>
+    </div>
+  
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#man命令"><span class="toc-text">man命令</span></a></li></ol>
+  </div>
+
+
+    </div>
+
+    
+
+  </div>
+
+  <footer class="footer text-center">
+    <div id="bottom-inner">
+      
+        <a href="http://hexo.io" target="_blank" class="footer-link">Hexo</a>
+      
+        <a href="https://github.com/microacup/hexo-theme-micorb" target="_blank" class="footer-link">Theme microb</a>
+      
+    </div>
+  </footer>
+  
+
+<script>
+  var titleTime,originTitle=document.title;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="[闷声发大财中...] "+originTitle,clearTimeout(titleTime)):(document.title="[+1s] "+originTitle,titleTime=setTimeout(function(){document.title=originTitle},2e3))});
+</script>
+
+<script>
+  (function (window, document) {
+    window.requestAnimationFrame = (function () {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function (callback) {
+          setTimeout(callback, 1000 / 60);
+        }
+    })();
+
+    function init() {
+      addMenuEvent();
+    }
+    init();
+
+    function addMenuEvent() {
+      var menu = document.getElementById('menu-main-post');
+      if (menu) {
+        var toc = document.getElementById('toc');
+        menu.title = toc ? '目录' : '回到顶部';
+        menu.onclick = function () {
+          if (toc) {
+            if (toc.style.display == 'block') {
+              toc.style.display = 'none';
+            } else {
+              toc.style.display = 'block';
+            }
+          } else {
+            returnTop();
+          }
+        };
+      }
+    }
+
+    var timer = null;
+
+    function returnTop() {
+      cancelAnimationFrame(timer);
+      timer = requestAnimationFrame(function fn() {
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 0) {
+          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+          timer = requestAnimationFrame(fn);
+        } else {
+          cancelAnimationFrame(timer);
+        }
+      });
+    }
+
+  })(window, document);
+</script>
+
+
+  
+
+
+
+</body>
+</html>

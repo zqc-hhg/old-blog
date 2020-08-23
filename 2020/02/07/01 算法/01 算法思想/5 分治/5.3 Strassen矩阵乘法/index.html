@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#202020"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  
+    <meta name="keywords" content="算法," />
+  
+
+  
+    <meta name="description" content="5.3 Strassen矩阵乘法" />
+  
+  
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <title>5.3 Strassen矩阵乘法 [ Max&#39;s Blog ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
+    
+      <link rel="stylesheet" href="/css/microb.css">
+    
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <nav class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+  <ul class="pure-menu-list float-r clearfix">
+    
+      <li class="pure-menu-item toc-menu">
+        <a id="menu-main-post" class="pure-menu-link" href="javascript:;">
+          <img class="menu-icon" src="/logo.png" alt="MENU">
+        </a>
+      </li>
+    
+  </ul>  
+  <a class="pure-menu-heading" href="/">
+      <h1 class="title">Max&#39;s Blog</h1>
+      <!-- <span></span> -->
+  </a>
+  <!-- 
+  <img class="logo" id="logo" src="/logo.png" alt="logo">
+   -->
+</nav>
+
+  <div class="container" id="content-outer">
+    <div class="inner" id="content-inner">
+      <article class="post" id="post">
+  <header class="post-header text-center">
+    <h1 class="title">
+      5.3 Strassen矩阵乘法
+    </h1>
+    
+    <time class="time" datetime="2020-02-07T12:32:20.000Z">
+      2020-02-07
+    </time>
+    
+    <hr>
+  </header>
+  <div class="post-content">
+    <h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>​        Strassen算法是一种渐进快于平凡算法的矩阵相乘算法，因为分解后的问题包含了8次矩阵相乘和4次矩阵相加，就是这8次矩阵相乘导致了速度不能提升。于是我们想到能不能减少矩阵相乘的次数，取而代之的是矩阵相加的次数增加。Strassen正是利用了这一点。</p>
+<h4 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h4><p><img src="https://upload-images.jianshu.io/upload_images/1186132-a643e20f23008d91.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt=""></p>
+<p>把每个矩阵分割为4份，然后创建如下10个中间矩阵：</p>
+<p> S1 = B12 - B22<br> S2 = A11 + A12<br> S3 = A21 + A22<br> S4 = B21 - B11<br> S5 = A11 + A22<br> S6 = B11 + B22<br> S7 = A12 - A22<br> S8 = B21 + B22<br> S9 = A11 - A21<br> S10 = B11 + B12</p>
+<p>接着，计算7次矩阵乘法：</p>
+<p> P1 = A11 • S1<br> P2 = S2 • B22<br> P3 = S3 • B11<br> P4 = A22 • S4<br> P5 = S5 • S6<br> P6 = S7 • S8<br> P7 = S9 • S10</p>
+<p>最后，根据这7个结果就可以计算出C矩阵：<br> C11 = P5 + P4 - P2 + P6<br> C12 = P1 + P2<br> C21 = P3 + P4<br> C22 = P5 + P1 - P3 - P7</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;  </span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  N  10  </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//matrix + matrix  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">plus</span><span class="params">( <span class="keyword">int</span> t[N/<span class="number">2</span>][N/<span class="number">2</span>], <span class="keyword">int</span> r[N/<span class="number">2</span>][N/<span class="number">2</span>], <span class="keyword">int</span> s[N/<span class="number">2</span>][N/<span class="number">2</span>] )</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i, j;  </span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; N / <span class="number">2</span>; i++ )  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">for</span>( j = <span class="number">0</span>; j &lt; N / <span class="number">2</span>; j++ )  </span><br><span class="line">        &#123;  </span><br><span class="line">            t[i][j] = r[i][j] + s[i][j];  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">//matrix - matrix  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">minus</span><span class="params">( <span class="keyword">int</span> t[N/<span class="number">2</span>][N/<span class="number">2</span>], <span class="keyword">int</span> r[N/<span class="number">2</span>][N/<span class="number">2</span>], <span class="keyword">int</span> s[N/<span class="number">2</span>][N/<span class="number">2</span>] )</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i, j;  </span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; N / <span class="number">2</span>; i++ )  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">for</span>( j = <span class="number">0</span>; j &lt; N / <span class="number">2</span>; j++ )  </span><br><span class="line">        &#123;  </span><br><span class="line">            t[i][j] = r[i][j] - s[i][j];  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">//matrix * matrix  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mul</span><span class="params">( <span class="keyword">int</span> t[N/<span class="number">2</span>][N/<span class="number">2</span>], <span class="keyword">int</span> r[N/<span class="number">2</span>][N/<span class="number">2</span>], <span class="keyword">int</span> s[N/<span class="number">2</span>][N/<span class="number">2</span>]  )</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i, j, k;  </span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; N / <span class="number">2</span>; i++ )  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">for</span>( j = <span class="number">0</span>; j &lt; N / <span class="number">2</span>; j++ )  </span><br><span class="line">        &#123;  </span><br><span class="line">            t[i][j] = <span class="number">0</span>;  </span><br><span class="line">            <span class="keyword">for</span>( k = <span class="number">0</span>; k &lt; N / <span class="number">2</span>; k++ )  </span><br><span class="line">            &#123;  </span><br><span class="line">                t[i][j] += r[i][k] * s[k][j];  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i, j, k;  </span><br><span class="line">    <span class="keyword">int</span> mat[N][N];  </span><br><span class="line">    <span class="keyword">int</span> m1[N][N];  </span><br><span class="line">    <span class="keyword">int</span> m2[N][N];  </span><br><span class="line">    <span class="keyword">int</span> a[N/<span class="number">2</span>][N/<span class="number">2</span>],b[N/<span class="number">2</span>][N/<span class="number">2</span>],c[N/<span class="number">2</span>][N/<span class="number">2</span>],d[N/<span class="number">2</span>][N/<span class="number">2</span>];  </span><br><span class="line">    <span class="keyword">int</span> e[N/<span class="number">2</span>][N/<span class="number">2</span>],f[N/<span class="number">2</span>][N/<span class="number">2</span>],g[N/<span class="number">2</span>][N/<span class="number">2</span>],h[N/<span class="number">2</span>][N/<span class="number">2</span>];  </span><br><span class="line">    <span class="keyword">int</span> p1[N/<span class="number">2</span>][N/<span class="number">2</span>],p2[N/<span class="number">2</span>][N/<span class="number">2</span>],p3[N/<span class="number">2</span>][N/<span class="number">2</span>],p4[N/<span class="number">2</span>][N/<span class="number">2</span>];  </span><br><span class="line">    <span class="keyword">int</span> p5[N/<span class="number">2</span>][N/<span class="number">2</span>],p6[N/<span class="number">2</span>][N/<span class="number">2</span>],p7[N/<span class="number">2</span>][N/<span class="number">2</span>];  </span><br><span class="line">    <span class="keyword">int</span> r[N/<span class="number">2</span>][N/<span class="number">2</span>], s[N/<span class="number">2</span>][N/<span class="number">2</span>], t[N/<span class="number">2</span>][N/<span class="number">2</span>], u[N/<span class="number">2</span>][N/<span class="number">2</span>], t1[N/<span class="number">2</span>][N/<span class="number">2</span>], t2[N/<span class="number">2</span>][N/<span class="number">2</span>];  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\nInput the first matrix...:\n"</span>);  </span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; N; i++ )  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">for</span>( j = <span class="number">0</span>; j &lt; N; j++ )  </span><br><span class="line">        &#123;  </span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;m1[i][j]);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\nInput the second matrix...:\n"</span>);  </span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; N; i++ )  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">for</span>( j = <span class="number">0</span>; j &lt; N; j++ )  </span><br><span class="line">        &#123;  </span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;m2[i][j]);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// a b c d e f g h  </span></span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; N / <span class="number">2</span>; i++ )  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">for</span>( j = <span class="number">0</span>; j &lt; N / <span class="number">2</span>; j++ )  </span><br><span class="line">        &#123;  </span><br><span class="line">            a[i][j] = m1[i][j];  </span><br><span class="line">            b[i][j] = m1[i][j + N / <span class="number">2</span>];  </span><br><span class="line">            c[i][j] = m1[i + N / <span class="number">2</span>][j];  </span><br><span class="line">            d[i][j] = m1[i + N / <span class="number">2</span>][j + N / <span class="number">2</span>];  </span><br><span class="line">            e[i][j] = m2[i][j];  </span><br><span class="line">            f[i][j] = m2[i][j + N / <span class="number">2</span>];  </span><br><span class="line">            g[i][j] = m2[i + N / <span class="number">2</span>][j];  </span><br><span class="line">            h[i][j] = m2[i + N / <span class="number">2</span>][j + N / <span class="number">2</span>];  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//p1  </span></span><br><span class="line">    minus( r, f, h );  </span><br><span class="line">    mul( p1, a, r );   </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//p2  </span></span><br><span class="line">    plus( r, a, b );  </span><br><span class="line">    mul( p2, r, h );  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//p3  </span></span><br><span class="line">    plus( r, c, d );  </span><br><span class="line">    mul( p3, r, e );  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//p4  </span></span><br><span class="line">    minus( r, g, e );  </span><br><span class="line">    mul( p4, d, r );  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//p5  </span></span><br><span class="line">    plus( r, a, d );  </span><br><span class="line">    plus( s, e, f );  </span><br><span class="line">    mul( p5, r, s );  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//p6  </span></span><br><span class="line">    minus( r, b, d );  </span><br><span class="line">    plus( s, g, h );  </span><br><span class="line">    mul( p6, r, s );  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//p7  </span></span><br><span class="line">    minus( r, a, c );  </span><br><span class="line">    plus( s, e, f );  </span><br><span class="line">    mul( p7, r, s );  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//r = p5 + p4 - p2 + p6  </span></span><br><span class="line">    plus( t1, p5, p4 );  </span><br><span class="line">    minus( t2, t1, p2 );  </span><br><span class="line">    plus( r, t2, p6 );  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//s = p1 + p2  </span></span><br><span class="line">    plus( s, p1, p2 );  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//t = p3 + p4  </span></span><br><span class="line">    plus( t, p3, p4 );  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//u = p5 + p1 - p3 - p7 = p5 + p1 - ( p3 + p7 )  </span></span><br><span class="line">    plus( t1, p5, p1 );  </span><br><span class="line">    plus( t2, p3, p7 );  </span><br><span class="line">    minus( u, t1, t2 );  </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; N / <span class="number">2</span>; i++ )  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">for</span>( j = <span class="number">0</span>; j &lt; N / <span class="number">2</span>; j++ )  </span><br><span class="line">        &#123;  </span><br><span class="line">            mat[i][j] = r[i][j];  </span><br><span class="line">            mat[i][j + N / <span class="number">2</span>] = s[i][j];  </span><br><span class="line">            mat[i + N / <span class="number">2</span>][j] = t[i][j];  </span><br><span class="line">            mat[i + N / <span class="number">2</span>][j + N / <span class="number">2</span>] = u[i][j];  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n下面是strassen算法处理结果：\n"</span>);  </span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; N; i++ )  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">for</span>( j = <span class="number">0</span>; j &lt; N; j++ )  </span><br><span class="line">        &#123;  </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>, mat[i][j]);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">     </span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; N; i++ )  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">for</span>( j = <span class="number">0</span>; j &lt; N; j++ )  </span><br><span class="line">        &#123;  </span><br><span class="line">            mat[i][j] = <span class="number">0</span>;  </span><br><span class="line">            <span class="keyword">for</span>( k = <span class="number">0</span>; k &lt; N; k++ )  </span><br><span class="line">            &#123;  </span><br><span class="line">                mat[i][j] += m1[i][j] * m2[i][j];  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; N; i++ )  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">for</span>( j = <span class="number">0</span>; j &lt; N; j++ )  </span><br><span class="line">        &#123;  </span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>, mat[i][j]);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+    <!-- 显示photos -->
+    
+
+  </div>
+  <div class="post-tags">
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+  </div>
+</article>
+  
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.2%20%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/" rel="next" title="5.2 大整数乘法">
+            <span>〈 </span> 5.2 大整数乘法
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+        
+          <a href="/2020/02/09/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/7%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/7.0%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A6%82%E8%BF%B0/" rel="prev" title="7.0 动态规划概述">
+            7.0 动态规划概述 <span>〉</span>
+          </a>
+        
+      </div>
+    </div>
+  
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#问题描述"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解决思路"><span class="toc-text">解决思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li></ol>
+  </div>
+
+
+    </div>
+
+    
+
+  </div>
+
+  <footer class="footer text-center">
+    <div id="bottom-inner">
+      
+        <a href="http://hexo.io" target="_blank" class="footer-link">Hexo</a>
+      
+        <a href="https://github.com/microacup/hexo-theme-micorb" target="_blank" class="footer-link">Theme microb</a>
+      
+    </div>
+  </footer>
+  
+
+<script>
+  var titleTime,originTitle=document.title;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="[闷声发大财中...] "+originTitle,clearTimeout(titleTime)):(document.title="[+1s] "+originTitle,titleTime=setTimeout(function(){document.title=originTitle},2e3))});
+</script>
+
+<script>
+  (function (window, document) {
+    window.requestAnimationFrame = (function () {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function (callback) {
+          setTimeout(callback, 1000 / 60);
+        }
+    })();
+
+    function init() {
+      addMenuEvent();
+    }
+    init();
+
+    function addMenuEvent() {
+      var menu = document.getElementById('menu-main-post');
+      if (menu) {
+        var toc = document.getElementById('toc');
+        menu.title = toc ? '目录' : '回到顶部';
+        menu.onclick = function () {
+          if (toc) {
+            if (toc.style.display == 'block') {
+              toc.style.display = 'none';
+            } else {
+              toc.style.display = 'block';
+            }
+          } else {
+            returnTop();
+          }
+        };
+      }
+    }
+
+    var timer = null;
+
+    function returnTop() {
+      cancelAnimationFrame(timer);
+      timer = requestAnimationFrame(function fn() {
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 0) {
+          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+          timer = requestAnimationFrame(fn);
+        } else {
+          cancelAnimationFrame(timer);
+        }
+      });
+    }
+
+  })(window, document);
+</script>
+
+
+  
+
+
+
+</body>
+</html>

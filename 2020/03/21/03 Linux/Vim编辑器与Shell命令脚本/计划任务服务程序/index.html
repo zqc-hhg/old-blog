@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#202020"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  
+    <meta name="keywords" content="" />
+  
+
+  
+    <meta name="description" content="03 Linux/Vim编辑器与Shell命令脚本/计划任务服务程序" />
+  
+  
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <title>03 Linux/Vim编辑器与Shell命令脚本/计划任务服务程序 [ Max&#39;s Blog ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
+    
+      <link rel="stylesheet" href="/css/microb.css">
+    
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <nav class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+  <ul class="pure-menu-list float-r clearfix">
+    
+      <li class="pure-menu-item toc-menu">
+        <a id="menu-main-post" class="pure-menu-link" href="javascript:;">
+          <img class="menu-icon" src="/logo.png" alt="MENU">
+        </a>
+      </li>
+    
+  </ul>  
+  <a class="pure-menu-heading" href="/">
+      <h1 class="title">Max&#39;s Blog</h1>
+      <!-- <span></span> -->
+  </a>
+  <!-- 
+  <img class="logo" id="logo" src="/logo.png" alt="logo">
+   -->
+</nav>
+
+  <div class="container" id="content-outer">
+    <div class="inner" id="content-inner">
+      <article class="post" id="post">
+  <header class="post-header text-center">
+    <h1 class="title">
+      03 Linux/Vim编辑器与Shell命令脚本/计划任务服务程序
+    </h1>
+    
+    <time class="time" datetime="2020-03-21T03:00:46.721Z">
+      2020-03-21
+    </time>
+    
+    <hr>
+  </header>
+  <div class="post-content">
+    <h3 id="一次性计划任务（at）"><a href="#一次性计划任务（at）" class="headerlink" title="一次性计划任务（at）"></a>一次性计划任务（at）</h3><p>创建任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@linuxprobe ~]# at 23:30</span><br><span class="line">at &gt; systemctl restart httpd</span><br><span class="line">at &gt; 此处请同时按下Ctrl+d来结束编写计划任务</span><br><span class="line">job 3 at Mon Apr 27 23:30:00 2015</span><br><span class="line">[root@linuxprobe ~]# at -l</span><br><span class="line">3 Mon Apr 27 23:30:00 2016 a root</span><br></pre></td></tr></table></figure>
+<p>删除任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@linuxprobe ~]# at -l</span><br><span class="line">3 Mon Apr 27 23:30:00 2016 a root</span><br><span class="line">4 Mon Apr 27 23:30:00 2016 a root</span><br><span class="line">[root@linuxprobe ~]# atrm 3</span><br><span class="line">[root@linuxprobe ~]# at -l</span><br><span class="line">4 Mon Apr 27 23:30:00 2016 a root</span><br></pre></td></tr></table></figure>
+<h3 id="长期性计划任务（crontab）"><a href="#长期性计划任务（crontab）" class="headerlink" title="长期性计划任务（crontab）"></a>长期性计划任务（crontab）</h3><p><img src="https://www.linuxprobe.com/wp-content/uploads/2015/02/cron%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%8F%82%E6%95%B0.png" alt=""></p>
+<p><strong>!!!命令需要地址</strong> </p>
+<p>创建任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@linuxprobe ~]# crontab -e</span><br><span class="line">no crontab for root - using an empty one</span><br><span class="line">crontab: installing new crontab</span><br><span class="line">[root@linuxprobe ~]# crontab -l</span><br><span class="line">25 3 * * 1,3,5 &#x2F;usr&#x2F;bin&#x2F;tar -czvf backup.tar.gz &#x2F;home&#x2F;wwwroot</span><br></pre></td></tr></table></figure>
+<p>删除任务</p>
+<blockquote>
+<p>crontab -r</p>
+<p>在crond服务的配置参数中，可以像Shell脚本那样以#号开头写上注释信息，这样在日后回顾这段命令代码时可以快速了解其功能、需求以及编写人员等重要信息。<br>计划任务中的“分”字段必须有数值，绝对不能为空或是*号，而“日”和“星期”字段不能同时使用，否则就会发生冲突。</p>
+</blockquote>
+
+
+    <!-- 显示photos -->
+    
+
+  </div>
+  <div class="post-tags">
+    
+  </div>
+</article>
+  
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <a href="/2020/03/20/03%20Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/%E7%BC%96%E5%86%99Shell%E8%84%9A%E6%9C%AC/" rel="next" title="03 Linux/Vim编辑器与Shell命令脚本/编写Shell脚本">
+            <span>〈 </span> 03 Linux/Vim编辑器与Shell命令脚本/编写Shell脚本
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+        
+          <a href="/2020/03/21/03%20Linux/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%83%BD%E5%8A%9B/" rel="prev" title="03 Linux/用户身份与文件权限/用户身份与能力">
+            03 Linux/用户身份与文件权限/用户身份与能力 <span>〉</span>
+          </a>
+        
+      </div>
+    </div>
+  
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一次性计划任务（at）"><span class="toc-text">一次性计划任务（at）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#长期性计划任务（crontab）"><span class="toc-text">长期性计划任务（crontab）</span></a></li></ol>
+  </div>
+
+
+    </div>
+
+    
+
+  </div>
+
+  <footer class="footer text-center">
+    <div id="bottom-inner">
+      
+        <a href="http://hexo.io" target="_blank" class="footer-link">Hexo</a>
+      
+        <a href="https://github.com/microacup/hexo-theme-micorb" target="_blank" class="footer-link">Theme microb</a>
+      
+    </div>
+  </footer>
+  
+
+<script>
+  var titleTime,originTitle=document.title;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="[闷声发大财中...] "+originTitle,clearTimeout(titleTime)):(document.title="[+1s] "+originTitle,titleTime=setTimeout(function(){document.title=originTitle},2e3))});
+</script>
+
+<script>
+  (function (window, document) {
+    window.requestAnimationFrame = (function () {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function (callback) {
+          setTimeout(callback, 1000 / 60);
+        }
+    })();
+
+    function init() {
+      addMenuEvent();
+    }
+    init();
+
+    function addMenuEvent() {
+      var menu = document.getElementById('menu-main-post');
+      if (menu) {
+        var toc = document.getElementById('toc');
+        menu.title = toc ? '目录' : '回到顶部';
+        menu.onclick = function () {
+          if (toc) {
+            if (toc.style.display == 'block') {
+              toc.style.display = 'none';
+            } else {
+              toc.style.display = 'block';
+            }
+          } else {
+            returnTop();
+          }
+        };
+      }
+    }
+
+    var timer = null;
+
+    function returnTop() {
+      cancelAnimationFrame(timer);
+      timer = requestAnimationFrame(function fn() {
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 0) {
+          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+          timer = requestAnimationFrame(fn);
+        } else {
+          cancelAnimationFrame(timer);
+        }
+      });
+    }
+
+  })(window, document);
+</script>
+
+
+  
+
+
+
+</body>
+</html>

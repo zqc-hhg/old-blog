@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#202020"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  
+    <meta name="keywords" content="" />
+  
+
+  
+    <meta name="description" content="03 Linux/管道符、重定向与环境变量" />
+  
+  
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <title>03 Linux/管道符、重定向与环境变量 [ Max&#39;s Blog ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
+    
+      <link rel="stylesheet" href="/css/microb.css">
+    
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <nav class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+  <ul class="pure-menu-list float-r clearfix">
+    
+      <li class="pure-menu-item toc-menu">
+        <a id="menu-main-post" class="pure-menu-link" href="javascript:;">
+          <img class="menu-icon" src="/logo.png" alt="MENU">
+        </a>
+      </li>
+    
+  </ul>  
+  <a class="pure-menu-heading" href="/">
+      <h1 class="title">Max&#39;s Blog</h1>
+      <!-- <span></span> -->
+  </a>
+  <!-- 
+  <img class="logo" id="logo" src="/logo.png" alt="logo">
+   -->
+</nav>
+
+  <div class="container" id="content-outer">
+    <div class="inner" id="content-inner">
+      <article class="post" id="post">
+  <header class="post-header text-center">
+    <h1 class="title">
+      03 Linux/管道符、重定向与环境变量
+    </h1>
+    
+    <time class="time" datetime="2020-03-18T00:34:33.435Z">
+      2020-03-18
+    </time>
+    
+    <hr>
+  </header>
+  <div class="post-content">
+    <ul>
+<li><h3 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h3></li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>命令 &lt; 文件</td>
+<td>将文件作为命令的标准输入</td>
+</tr>
+<tr>
+<td>命令 &lt;&lt; 分界符</td>
+<td>从标准输入中读入，直到遇见分界符才停止</td>
+</tr>
+<tr>
+<td>命令 &lt; 文件1 &gt; 文件2</td>
+<td>将文件1作为命令的标准输入并将标准输出到文件2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>重定义输出</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>命令 &gt; 文件</td>
+<td>将标准输出重定向到一个文件中（清空原有文件的数据）</td>
+</tr>
+<tr>
+<td>命令 2&gt; 文件</td>
+<td>将错误输出重定向到一个文件中（清空原有文件的数据）</td>
+</tr>
+<tr>
+<td>命令 &gt;&gt; 文件</td>
+<td>将标准输出重定向到一个文件中（追加到原有内容的后面）</td>
+</tr>
+<tr>
+<td>命令 2&gt;&gt; 文件</td>
+<td>将错误输出重定向到一个文件中（追加到原有内容的后面）</td>
+</tr>
+<tr>
+<td>命令 &gt;&gt; 文件 2&gt;&amp;1 或 命令 &amp;&gt;&gt; 文件</td>
+<td>将标准输出与错误输出共同写入到文件中（追加到原有内容的后面）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><h3 id="管道命令符"><a href="#管道命令符" class="headerlink" title="管道命令符"></a>管道命令符</h3><p>管道符的作用：把左面（前面）命令的输出值作为右面（后面）命令的输入值以便进一步处理信息。</p>
+</li>
+<li><h3 id="命令行的通配符"><a href="#命令行的通配符" class="headerlink" title="命令行的通配符"></a>命令行的通配符</h3><p>星号（<em>）代表匹配零个或多个字符，问号（?）代表匹配单个字符，中括号内加上数字[0-9]代表匹配0～9之间的单个数字的字符，而中括号内加上字母[abc]则是代表匹配a、b、c三个字符中的任意一个字符(<em>*正则表达式</em></em>)</p>
+</li>
+<li><h3 id="常用的转义字符"><a href="#常用的转义字符" class="headerlink" title="常用的转义字符"></a>常用的转义字符</h3><p>4个最常用的转义字符如下所示。</p>
+<blockquote>
+<p>反斜杠（\）：使反斜杠后面的一个变量变为单纯的字符串。</p>
+<p>单引号（’’）：转义其中所有的变量为单纯的字符串。</p>
+<p>双引号（””）：保留其中的变量属性，不进行转义处理。</p>
+<p>反引号（``）：把其中的命令执行后返回结果。</p>
+</blockquote>
+</li>
+<li><h3 id="重要的环境变量"><a href="#重要的环境变量" class="headerlink" title="重要的环境变量"></a>重要的环境变量</h3></li>
+</ul>
+<p><strong>命令执行过程：</strong></p>
+<p><strong>1、判断路径</strong></p>
+<p>判断用户是否以绝对路径或相对路径的方式输入命令（如/bin/ls），如果是的话，直接执行。</p>
+<p><strong>2、检查别名</strong></p>
+<p>Linux 系统会检查用户输入的命令是否为“别名命令”。要知道，通过 alias 命令是可以给现有命令自定义别名的，即用一个自定义的命令名称来替换原本的命令名称。</p>
+<p><strong>3、判断用户输入的是内部命令还是外部命令</strong></p>
+<p>Linux命令行解释器（又称为 Shell）会判断用户输入的命令是内部命令还是外部命令。其中，内部命令指的是解释器内部的命令，会被直接执行；而用户通常输入的命令都是外部命令。<br>内部命令： Shell 自带，会随着系统启动，可以直接从内存中读取<br>外部命令：在系统PATH变量的某个路径下的可执行文件<br>判断一个命令属于内部命令还是外部命令，可以使用 type 命令查看。</p>
+<p><strong>4、内部命令直接执行，外部命令检测是否存在缓存</strong></p>
+<p><strong>5、检测PATH路径，有执行，无报错。</strong></p>
+<p>当用户执行的是外部命令时，系统会在指定的多个路径中查找该命令的可执行文件，而定义这些路径的变量，就称为 PATH 环境变量，其作用就是告诉 Shell 待执行命令的可执行文件可能存放的位置，也就是说，Shell 会在 PATH 变量包含的多个路径中逐个查找，直到找到为止（如果找不到，Shell 会提供用户“找不到此命令”）。</p>
+<p><strong>重要的环境变量</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>变量名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOME</td>
+<td>用户的主目录（即家目录）</td>
+</tr>
+<tr>
+<td>SHELL</td>
+<td>用户在使用的Shell解释器名称</td>
+</tr>
+<tr>
+<td>HISTSIZE</td>
+<td>输出的历史命令记录条数</td>
+</tr>
+<tr>
+<td>HISTFILESIZE</td>
+<td>保存的历史命令记录条数</td>
+</tr>
+<tr>
+<td>MAIL</td>
+<td>邮件保存路径</td>
+</tr>
+<tr>
+<td>LANG</td>
+<td>系统语言、语系名称</td>
+</tr>
+<tr>
+<td>RANDOM</td>
+<td>生成一个随机数字</td>
+</tr>
+<tr>
+<td>PS1</td>
+<td>Bash解释器的提示符</td>
+</tr>
+<tr>
+<td>PATH</td>
+<td>定义解释器搜索用户执行命令的路径</td>
+</tr>
+<tr>
+<td>EDITOR</td>
+<td>用户默认的文本编辑器</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>各个用户可以自定义，命令作用范围也有限，默认情况下不能被其他用户使用。如果工作需要，可以使用<strong>export</strong>命令将其提升为全局变量，这样其他用户也就可以使用它了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@linuxprobe workdir]# su linuxprobe</span><br><span class="line">Last login: Fri Mar 20 20:52:10 CST 2017 on pts&#x2F;0</span><br><span class="line">[linuxprobe@linuxprobe ~]$ cd $WORKDIR</span><br><span class="line">[linuxprobe@linuxprobe ~]$ echo $WORKDIR</span><br><span class="line">[linuxprobe@linuxprobe ~]$ exit</span><br><span class="line">[root@linuxprobe ~]# export WORKDIR</span><br><span class="line">[root@linuxprobe ~]# su linuxprobe</span><br><span class="line">Last login: Fri Mar 20 21:52:10 CST 2017 on pts&#x2F;0</span><br><span class="line">[linuxprobe@linuxprobe ~]$ cd $WORKDIR</span><br><span class="line">[linuxprobe@linuxprobe workdir]$ pwd</span><br><span class="line">&#x2F;home&#x2F;workdir</span><br></pre></td></tr></table></figure>
+
+    <!-- 显示photos -->
+    
+
+  </div>
+  <div class="post-tags">
+    
+  </div>
+</article>
+  
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <a href="/2020/03/16/03%20Linux/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/00%20%20%E5%B8%AE%E5%8A%A9/" rel="next" title="03 Linux/鸟叔的linux私房菜/00  帮助">
+            <span>〈 </span> 03 Linux/鸟叔的linux私房菜/00  帮助
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+        
+          <a href="/2020/03/18/03%20Linux/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E4%BD%9C%E5%91%BD%E4%BB%A4/" rel="prev" title="03 Linux/基本命令/常用系统工作命令">
+            03 Linux/基本命令/常用系统工作命令 <span>〉</span>
+          </a>
+        
+      </div>
+    </div>
+  
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#输入输出重定向"><span class="toc-text">输入输出重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#管道命令符"><span class="toc-text">管道命令符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令行的通配符"><span class="toc-text">命令行的通配符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的转义字符"><span class="toc-text">常用的转义字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重要的环境变量"><span class="toc-text">重要的环境变量</span></a></li></ol>
+  </div>
+
+
+    </div>
+
+    
+
+  </div>
+
+  <footer class="footer text-center">
+    <div id="bottom-inner">
+      
+        <a href="http://hexo.io" target="_blank" class="footer-link">Hexo</a>
+      
+        <a href="https://github.com/microacup/hexo-theme-micorb" target="_blank" class="footer-link">Theme microb</a>
+      
+    </div>
+  </footer>
+  
+
+<script>
+  var titleTime,originTitle=document.title;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="[闷声发大财中...] "+originTitle,clearTimeout(titleTime)):(document.title="[+1s] "+originTitle,titleTime=setTimeout(function(){document.title=originTitle},2e3))});
+</script>
+
+<script>
+  (function (window, document) {
+    window.requestAnimationFrame = (function () {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function (callback) {
+          setTimeout(callback, 1000 / 60);
+        }
+    })();
+
+    function init() {
+      addMenuEvent();
+    }
+    init();
+
+    function addMenuEvent() {
+      var menu = document.getElementById('menu-main-post');
+      if (menu) {
+        var toc = document.getElementById('toc');
+        menu.title = toc ? '目录' : '回到顶部';
+        menu.onclick = function () {
+          if (toc) {
+            if (toc.style.display == 'block') {
+              toc.style.display = 'none';
+            } else {
+              toc.style.display = 'block';
+            }
+          } else {
+            returnTop();
+          }
+        };
+      }
+    }
+
+    var timer = null;
+
+    function returnTop() {
+      cancelAnimationFrame(timer);
+      timer = requestAnimationFrame(function fn() {
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 0) {
+          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+          timer = requestAnimationFrame(fn);
+        } else {
+          cancelAnimationFrame(timer);
+        }
+      });
+    }
+
+  })(window, document);
+</script>
+
+
+  
+
+
+
+</body>
+</html>

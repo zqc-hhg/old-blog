@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#202020"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  
+    <meta name="keywords" content="Linux," />
+  
+
+  
+    <meta name="description" content="03 Linux/02 文件管理" />
+  
+  
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <title>03 Linux/02 文件管理 [ Max&#39;s Blog ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
+    
+      <link rel="stylesheet" href="/css/microb.css">
+    
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <nav class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+  <ul class="pure-menu-list float-r clearfix">
+    
+      <li class="pure-menu-item toc-menu">
+        <a id="menu-main-post" class="pure-menu-link" href="javascript:;">
+          <img class="menu-icon" src="/logo.png" alt="MENU">
+        </a>
+      </li>
+    
+  </ul>  
+  <a class="pure-menu-heading" href="/">
+      <h1 class="title">Max&#39;s Blog</h1>
+      <!-- <span></span> -->
+  </a>
+  <!-- 
+  <img class="logo" id="logo" src="/logo.png" alt="logo">
+   -->
+</nav>
+
+  <div class="container" id="content-outer">
+    <div class="inner" id="content-inner">
+      <article class="post" id="post">
+  <header class="post-header text-center">
+    <h1 class="title">
+      03 Linux/02 文件管理
+    </h1>
+    
+    <time class="time" datetime="2020-03-07T07:16:46.000Z">
+      2020-03-07
+    </time>
+    
+    <hr>
+  </header>
+  <div class="post-content">
+    <h3 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3><p>FHS（Filesystem Hierarchy Standard）认为，Linux 系统的根目录（/）最为重要（没有之一），其原因有以下 2 点：</p>
+<ol>
+<li><p>所有目录都是由根目录衍生出来的；</p>
+</li>
+<li><p>根目录与系统的开机、修复、还原密切相关；</p>
+<p><img src="http://c.biancheng.net/uploads/allimg/190506/2-1Z5061A1003X.gif" alt=""></p>
+</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>一级目录</th>
+<th>功能（作用）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/bin/</td>
+<td>存放系统命令，普通用户和 root 都可以执行。放在 /bin 下的命令在单用户模式下也可以执行</td>
+</tr>
+<tr>
+<td>/boot/</td>
+<td>系统启动目录，保存与系统启动相关的文件，如内核文件和启动引导程序（grub）文件等</td>
+</tr>
+<tr>
+<td>/dev/</td>
+<td>设备文件保存位置</td>
+</tr>
+<tr>
+<td>/etc/</td>
+<td>配置文件保存位置。系统内所有采用默认安装方式（rpm 安装）的服务配置文件全部保存在此目录中，如用户信息、服务的启动脚本、常用服务的配置文件等</td>
+</tr>
+<tr>
+<td>/home/</td>
+<td>普通用户的主目录（也称为家目录）。在创建用户时，每个用户要有一个默认登录和保存自己数据的位置，就是用户的主目录，所有普通用户的主目录是在 /home/ 下建立一个和用户名相同的目录。如用户 liming 的主目录就是 /home/liming</td>
+</tr>
+<tr>
+<td>/lib/</td>
+<td>系统调用的函数库保存位置</td>
+</tr>
+<tr>
+<td>/media/</td>
+<td>挂载目录。系统建议用来挂载媒体设备，如软盘和光盘</td>
+</tr>
+<tr>
+<td>/mnt/</td>
+<td>挂载目录。早期 Linux 中只有这一个挂载目录，并没有细分。系统建议这个目录用来挂载额外的设备，如 U 盘、移动硬盘和其他操作系统的分区</td>
+</tr>
+<tr>
+<td>/misc/</td>
+<td>挂载目录。系统建议用来挂载 NFS 服务的共享目录。虽然系统准备了三个默认挂载目录 /media/、/mnt/、/misc/，但是到底在哪个目录中挂载什么设备可以由管理员自己决定。例如，笔者在接触 Linux 的时候，默认挂载目录只有 /mnt/，所以养成了在 /mnt/ 下建立不同目录挂载不同设备的习惯，如 /mnt/cdrom/ 挂载光盘、/mnt/usb/ 挂载 U 盘，都是可以的</td>
+</tr>
+<tr>
+<td>/opt/</td>
+<td>第三方安装的软件保存位置。这个目录是放置和安装其他软件的位置，手工安装的源码包软件都可以安装到这个目录中。不过笔者还是习惯把软件放到 /usr/local/ 目录中，也就是说，/usr/local/ 目录也可以用来安装软件</td>
+</tr>
+<tr>
+<td>/root/</td>
+<td>root 的主目录。普通用户主目录在 /home/ 下，root 主目录直接在“/”下</td>
+</tr>
+<tr>
+<td>/sbin/</td>
+<td>保存与系统环境设置相关的命令，只有 root 可以使用这些命令进行系统环境设置，但也有些命令可以允许普通用户查看</td>
+</tr>
+<tr>
+<td>/srv/</td>
+<td>服务数据目录。一些系统服务启动之后，可以在这个目录中保存所需要的数据</td>
+</tr>
+<tr>
+<td>/tmp/</td>
+<td>临时目录。系统存放临时文件的目录，在该目录下，所有用户都可以访问和写入。建议此目录中不能保存重要数据，最好每次开机都把该目录清空</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="文件命名规则"><a href="#文件命名规则" class="headerlink" title="文件命名规则"></a>文件命名规则</h3><p>Linux 系统中，文件和目录的命名规则如下：</p>
+<ol>
+<li><p>除了字符“/”之外，所有的字符都可以使用，但是要注意，在目录名或文件名中，使用某些特殊字符并不是明智之举。例如，在命名时应避免使用 &lt;、&gt;、？、* 和非打印字符等。如果一个文件名中包含了特殊字符，例如空格，那么在访问这个文件时就需要使用引号将文件名括起来。</p>
+</li>
+<li><p>目录名或文件名的长度不能超过 255 个字符。</p>
+</li>
+<li><p>目录名或文件名是区分大小写的。如 DOG、dog、Dog 和 DOg ，是互不相同的目录名或文件名，但使用字符大小写来区分不同的文件或目录，也是不明智的。</p>
+</li>
+<li><p>与 Windows 操作系统不同，文件的扩展名对 Linux 操作系统没有特殊的含义，换句话说，Linux 系统并不以文件的扩展名开分区文件类型。例如，dog.exe 只是一个文件，其扩展名 .exe 并不代表此文件就一定是可执行文件。</p>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3></li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">切换目录</th>
+<th style="text-align:center">cd</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">显示当前工作路径</td>
+<td style="text-align:center">pwd</td>
+</tr>
+<tr>
+<td style="text-align:center">查看目录中的文件</td>
+<td style="text-align:center">ls</td>
+</tr>
+<tr>
+<td style="text-align:center">创建目录</td>
+<td style="text-align:center">mkdir</td>
+</tr>
+<tr>
+<td style="text-align:center">删除空目录</td>
+<td style="text-align:center">rmdir</td>
+</tr>
+<tr>
+<td style="text-align:center">创建文件及修改文件时间戳yib</td>
+<td style="text-align:center">touch</td>
+</tr>
+<tr>
+<td style="text-align:center">在文件间建立软/硬链接</td>
+<td style="text-align:center">ln</td>
+</tr>
+<tr>
+<td style="text-align:center">复制文件和目录</td>
+<td style="text-align:center">cp</td>
+</tr>
+<tr>
+<td style="text-align:center">删除文件或目录</td>
+<td style="text-align:center">rm</td>
+</tr>
+<tr>
+<td style="text-align:center">移动或重命名文件和目录</td>
+<td style="text-align:center">mv</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">查找方式</th>
+<th style="text-align:center">命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">一般查找</td>
+<td style="text-align:center">find</td>
+</tr>
+<tr>
+<td style="text-align:center">在数据库查找</td>
+<td style="text-align:center">locate</td>
+</tr>
+<tr>
+<td style="text-align:center">查找执行文件</td>
+<td style="text-align:center">which/whereis</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>locate：效率高 但前提要更新数据库（update 每天关机后会执行一次）</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>文件压缩</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gzip</td>
+<td>压缩单个文件</td>
+</tr>
+<tr>
+<td>tar</td>
+<td>压缩多个文件</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="利用文件时间戳来备份文件"><a href="#利用文件时间戳来备份文件" class="headerlink" title="利用文件时间戳来备份文件"></a>利用文件时间戳来备份文件</h3><p>问题背景：面对较大的文件，每天cp一次效率太低</p>
+<p>原理：利用时间戳只更新被改动的文件</p>
+<p><img src="C:\Users\10557\AppData\Roaming\Typora\typora-user-images\image-20200318083423196.png" alt="image-20200318083423196"></p>
+
+
+    <!-- 显示photos -->
+    
+
+  </div>
+  <div class="post-tags">
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+  </div>
+</article>
+  
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <a href="/2020/03/07/03%20Linux/01%20%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/" rel="next" title="03 Linux/01 用户管理">
+            <span>〈 </span> 03 Linux/01 用户管理
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+        
+          <a href="/2020/03/16/03%20Linux/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/00%20%20%E5%B8%AE%E5%8A%A9/" rel="prev" title="03 Linux/鸟叔的linux私房菜/00  帮助">
+            03 Linux/鸟叔的linux私房菜/00  帮助 <span>〉</span>
+          </a>
+        
+      </div>
+    </div>
+  
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件结构"><span class="toc-text">文件结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件命名规则"><span class="toc-text">文件命名规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用文件时间戳来备份文件"><span class="toc-text">利用文件时间戳来备份文件</span></a></li></ol>
+  </div>
+
+
+    </div>
+
+    
+
+  </div>
+
+  <footer class="footer text-center">
+    <div id="bottom-inner">
+      
+        <a href="http://hexo.io" target="_blank" class="footer-link">Hexo</a>
+      
+        <a href="https://github.com/microacup/hexo-theme-micorb" target="_blank" class="footer-link">Theme microb</a>
+      
+    </div>
+  </footer>
+  
+
+<script>
+  var titleTime,originTitle=document.title;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="[闷声发大财中...] "+originTitle,clearTimeout(titleTime)):(document.title="[+1s] "+originTitle,titleTime=setTimeout(function(){document.title=originTitle},2e3))});
+</script>
+
+<script>
+  (function (window, document) {
+    window.requestAnimationFrame = (function () {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function (callback) {
+          setTimeout(callback, 1000 / 60);
+        }
+    })();
+
+    function init() {
+      addMenuEvent();
+    }
+    init();
+
+    function addMenuEvent() {
+      var menu = document.getElementById('menu-main-post');
+      if (menu) {
+        var toc = document.getElementById('toc');
+        menu.title = toc ? '目录' : '回到顶部';
+        menu.onclick = function () {
+          if (toc) {
+            if (toc.style.display == 'block') {
+              toc.style.display = 'none';
+            } else {
+              toc.style.display = 'block';
+            }
+          } else {
+            returnTop();
+          }
+        };
+      }
+    }
+
+    var timer = null;
+
+    function returnTop() {
+      cancelAnimationFrame(timer);
+      timer = requestAnimationFrame(function fn() {
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 0) {
+          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+          timer = requestAnimationFrame(fn);
+        } else {
+          cancelAnimationFrame(timer);
+        }
+      });
+    }
+
+  })(window, document);
+</script>
+
+
+  
+
+
+
+</body>
+</html>

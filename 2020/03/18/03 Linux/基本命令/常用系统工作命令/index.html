@@ -1,0 +1,410 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#202020"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  
+    <meta name="keywords" content="" />
+  
+
+  
+    <meta name="description" content="03 Linux/基本命令/常用系统工作命令" />
+  
+  
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <title>03 Linux/基本命令/常用系统工作命令 [ Max&#39;s Blog ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
+    
+      <link rel="stylesheet" href="/css/microb.css">
+    
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <nav class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+  <ul class="pure-menu-list float-r clearfix">
+    
+      <li class="pure-menu-item toc-menu">
+        <a id="menu-main-post" class="pure-menu-link" href="javascript:;">
+          <img class="menu-icon" src="/logo.png" alt="MENU">
+        </a>
+      </li>
+    
+  </ul>  
+  <a class="pure-menu-heading" href="/">
+      <h1 class="title">Max&#39;s Blog</h1>
+      <!-- <span></span> -->
+  </a>
+  <!-- 
+  <img class="logo" id="logo" src="/logo.png" alt="logo">
+   -->
+</nav>
+
+  <div class="container" id="content-outer">
+    <div class="inner" id="content-inner">
+      <article class="post" id="post">
+  <header class="post-header text-center">
+    <h1 class="title">
+      03 Linux/基本命令/常用系统工作命令
+    </h1>
+    
+    <time class="time" datetime="2020-03-18T00:53:53.417Z">
+      2020-03-18
+    </time>
+    
+    <hr>
+  </header>
+  <div class="post-content">
+    <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>格式</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>echo</td>
+<td>在终端输出字符串或变量提取后的值</td>
+<td>echo [字符串\</td>
+<td>$变量]</td>
+<td></td>
+</tr>
+<tr>
+<td>date</td>
+<td>显示及设置系统的时间或日期</td>
+<td>date [选项] [+指定的格式]</td>
+<td></td>
+</tr>
+<tr>
+<td>reboot</td>
+<td>重启系统</td>
+<td>reboot</td>
+<td></td>
+</tr>
+<tr>
+<td>poweroff</td>
+<td>关闭系统</td>
+<td>poweroff</td>
+<td></td>
+</tr>
+<tr>
+<td>wget</td>
+<td>在终端中下载网络文件</td>
+<td>wget [参数] 下载地址</td>
+<td></td>
+</tr>
+<tr>
+<td>ps</td>
+<td>查看系统中的进程状态</td>
+<td>ps[参数]</td>
+<td>[1]</td>
+</tr>
+<tr>
+<td>top</td>
+<td>动态地监视进程活动与系统负载等信息</td>
+<td>top</td>
+<td>[2]</td>
+</tr>
+<tr>
+<td>pidof</td>
+<td>查询某个指定服务进程的PID值</td>
+<td>pidof [参数] [服务名称]</td>
+<td></td>
+</tr>
+<tr>
+<td>kill</td>
+<td>终止某个指定PID的服务进程</td>
+<td>kill [参数] [进程PID]</td>
+<td></td>
+</tr>
+<tr>
+<td>killall</td>
+<td>终止某个指定名称的服务所对应的全部进程</td>
+<td>killall [参数] [服务名称]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>[1]</strong>Linux系统中时刻运行着许多进程，如果能够合理地管理它们，则可以优化系统的性能。在Linux系统中，有5种常见的进程状态，分别为运行、中断、不可中断、僵死与停止，其各自含义如下所示。</p>
+<blockquote>
+<p><strong>R（运行）：</strong>进程正在运行或在运行队列中等待。</p>
+<p><strong>S（中断）：</strong>进程处于休眠中，当某个条件形成后或者接收到信号时，则脱离该  状态。</p>
+<p><strong>D（不可中断）：</strong>进程不响应系统异步信号，即便用kill命令也不能将其中断。</p>
+<p><strong>Z（僵死）：</strong>进程已经终止，但进程描述符依然存在, 直到父进程调用wait4()系统函数后将进程释放。</p>
+<p><strong>T（停止）：</strong>进程收到停止信号后停止运行。</p>
+</blockquote>
+<p>当执行ps <strong>aux</strong>命令后通常会看到下表所示的进程状态，表中只是列举了部分输出值，而且正常的输出值中不包括中文注释。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>USER</th>
+<th>PID</th>
+<th>%CPU</th>
+<th>%MEM</th>
+<th>VSZ</th>
+<th>RSS</th>
+<th>TTY</th>
+<th>STAT</th>
+<th>START</th>
+<th>TIME</th>
+<th>COMMAND</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>进程的所有者</td>
+<td>进程ID号</td>
+<td>运算器占用率</td>
+<td>内存占用率</td>
+<td>虚拟内存使用量(单位是KB)</td>
+<td>占用的固定内存量(单位是KB)</td>
+<td>所在终端</td>
+<td>进程状态</td>
+<td>被启动的时间</td>
+<td>实际使用CPU的时间</td>
+<td>命令名称与参数</td>
+</tr>
+<tr>
+<td>root</td>
+<td>1</td>
+<td>0.0</td>
+<td>0.4</td>
+<td>53684</td>
+<td>7628</td>
+<td>?</td>
+<td>Ss</td>
+<td>07:22</td>
+<td>0:02</td>
+<td>/usr/lib/systemd/systemd</td>
+</tr>
+<tr>
+<td>root</td>
+<td>2</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0</td>
+<td>0</td>
+<td>?</td>
+<td>S</td>
+<td>07:22</td>
+<td>0:00</td>
+<td>[kthreadd]</td>
+</tr>
+<tr>
+<td>root</td>
+<td>3</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0</td>
+<td>0</td>
+<td>?</td>
+<td>S</td>
+<td>07:22</td>
+<td>0:00</td>
+<td>[ksoftirqd/0]</td>
+</tr>
+<tr>
+<td>root</td>
+<td>5</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0</td>
+<td>0</td>
+<td>?</td>
+<td>S&lt;</td>
+<td>07:22</td>
+<td>0:00</td>
+<td>[kworker/0:0H]</td>
+</tr>
+<tr>
+<td>root</td>
+<td>7</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0</td>
+<td>0</td>
+<td>?</td>
+<td>S</td>
+<td>07:22</td>
+<td>0:00</td>
+<td>[migration/0]</td>
+</tr>
+<tr>
+<td></td>
+<td>………………</td>
+<td>省略部分输出信息</td>
+<td>………………</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>ps <strong>aux</strong>：-a -u -x</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-a</td>
+<td>显示所有进程（包括其他用户的进程）</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>用户以及其他详细信息</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>显示没有控制终端的进程</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<p>[2]</p>
+<p><img src="https://www.linuxprobe.com/wp-content/uploads/2015/02/top%E5%91%BD%E4%BB%A4.jpg" alt=""></p>
+<blockquote>
+<p>第1行：系统时间、运行时间、登录终端数、系统负载（三个数值分别为1分钟、5分钟、15分钟内&gt;的平均值，数值越小意味着负载越低）。</p>
+<p>第2行：进程总数、运行中的进程数、睡眠中的进程数、停止的进程数、僵死的进程数。</p>
+<p>第3行：用户占用资源百分比、系统内核占用资源百分比、改变过优先级的进程资源百分比、空闲的资源百分比等。其中数据均为CPU数据并以百分比格式显示，例如“97.1 id”意味着有97.1%的CPU处理器资源处于空闲。</p>
+<p>第4行：物理内存总量、内存使用量、内存空闲量、作为内核缓存的内存量。</p>
+<p>第5行：虚拟内存总量、虚拟内存使用量、虚拟内存空闲量、已被提前加载的内存量。</p>
+</blockquote>
+
+
+    <!-- 显示photos -->
+    
+
+  </div>
+  <div class="post-tags">
+    
+  </div>
+</article>
+  
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <a href="/2020/03/18/03%20Linux/%E7%AE%A1%E9%81%93%E7%AC%A6%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" rel="next" title="03 Linux/管道符、重定向与环境变量">
+            <span>〈 </span> 03 Linux/管道符、重定向与环境变量
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+        
+          <a href="/2020/03/18/03%20Linux/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91%E5%91%BD%E4%BB%A4/" rel="prev" title="03 Linux/基本命令/文本文件编辑命令">
+            03 Linux/基本命令/文本文件编辑命令 <span>〉</span>
+          </a>
+        
+      </div>
+    </div>
+  
+
+
+
+    </div>
+
+    
+
+  </div>
+
+  <footer class="footer text-center">
+    <div id="bottom-inner">
+      
+        <a href="http://hexo.io" target="_blank" class="footer-link">Hexo</a>
+      
+        <a href="https://github.com/microacup/hexo-theme-micorb" target="_blank" class="footer-link">Theme microb</a>
+      
+    </div>
+  </footer>
+  
+
+<script>
+  var titleTime,originTitle=document.title;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="[闷声发大财中...] "+originTitle,clearTimeout(titleTime)):(document.title="[+1s] "+originTitle,titleTime=setTimeout(function(){document.title=originTitle},2e3))});
+</script>
+
+<script>
+  (function (window, document) {
+    window.requestAnimationFrame = (function () {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function (callback) {
+          setTimeout(callback, 1000 / 60);
+        }
+    })();
+
+    function init() {
+      addMenuEvent();
+    }
+    init();
+
+    function addMenuEvent() {
+      var menu = document.getElementById('menu-main-post');
+      if (menu) {
+        var toc = document.getElementById('toc');
+        menu.title = toc ? '目录' : '回到顶部';
+        menu.onclick = function () {
+          if (toc) {
+            if (toc.style.display == 'block') {
+              toc.style.display = 'none';
+            } else {
+              toc.style.display = 'block';
+            }
+          } else {
+            returnTop();
+          }
+        };
+      }
+    }
+
+    var timer = null;
+
+    function returnTop() {
+      cancelAnimationFrame(timer);
+      timer = requestAnimationFrame(function fn() {
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 0) {
+          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+          timer = requestAnimationFrame(fn);
+        } else {
+          cancelAnimationFrame(timer);
+        }
+      });
+    }
+
+  })(window, document);
+</script>
+
+
+  
+
+
+
+</body>
+</html>

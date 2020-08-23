@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#202020"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  
+    <meta name="keywords" content="" />
+  
+
+  
+    <meta name="description" content="03 Linux/基本命令/文件目录管理命令" />
+  
+  
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <title>03 Linux/基本命令/文件目录管理命令 [ Max&#39;s Blog ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
+    
+      <link rel="stylesheet" href="/css/microb.css">
+    
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <nav class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+  <ul class="pure-menu-list float-r clearfix">
+    
+      <li class="pure-menu-item toc-menu">
+        <a id="menu-main-post" class="pure-menu-link" href="javascript:;">
+          <img class="menu-icon" src="/logo.png" alt="MENU">
+        </a>
+      </li>
+    
+  </ul>  
+  <a class="pure-menu-heading" href="/">
+      <h1 class="title">Max&#39;s Blog</h1>
+      <!-- <span></span> -->
+  </a>
+  <!-- 
+  <img class="logo" id="logo" src="/logo.png" alt="logo">
+   -->
+</nav>
+
+  <div class="container" id="content-outer">
+    <div class="inner" id="content-inner">
+      <article class="post" id="post">
+  <header class="post-header text-center">
+    <h1 class="title">
+      03 Linux/基本命令/文件目录管理命令
+    </h1>
+    
+    <time class="time" datetime="2020-03-18T03:23:42.848Z">
+      2020-03-18
+    </time>
+    
+    <hr>
+  </header>
+  <div class="post-content">
+    <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>格式</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>touch</td>
+<td>创建空白文件或设置文件的时间</td>
+<td>touch [选项] [文件]</td>
+<td>[1]</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>创建空白的目录</td>
+<td>mkdir [选项] 目录</td>
+<td></td>
+</tr>
+<tr>
+<td>cp</td>
+<td>复制文件或目录</td>
+<td>cp [选项] 源文件 目标文件</td>
+<td></td>
+</tr>
+<tr>
+<td>mv</td>
+<td>剪切文件或将文件重命名</td>
+<td>mv [选项] 源文件 [目标路径 目标文件名]</td>
+<td></td>
+</tr>
+<tr>
+<td>rm</td>
+<td>删除文件或目录</td>
+<td>rm [选项] 文件</td>
+<td></td>
+</tr>
+<tr>
+<td>dd</td>
+<td>按照指定大小和个数的数据块来复制文件或转换文件</td>
+<td>dd [参数]</td>
+<td>[2]？？</td>
+</tr>
+<tr>
+<td>file</td>
+<td>查看文件的类型</td>
+<td>file 文件名</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>[1]利用文件时间戳备份文件</p>
+<p>问题背景：面对较大的文件，每天cp一次效率太低</p>
+<p>原理：利用时间戳只更新被改动的文件</p>
+<p><img src="C:\Users\10557\AppData\Roaming\Typora\typora-user-images\image-20200318083423196.png" alt="image-20200318083423196"></p>
+<p>[2]</p>
+<p>dd命令是一个比较重要而且比较有特色的一个命令，它能够让用户按照指定大小和个数的数据块来复制文件的内容。当然如果愿意的话，还可以在复制过程中转换其中的数据。Linux系统中有一个名为/dev/zero的设备文件,因为这个文件不会占用系统存储空间，但却可以提供无穷无尽的数据，因此可以使用它作为dd命令的输入文件，来生成一个指定大小的文件。dd命令的参数及其作用如表2-13所示。</p>
+<p>​                                                dd命令的参数及其作用</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>if</td>
+<td>输入的文件名称</td>
+</tr>
+<tr>
+<td>of</td>
+<td>输出的文件名称</td>
+</tr>
+<tr>
+<td>bs</td>
+<td>设置每个“块”的大小</td>
+</tr>
+<tr>
+<td>count</td>
+<td>设置要复制“块”的个数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>例如 我们可以用dd命令从/dev/zero设备文件中取出一个大小为560MB的数据块，然后保存成名为560_file的文件。在理解了这个命令后，以后就能随意创建任意大小的文件了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@linuxprobe ~]# dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;560_file count&#x3D;1 bs&#x3D;560M</span><br><span class="line">1+0 records in</span><br><span class="line">1+0 records out</span><br><span class="line">587202560 bytes (587 MB) copied, 27.1755 s, 21.6 MB&#x2F;s</span><br></pre></td></tr></table></figure>
+<p>dd命令的功能也绝不仅限于复制文件这么简单。如果您想把光驱设备中的光盘制作成iso格式的镜像文件，在Windows系统中需要借助于第三方软件才能做到，但在Linux系统中可以直接使用dd命令来压制出光盘镜像文件，将它变成一个可立即使用的iso镜像：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@linuxprobe ~]# dd if&#x3D;&#x2F;dev&#x2F;cdrom of&#x3D;RHEL-server-7.0-x86_64-LinuxProbe.Com.iso</span><br><span class="line">7311360+0 records in</span><br><span class="line">7311360+0 records out</span><br><span class="line">3743416320 bytes (3.7 GB) copied, 370.758 s, 10.1 MB&#x2F;s</span><br></pre></td></tr></table></figure>
+<ul>
+<li>备份</li>
+<li>制作启动盘</li>
+</ul>
+<p><a href="http://c.biancheng.net/linux/dd.html" target="_blank" rel="noopener">参考信息</a></p>
+
+
+    <!-- 显示photos -->
+    
+
+  </div>
+  <div class="post-tags">
+    
+  </div>
+</article>
+  
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <a href="/2020/03/18/03%20Linux/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91%E5%91%BD%E4%BB%A4/" rel="next" title="03 Linux/基本命令/文本文件编辑命令">
+            <span>〈 </span> 03 Linux/基本命令/文本文件编辑命令
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+        
+          <a href="/2020/03/18/03%20Linux/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E6%89%93%E5%8C%85%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%90%9C%E7%B4%A2%E5%91%BD%E4%BB%A4/" rel="prev" title="03 Linux/基本命令/打包压缩与搜索命令">
+            03 Linux/基本命令/打包压缩与搜索命令 <span>〉</span>
+          </a>
+        
+      </div>
+    </div>
+  
+
+
+
+    </div>
+
+    
+
+  </div>
+
+  <footer class="footer text-center">
+    <div id="bottom-inner">
+      
+        <a href="http://hexo.io" target="_blank" class="footer-link">Hexo</a>
+      
+        <a href="https://github.com/microacup/hexo-theme-micorb" target="_blank" class="footer-link">Theme microb</a>
+      
+    </div>
+  </footer>
+  
+
+<script>
+  var titleTime,originTitle=document.title;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="[闷声发大财中...] "+originTitle,clearTimeout(titleTime)):(document.title="[+1s] "+originTitle,titleTime=setTimeout(function(){document.title=originTitle},2e3))});
+</script>
+
+<script>
+  (function (window, document) {
+    window.requestAnimationFrame = (function () {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function (callback) {
+          setTimeout(callback, 1000 / 60);
+        }
+    })();
+
+    function init() {
+      addMenuEvent();
+    }
+    init();
+
+    function addMenuEvent() {
+      var menu = document.getElementById('menu-main-post');
+      if (menu) {
+        var toc = document.getElementById('toc');
+        menu.title = toc ? '目录' : '回到顶部';
+        menu.onclick = function () {
+          if (toc) {
+            if (toc.style.display == 'block') {
+              toc.style.display = 'none';
+            } else {
+              toc.style.display = 'block';
+            }
+          } else {
+            returnTop();
+          }
+        };
+      }
+    }
+
+    var timer = null;
+
+    function returnTop() {
+      cancelAnimationFrame(timer);
+      timer = requestAnimationFrame(function fn() {
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 0) {
+          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+          timer = requestAnimationFrame(fn);
+        } else {
+          cancelAnimationFrame(timer);
+        }
+      });
+    }
+
+  })(window, document);
+</script>
+
+
+  
+
+
+
+</body>
+</html>

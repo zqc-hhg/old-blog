@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#202020"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  
+    <meta name="keywords" content="" />
+  
+
+  
+    <meta name="description" content="03 Linux/基本命令/打包压缩与搜索命令" />
+  
+  
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <title>03 Linux/基本命令/打包压缩与搜索命令 [ Max&#39;s Blog ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
+    
+      <link rel="stylesheet" href="/css/microb.css">
+    
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <nav class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+  <ul class="pure-menu-list float-r clearfix">
+    
+      <li class="pure-menu-item toc-menu">
+        <a id="menu-main-post" class="pure-menu-link" href="javascript:;">
+          <img class="menu-icon" src="/logo.png" alt="MENU">
+        </a>
+      </li>
+    
+  </ul>  
+  <a class="pure-menu-heading" href="/">
+      <h1 class="title">Max&#39;s Blog</h1>
+      <!-- <span></span> -->
+  </a>
+  <!-- 
+  <img class="logo" id="logo" src="/logo.png" alt="logo">
+   -->
+</nav>
+
+  <div class="container" id="content-outer">
+    <div class="inner" id="content-inner">
+      <article class="post" id="post">
+  <header class="post-header text-center">
+    <h1 class="title">
+      03 Linux/基本命令/打包压缩与搜索命令
+    </h1>
+    
+    <time class="time" datetime="2020-03-18T07:24:52.449Z">
+      2020-03-18
+    </time>
+    
+    <hr>
+  </header>
+  <div class="post-content">
+    <h3 id="1．tar命令"><a href="#1．tar命令" class="headerlink" title="1．tar命令"></a>1．tar命令</h3><p>​    tar命令用于对文件进行打包压缩或解压，格式为“tar [选项] [文件]”。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-c</td>
+<td>创建压缩文件</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>解开压缩文件</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>查看压缩包内有哪些文件</td>
+</tr>
+<tr>
+<td>-z</td>
+<td>用Gzip压缩或解压</td>
+</tr>
+<tr>
+<td>-j</td>
+<td>用bzip2压缩或解压</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示压缩或解压的过程</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>目标文件名</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>保留原始的权限与属性</td>
+</tr>
+<tr>
+<td>-P</td>
+<td>使用绝对路径来压缩</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>指定解压到的目录</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>​    <strong>一般使用“tar -czvf 压缩包名称.tar.gz 要打包的目录”命令把指定的文件进行打包压缩；相应的解压命令为“tar -xzvf 压缩包名称.tar.gz”。</strong></p>
+<h3 id="2．grep命令"><a href="#2．grep命令" class="headerlink" title="2．grep命令"></a>2．grep命令</h3><p>​    grep命令用于在文本中执行关键词搜索，并显示匹配的结果，格式为“grep [选项] “模式”[文件]”。</p>
+<p><strong>模式部分：</strong></p>
+<p>　　1、直接输入要匹配的字符串，这个可以用fgrep（fast grep）代替来提高查找速度，比如我要匹配一下hello.c文件中printf的个数：fgrep  -c  “printf”  hello.c</p>
+<p>　　2、使用<strong>基本正则表达式</strong></p>
+<h3 id="3．find命令"><a href="#3．find命令" class="headerlink" title="3．find命令"></a>3．find命令</h3><p>​        find命令用于按照指定条件来查找文件，格式为“find [查找路径] 寻找条件 操作”。</p>
+<p>实例</p>
+<blockquote>
+<p>在整个文件系统中找出所有归属于linuxprobe用户的文件并复制到/root/findresults目录。</p>
+<p>该实验的重点是“-exec {}  \;”参数，其中的{}表示find命令搜索出的每一个文件，并且命令的结尾必须是“\;”。完成该实验的具体命令如下：</p>
+<p>[root@linuxprobe ~]# find / -user linuxprobe -exec cp -a {} /root/findresults/ \;<br>find -name april<em>        在当前目录下查找以april开始的文件<br>find -name april</em> &gt; a.txt    在当前目录下查找以april开始的文件，并把结果输出到a.txt中<br>find -name ap<em> -o -name may</em>   查找以ap或may开头的文件<br>find /tmp -name wa* -type l   在/tmp下查找名为wa开头且类型为符号链接的文件<br>find /home -mtime -2       在/home下查最近两天内改动过的文件<br>find /home -atime -1       查/home下1天之内被存取过的文件<br>find /home -mmin +60       在/home下查60分钟前改动过的文件<br>find /home -amin +30       在/home下查最近30分钟前被存取过的文件<br>find /home -newer tmp.txt    在/home下查更新时间比tmp.txt近的文件或目录<br>find /home -anewer tmp.txt    在/home下查存取时间比tmp.txt近的文件或目录<br>find /home -used -2       列出/home中文件或目录被改动过之后，在2日内被存取过的文件或目录<br>find /home -user cnscn      列出/home目录内属于用户cnscn的文件或目录<br>find /home -uid +501       列出/home目录内用户的识别码大于501的文件或目录<br>find /home -group cnscn     列出/home内组为cnscn的文件或目录<br>find /home -gid 501       列出/home内组id为501的文件或目录<br>find /home -nouser        列出/home内不属于本地用户的文件或目录<br>find /home -nogroup       列出/home内不属于本地组的文件或目录<br>find /home -maxdepth 4 -name tmp.txt  列出/home内的tmp.txt 查时深度最多为3层<br>find /home -mindepth 3 -maxdepth 5 -name tmp.txt  在/home的第二层到第四层之间查tmp.txt<br>find /home -empty        查找/home中大小为0的文件或空目录<br>find /home -size +512k      查/home中大于512k的文件<br>find /home -size -512k      查/home中小于512k的文件<br>find /home -links +2       查/home中硬连接数大于2的文件或目录<br>find /home -perm 0700      查/home中权限为700的文件或目录<br>find -type f -exec ls -l {} \;  查当前目录下的所有普通文件，并在-exec选项中使用ls -l命令将它们列出<br>find -name a.txt -ok rm {} \;   查当前目录下的a.txt并询问是否删除</p>
+</blockquote>
+<p>​        <a href="https://www.cnblogs.com/du-z/p/10918143.html" target="_blank" rel="noopener">详细说明</a></p>
+
+
+    <!-- 显示photos -->
+    
+
+  </div>
+  <div class="post-tags">
+    
+  </div>
+</article>
+  
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <a href="/2020/03/18/03%20Linux/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/" rel="next" title="03 Linux/基本命令/文件目录管理命令">
+            <span>〈 </span> 03 Linux/基本命令/文件目录管理命令
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+        
+          <a href="/2020/03/20/03%20Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/Vim%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8/" rel="prev" title="03 Linux/Vim编辑器与Shell命令脚本/Vim文本编辑器">
+            03 Linux/Vim编辑器与Shell命令脚本/Vim文本编辑器 <span>〉</span>
+          </a>
+        
+      </div>
+    </div>
+  
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1．tar命令"><span class="toc-text">1．tar命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2．grep命令"><span class="toc-text">2．grep命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3．find命令"><span class="toc-text">3．find命令</span></a></li></ol>
+  </div>
+
+
+    </div>
+
+    
+
+  </div>
+
+  <footer class="footer text-center">
+    <div id="bottom-inner">
+      
+        <a href="http://hexo.io" target="_blank" class="footer-link">Hexo</a>
+      
+        <a href="https://github.com/microacup/hexo-theme-micorb" target="_blank" class="footer-link">Theme microb</a>
+      
+    </div>
+  </footer>
+  
+
+<script>
+  var titleTime,originTitle=document.title;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="[闷声发大财中...] "+originTitle,clearTimeout(titleTime)):(document.title="[+1s] "+originTitle,titleTime=setTimeout(function(){document.title=originTitle},2e3))});
+</script>
+
+<script>
+  (function (window, document) {
+    window.requestAnimationFrame = (function () {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function (callback) {
+          setTimeout(callback, 1000 / 60);
+        }
+    })();
+
+    function init() {
+      addMenuEvent();
+    }
+    init();
+
+    function addMenuEvent() {
+      var menu = document.getElementById('menu-main-post');
+      if (menu) {
+        var toc = document.getElementById('toc');
+        menu.title = toc ? '目录' : '回到顶部';
+        menu.onclick = function () {
+          if (toc) {
+            if (toc.style.display == 'block') {
+              toc.style.display = 'none';
+            } else {
+              toc.style.display = 'block';
+            }
+          } else {
+            returnTop();
+          }
+        };
+      }
+    }
+
+    var timer = null;
+
+    function returnTop() {
+      cancelAnimationFrame(timer);
+      timer = requestAnimationFrame(function fn() {
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 0) {
+          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+          timer = requestAnimationFrame(fn);
+        } else {
+          cancelAnimationFrame(timer);
+        }
+      });
+    }
+
+  })(window, document);
+</script>
+
+
+  
+
+
+
+</body>
+</html>
