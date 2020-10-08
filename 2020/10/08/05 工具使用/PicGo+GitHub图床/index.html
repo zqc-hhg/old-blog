@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		5分治 | 
+		05 工具使用/PicGo+GitHub图床 | 
 	 
 	Max&#39;s Blog
 	</title>
@@ -131,7 +131,7 @@
 									</a>
 									
 							<ul>
-								<li class="file active">
+								<li class="file">
 									<a href="/2020/02/04/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.0%20%E5%88%86%E6%B2%BB%E6%A6%82%E8%BF%B0/">
 										5.0 分治概述
 									</a>
@@ -595,7 +595,7 @@
 									</a>
 									
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/10/08/05%20%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/PicGo+GitHub%E5%9B%BE%E5%BA%8A/">
 										PicGo+GitHub图床
 									</a>
@@ -693,75 +693,54 @@
 	<div id="content">
 		<h1 id="article-title">
 
-	5.0 分治概述
+	PicGo+GitHub图床
 </h1>
 <div class="article-meta">
 	
 		<span>
-			阅读量:<span id="/2020/02/04/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.0%20%E5%88%86%E6%B2%BB%E6%A6%82%E8%BF%B0/" class="leancloud_visitors" data-flag-title="5分治"></span>
+			阅读量:<span id="/2020/10/08/05%20%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/PicGo+GitHub%E5%9B%BE%E5%BA%8A/" class="leancloud_visitors" data-flag-title="05 工具使用/PicGo+GitHub图床"></span>
 		</span>
 	
 	<span>max</span>
-	<span>2020-02-04 09:17:31</span>
+	<span>2020-10-08 11:57:07</span>
     
 		<div id="article-categories">
-            
-                
-                    <span>
-                        <i class="fa fa-folder" aria-hidden="true"></i>
-                        <a href="/categories/算法/">算法</a>
-						
-							>
-						
-                    </span>
-                
-            
-                
-                    <span>
-                        <i class="fa fa-folder" aria-hidden="true"></i>
-                        <a href="/categories/算法/算法思想/">算法思想</a>
-						
-                    </span>
-                
             
 		</div>
     
 </div>
 
 <div id="article-content">
-	<blockquote>
-<p>分治法可以通俗的解释为：把一片领土分解，分解为若干块小部分，然后一块块地占领征服，被分解的可以是不同的政治派别或是其他什么，然后让他们彼此异化。</p>
+	<h2 id="1-创建GitHub图床之前，需要注册-登陆GitHub账号"><a href="#1-创建GitHub图床之前，需要注册-登陆GitHub账号" class="headerlink" title="1. 创建GitHub图床之前，需要注册/登陆GitHub账号"></a>1. 创建GitHub图床之前，需要注册/登陆GitHub账号</h2><blockquote>
+<p>申请GitHub账号很简单，我就不演示了</p>
 </blockquote>
-<h2 id="5-1-精髓"><a href="#5-1-精髓" class="headerlink" title="5.1 精髓"></a>5.1 精髓</h2><p>​      分治法的精髓：</p>
+<h2 id="2-创建Repository"><a href="#2-创建Repository" class="headerlink" title="2. 创建Repository"></a>2. 创建Repository</h2><p><img src="https://user-gold-cdn.xitu.io/2019/1/28/16893b439125b024?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""><br> _点击”New repository”按钮_ <img src="https://user-gold-cdn.xitu.io/2019/1/28/16893b43d211747d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""><br> _最后1234步骤执行_</p>
+<blockquote>
 <ul>
-<li><p>分—将问题分解为规模更小的子问题；</p>
-</li>
-<li><p>治—将这些规模更小的子问题逐个击破；</p>
-</li>
-<li><p>合—将已解决的子问题合并，最终得出“母”问题的解；</p>
-</li>
+<li>我已经建立过一个同名的repository的，所以第一步会显示红色</li>
+<li>第三步，为repository初始化一个README.md文件可以根据需求选择，非必选</li>
 </ul>
-<h2 id="5-2-问题特征"><a href="#5-2-问题特征" class="headerlink" title="5.2 问题特征"></a>5.2 问题特征</h2><p>​       分治法所能解决的问题一般具有以下几个<strong>特征</strong>：</p>
-<ol>
-<li><p>该问题的规模缩小到一定的程度就可以容易地解决</p>
-</li>
-<li><p>该问题可以分解为若干个规模较小的相同问题，即该问题具有最优子结构性质。</p>
-</li>
-<li><p>利用该问题分解出的子问题的解可以合并为该问题的解；</p>
-</li>
-<li><p>该问题所分解出的各个子问题是相互独立的，即子问题之间不包含公共的子问题。</p>
-</li>
-</ol>
-<h2 id="5-3-具体问题"><a href="#5-3-具体问题" class="headerlink" title="5.3 具体问题"></a>5.3 具体问题</h2><p>（1）二分搜索</p>
-<p>（2）大整数乘法</p>
-<p>（3）Strassen矩阵乘法</p>
-<p>（4）棋盘覆盖</p>
-<p>（5）归并排序</p>
-<p>（6）快速排序</p>
-<p>（7）线性时间选择</p>
-<p>（8）最接近点对问题</p>
-<p>（9）循环赛日程表</p>
-<p>（10）汉诺塔</p>
+</blockquote>
+<h2 id="3-生成一个Token用于操作GitHub-repository"><a href="#3-生成一个Token用于操作GitHub-repository" class="headerlink" title="3.生成一个Token用于操作GitHub repository"></a>3.生成一个Token用于操作GitHub repository</h2><p><img src="https://user-gold-cdn.xitu.io/2019/1/28/16893b43f3c6ccb3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""><br> _回到主页，点击”Settings”按钮_ <img src="https://user-gold-cdn.xitu.io/2019/1/28/16893b43f97bc563?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""><br> _进入页面后，点击”Developer settings”按钮_ <img src="https://user-gold-cdn.xitu.io/2019/1/28/16893b43faa50788?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""><br> _点击”Personal access tokens”按钮_ <img src="https://user-gold-cdn.xitu.io/2019/1/28/16893b4403817332?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""><br> _创建新的Token_ <img src="https://user-gold-cdn.xitu.io/2019/1/28/16893b44115f2ee3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""><br> _填写描述，选择”repo”,然后点击”Generate token”按钮_</p>
+<blockquote>
+<p>注：创建成功后，会生成一串token，这串token之后不会再显示，所以第一次看到的时候，就要好好保存</p>
+</blockquote>
+<h2 id="1-下载运行PicGo"><a href="#1-下载运行PicGo" class="headerlink" title="1. 下载运行PicGo"></a>1. 下载运行PicGo</h2><p><img src="https://user-gold-cdn.xitu.io/2019/1/28/16893b4427ee17cd?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""><br> _下载zip包后，解压，运行可执行文件_</p>
+<h2 id="2-配置图床"><a href="#2-配置图床" class="headerlink" title="2. 配置图床"></a>2. 配置图床</h2><p><img src="https://user-gold-cdn.xitu.io/2019/1/28/16893b44282f8187?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""><br> _如图配置_</p>
+<blockquote>
+<ul>
+<li>设定仓库名的时候，是按照“账户名/仓库名的格式填写”</li>
+<li>分支名统一填写“master”</li>
+<li>将之前的Token黏贴在这里</li>
+<li>存储的路径可以按照我这样子写，就会在repository下创建一个“img”文件夹</li>
+<li>自定义域名的作用是，在上传图片后成功后，PicGo会将“自定义域名+上传的图片名”生成的访问链接，放到剪切板上<code>https://raw.githubusercontent.com/用户名/RepositoryName/分支名，</code>，自定义域名需要按照这样去填写</li>
+</ul>
+</blockquote>
+<h2 id="3-快捷键及相关配置"><a href="#3-快捷键及相关配置" class="headerlink" title="3.快捷键及相关配置"></a>3.快捷键及相关配置</h2><p><img src="https://user-gold-cdn.xitu.io/2019/1/28/16893b4431798992?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""><br> _可以按照这样配置_</p>
+<blockquote>
+<p>注：可以将快捷键设置为<code>ctrl+shift+x</code></p>
+</blockquote>
+<p>将上面的步骤都设置好之后，就可以让自己的Markdown文档飞起来了，每次截图之后，都可以按一下<code>ctrl+shift+x</code>，这样就会将剪切板上面的截图转化为在线网络图片链接，简直就是爽的不要不要的！！</p>
 
 </div>
 
@@ -769,16 +748,11 @@
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.4%20%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96/">
-                  <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  5.4 棋盘覆盖
-              </a>
-            
         </div>
         <div class="item right">
             
-              <a href="/2020/01/19/04%20%E5%85%B6%E4%BB%96/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%E5%8F%8A%E5%B0%8F%E6%8A%80%E5%B7%A7%EF%BC%88%E4%B8%80)/">
-                
+              <a href="/2020/10/05/06%20pwn/00%20%E6%A0%88%E6%BA%A2%E5%87%BA/%5BOGeek2019%5Dbabyrop%20%E9%A2%98%E8%A7%A3/">
+                00 栈溢出
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
               </a>
             

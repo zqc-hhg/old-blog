@@ -596,6 +596,15 @@
 									
 							<ul>
 								<li class="file">
+									<a href="/2020/10/08/05%20%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/PicGo+GitHub%E5%9B%BE%E5%BA%8A/">
+										PicGo+GitHub图床
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
 									<a href="/2020/09/29/05%20%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E4%BD%BF%E7%94%A8gdb%E8%B0%83%E8%AF%95%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">
 										使用gdb调试应用程序
 									</a>
@@ -702,14 +711,13 @@
 </div>
 
 <div id="article-content">
-	<p>1.查看保护措施<br><img src="https://bbs.pediy.com/upload/attach/202009/876202_K7CGJ2XEH46GF97.png" alt=""></p>
+	<p>1.查看保护措施<br><img src="https://raw.githubusercontent.com/zqc-hhg/img/master/img/20201008113820.png" alt=""></p>
 <p>发现只有NX保护，32位文件</p>
-<p>2.查看代码<br><img src="https://bbs.pediy.com/upload/attach/202009/876202_3PHENCGDW3GB9KD.png" alt=""></p>
-<p>发现buf是一个随机数（sub_80486BB是初始化缓存区的函数）<br><img src="https://bbs.pediy.com/upload/attach/202009/876202_8TWANWQEMEU5RBS.png" alt=""></p>
+<p>2.查看代码<br><img src="https://raw.githubusercontent.com/zqc-hhg/img/master/img/20201008113935.png" alt=""></p>
+<p>发现buf是一个随机数（sub_80486BB是初始化缓存区的函数）<br><img src="https://raw.githubusercontent.com/zqc-hhg/img/master/blog/20201008114418.png" alt=""></p>
 <p>首先，发现函数中有个字符串的比较，如果字符串不相同，则会直接退出程序，而s是main函数中的buf（随机数），所以要想办法直接绕过这个比较，所以v1必须等于0。</p>
 <p>v1 = strlen（buf），strlen这个函数有个缺陷：遇到\\x00直接截断。所以我们要输入第一位数为\\x00</p>
-<p>再看一下，buf是个7位数的数组，但是函数中有read（0，buf，0x20u），而经过计算，v5相当于buf的第8位，所以v5是可以被我们指定的。</p>
-<p><img src="https://bbs.pediy.com/upload/attach/202009/876202_G497PGU6NXEM4ZF.png" alt=""></p>
+<p>再看一下，buf是个7位数的数组，但是函数中有read（0，buf，0x20u），<img src="https://raw.githubusercontent.com/zqc-hhg/img/master/blog/20201008114503.png" alt=""></p>
 <p>a1 就是上文中的 v5，buf的地址为[ebp-E7],如果v5为127，则会执行第一条代码，C8&lt;E7,不能覆盖返回地址，v5需要尽可能的大，才能覆盖到返回地址。</p>
 <blockquote>
 <p>思考一下，文件开启了NX保护，而且文件中并没有获得权限的函数，所以我们只能调用动态链接库中的‘system’类函数<br>已知延迟绑定机制（GOT与PLT），我们就可以伪装函数：确定函数 A 在 GOT 表中的条目位置，确定函数 B 在内存中的地址，将函数 B 的地址写入函数 A 在 GOT 表中的条目。<br>在这题中，我们可以泄露write函数的地址，然后用题目提供的动态共享库算出内存中system函数的地址，再用system函数的地址覆盖返回地址</p>
@@ -722,6 +730,11 @@
 
     <div class="post-guide">
         <div class="item left">
+            
+              <a href="/2020/10/08/05%20%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/PicGo+GitHub%E5%9B%BE%E5%BA%8A/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  
+              </a>
             
         </div>
         <div class="item right">
