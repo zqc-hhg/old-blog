@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		03 Linux/命令/用户身份与文件权限/用户身份与能力 | 
+	 
+	Max&#39;s Blog
+	</title>
+	
+	<!-- keywords,description -->
+	 
+
+	<!-- favicon -->
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+  
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+	
+		
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+
+		
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+	
+	
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">Max's Blog</a>
+
+	<ul id="menu">
+		<li class="menu-item">
+			<a href="/about" class="menu-item-link">ABOUT</a>
+		</li>
+		
+		<li class="menu-item">
+			<a href="https://github.com/wujun234/uid-generator-spring-boot-starter" class="menu-item-link" target="_blank">
+				UidGenerator
+			</a>
+		</li>
+		<li class="menu-item">
+			<a href="https://github.com/zqc-hhg" class="menu-item-link" target="_blank">
+				<i class="fa fa-github fa-2x"></i>
+			</a>
+		</li>
+	</ul>
+</header>
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="text" placeholder="search...">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										00 踩坑
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/08/23/00%20%E8%B8%A9%E5%9D%91/%E8%A7%A3%E5%86%B3%E2%80%9C%E9%87%8D%E6%96%B0%E5%AE%89%E8%A3%85vmware-tools%E2%80%9D%E7%81%B0%E8%89%B2%E8%80%8C%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/">
+										解决“重新安装vmware-tools”灰色而无法安装问题
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										01 算法
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										01 算法思想
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										5 分治
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/02/04/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.0%20%E5%88%86%E6%B2%BB%E6%A6%82%E8%BF%B0/">
+										5.0 分治概述
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.1%20%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/">
+										5.1 二分搜索
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.2%20%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/">
+										5.2 大整数乘法
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.3%20Strassen%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/">
+										5.3 Strassen矩阵乘法
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.4%20%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96/">
+										5.4 棋盘覆盖
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.5%20%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
+										5.5 归并排序
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.6%20%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
+										5.6 快速排序
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										7 动态规划
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/02/09/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/7%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/7.0%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A6%82%E8%BF%B0/">
+										7.0 动态规划概述
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										02 网络
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										01 TCP IP
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/02/14/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/00%20OSI%E6%A8%A1%E5%9E%8B%E7%AE%80%E4%BB%8B/">
+										00 OSI模型简介
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/15/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/01%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+										01 网络基础知识
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/18/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/02%20TCP%20IP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+										02 TCP IP基础知识
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/28/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/03%20%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">
+										03 数据链路层
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										03 Linux
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										命令
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/07/03%20Linux/%E5%91%BD%E4%BB%A4/01%20%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
+										01 用户管理
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/07/03%20Linux/%E5%91%BD%E4%BB%A4/02%20%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">
+										02 文件管理
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Vim编辑器与Shell命令脚本
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/20/03%20Linux/%E5%91%BD%E4%BB%A4/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/Vim%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8/">
+										Vim文本编辑器
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/20/03%20Linux/%E5%91%BD%E4%BB%A4/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/%E7%BC%96%E5%86%99Shell%E8%84%9A%E6%9C%AC/">
+										编写Shell脚本
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E6%9C%8D%E5%8A%A1%E7%A8%8B%E5%BA%8F/">
+										计划任务服务程序
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										基本命令
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E4%BD%9C%E5%91%BD%E4%BB%A4/">
+										常用系统工作命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E6%89%93%E5%8C%85%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%90%9C%E7%B4%A2%E5%91%BD%E4%BB%A4/">
+										打包压缩与搜索命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/">
+										文件目录管理命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91%E5%91%BD%E4%BB%A4/">
+										文本文件编辑命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										用户身份与文件权限
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E5%BD%92%E5%B1%9E/">
+										文件权限与归属
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file active">
+									<a href="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%83%BD%E5%8A%9B/">
+										用户身份与能力
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										鸟叔的linux私房菜
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/16/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/00%20%20%E5%B8%AE%E5%8A%A9/">
+										00  帮助
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/06/26/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/00%20Linux%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/">
+										00 Linux的前世今生
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/11/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/03%20Linux%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/">
+										03 Linux文件权限与目录配置
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/13/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/04%20Linux%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/">
+										04 Linux文件与目录管理
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/08/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E5%B8%AE%E5%8A%A9%E5%91%BD%E4%BB%A4/">
+										帮助命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/06/26/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E5%BC%80%E6%BA%90VS%E9%97%AD%E6%BA%90/">
+										开源VS闭源
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/08/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E6%AD%A3%E7%A1%AE%E5%85%B3%E6%9C%BA/">
+										正确关机
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/07/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/">
+										磁盘分区
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E7%AE%A1%E9%81%93%E7%AC%A6%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">
+										管道符、重定向与环境变量
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/06/26/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E8%AE%BA/">
+										计算机概论
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										系统
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/10/04/03%20Linux/%E7%B3%BB%E7%BB%9F/PLT&GOT%20%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A%E6%9C%BA%E5%88%B6/">
+										PLT&GOT 表以及延迟绑定机制
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										04 其他
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/02/04%20%E5%85%B6%E4%BB%96/hello-world/">
+										hello-world
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/01/19/04%20%E5%85%B6%E4%BB%96/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%E5%8F%8A%E5%B0%8F%E6%8A%80%E5%B7%A7%EF%BC%88%E4%B8%80)/">
+										程序设计的注意事项及小技巧（一)
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										05 工具使用
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/09/29/05%20%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E4%BD%BF%E7%94%A8gdb%E8%B0%83%E8%AF%95%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">
+										使用gdb调试应用程序
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										06 pwn
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										00 栈溢出
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/10/05/06%20pwn/00%20%E6%A0%88%E6%BA%A2%E5%87%BA/%5BOGeek2019%5Dbabyrop%20%E9%A2%98%E8%A7%A3/">
+										[OGeek2019]babyrop 题解
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										07 C语言
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/09/29/07%20C%E8%AF%AD%E8%A8%80/read/">
+										read
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/09/29/07%20C%E8%AF%AD%E8%A8%80/replace/">
+										replace
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/02/hello-world/">
+										hello-world
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content">
+		<h1 id="article-title">
+
+	用户身份与能力
+</h1>
+<div class="article-meta">
+	
+		<span>
+			阅读量:<span id="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%83%BD%E5%8A%9B/" class="leancloud_visitors" data-flag-title="03 Linux/命令/用户身份与文件权限/用户身份与能力"></span>
+		</span>
+	
+	<span>max</span>
+	<span>2020-03-21 14:47:11</span>
+    
+		<div id="article-categories">
+            
+		</div>
+    
+</div>
+
+<div id="article-content">
+	<p>​    Linux 系统中，每个用户的 ID 细分为 2 种，分别是用户ID（User ID，简称 UID）和组 ID（Group ID，简称 GID），这与文件有拥有者和拥有群组两种属性相对应。</p>
+<h3 id="etc-passwd1"><a href="#etc-passwd1" class="headerlink" title="/etc/passwd1"></a>/etc/passwd<sup><a href="#fn_1" id="reffn_1">1</a></sup></h3><p><img src="C:\Users\10557\AppData\Roaming\Typora\typora-user-images\image-20200314132525279.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户名：密码：UID（用户ID）：GID（组ID）：描述性信息：主目录：默认Shell</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>用户名，就是一串代表用户身份的字符串。</p>
+</li>
+<li><p>“x” 表示此用户设有密码，但不是真正的密码，真正的密码保存在 /etc/shadow 文件中</p>
+</li>
+<li><p>UID，也就是用户 ID。每个用户都有唯一的一个 UID，Linux 系统通过 UID 来识别不同的用户。</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>UID范围</th>
+<th>用户身份</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>超级用户。UID 为 0 就代表这个账号是管理员账号。在 Linux 中，如何把普通用户升级成管理员呢？只需把其他用户的 UID 修改为 0 就可以了，这一点和 Windows 是不同的。不过不建议建立多个管理员账号</td>
+</tr>
+<tr>
+<td>1~999</td>
+<td>系统用户（伪用户）。也就是说，此范围的 UID 保留给系统使用。其中，1~99 用于系统自行创建的账号；100~499 分配给有系统账号需求的用户。其实，除了 0 之外，其他的 UID 并无不同，这里只是默认 500 以下的数字给系统作为保留账户，只是一个公认的习惯而已。</td>
+</tr>
+<tr>
+<td>1000~65535</td>
+<td>普通用户。通常这些 UID 已经足够用户使用了。但不够用也没关系，2.6.x 内核之后的 Linux 系统已经可以支持 2^32个 UID 了。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p>GID:全称“Group ID”，简称“组ID”，表示用户初始组的组 ID 号。</p>
+<ul>
+<li>初始组，指用户登陆时就拥有这个用户组的相关权限。每个用户的初始组只能有一个，通常就是将和此用户的用户名相同的组名作为该用户的初始组。</li>
+<li>附加组，指用户可以加入多个其他的用户组，并拥有这些组的权限。每个用户只能有一个初始组，除初始组外，用户再加入其他的用户组，这些用户组就是这个用户的附加组。附加组可以有多个，而且用户可以有这些附加组的权限。</li>
+</ul>
+</li>
+<li><p>描述性信息:这个字段并没有什么重要的用途，只是用来解释这个用户的意义而已。</p>
+</li>
+<li><p>主目录也就是用户登录后有操作权限的访问目录，通常称为用户的主目录。</p>
+</li>
+<li>默认的Shell<br>Shell 就是 Linux 的命令解释器，是用户和 Linux 内核之间沟通的桥梁。<br>用户登陆 Linux 系统后，通过使用 Linux 命令完成操作任务，但系统只认识类似 0101    的机器语言，这里就需要使用命令解释器。也就是说，Shell 命令解释器的功能就是将用户输入的 命令转换成系统可以识别的机器语言。</li>
+</ul>
+<h3 id="etc-shadow"><a href="#etc-shadow" class="headerlink" title="\etc\shadow"></a>\etc\shadow</h3><p><img src="C:\Users\10557\AppData\Roaming\Typora\typora-user-images\image-20200314155832243.png" alt="image-20200314155832243"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户名：加密密码：最后一次修改时间：最小修改时间间隔：密码有效期：密码需要变更前的警告天数：密码过期后的宽限时间：账号失效时间：保留字段</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>加密密码：这里保存的是真正加密的密码。目前 Linux 的密码采用的是 SHA512 散列加密算法，原来采用的是 MD5 或 DES 加密算法。SHA512 散列加密算法的加密等级更高，也更加安全。</p>
+</li>
+<li><p>最后一次修改时间：Linux 计算日期的时间是以  1970 年 1 月 1 日作为 1 不断累加得到的时间，到 1971 年 1 月 1 日，则为 366 天。这里显示 15775 天，也就是说，此 root 账号在 1970 年 1 月 1 日之后的第 15775 天修改的 root 用户密码。（本图中未显示，因为没有改过密码）</p>
+</li>
+</ul>
+<h2 id="忘记密码怎么办"><a href="#忘记密码怎么办" class="headerlink" title="忘记密码怎么办"></a>忘记密码怎么办</h2><p>对于普通账户的密码遗失，可以通过 root 账户解决，它会重新给你配置好指定账户的密码，而不需知道你原有的密码（利用 root 的身份使用 passwd 命令即可）。</p>
+<p>如果 root 账号的密码遗失，则需要重新启动进入单用户模式，系统会提供 root 权限的 bash 接口，此时可以用 passwd 命令修改账户密码；也可以通过挂载根目录，修改 /etc/shadow，将账户的 root 密码清空的方法，此方式可使用 root 无法密码即可登陆，建议登陆后使用 passwd 命令配置 root 密码。</p>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>user</th>
+<th>group</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>添加</td>
+<td>useradd</td>
+<td>groupadd</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>userdel</td>
+<td>groupdel</td>
+</tr>
+<tr>
+<td>修改信息</td>
+<td>usermod</td>
+<td>groupmod</td>
+</tr>
+<tr>
+<td>修改密码\将系统用户加入或移除群组</td>
+<td>passwd</td>
+<td>gpasswd</td>
+</tr>
+<tr>
+<td>用户切换\切换用户的有效群组</td>
+<td>su</td>
+<td>newgrp</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+              <a href="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E5%BD%92%E5%B1%9E/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  文件权限与归属
+              </a>
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E6%9C%8D%E5%8A%A1%E7%A8%8B%E5%BA%8F/">
+                计划任务服务程序
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: 'SPu2VRL8GBwy0tz4XPGRVVM8-gzGzoHsz',
+			appKey: 'wmFJLexGHhIBOmhlio1SFhCt',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+    // 显示次数
+		function showTime(Counter) {
+			var query = new AV.Query("Counter");
+			if($(".leancloud_visitors").length > 0){
+				var url = $(".leancloud_visitors").attr('id').trim();
+				// where field
+				query.equalTo("words", url);
+				// count
+				query.count().then(function (number) {
+					// There are number instances of MyClass where words equals url.
+					$(document.getElementById(url)).text(number?  number : '--');
+				}, function (error) {
+					// error is an instance of AVError.
+				});
+			}
+		}
+		// 追加pv
+		function addCount(Counter) {
+			var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'wujun234.github.io';
+			var Counter = AV.Object.extend("Counter");
+			var query = new Counter;
+			query.save({
+				words: url
+			}).then(function (object) {
+			})
+		}
+		$(function () {
+			var Counter = AV.Object.extend("Counter");
+			addCount(Counter);
+			showTime(Counter);
+		});
+	
+</script>
+	</div>
+	<div id="footer" style="display: none">
+	<p>
+	©2019-<span id="footerYear"></span> 
+<header id="header">
+    <a id="title" href="/" class="logo">Max's Blog</a>
+
+	<ul id="menu">
+		<li class="menu-item">
+			<a href="/about" class="menu-item-link">ABOUT</a>
+		</li>
+		
+		<li class="menu-item">
+			<a href="https://github.com/wujun234/uid-generator-spring-boot-starter" class="menu-item-link" target="_blank">
+				UidGenerator
+			</a>
+		</li>
+		<li class="menu-item">
+			<a href="https://github.com/zqc-hhg" class="menu-item-link" target="_blank">
+				<i class="fa fa-github fa-2x"></i>
+			</a>
+		</li>
+	</ul>
+</header>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

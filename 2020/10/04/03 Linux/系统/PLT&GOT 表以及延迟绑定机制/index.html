@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		03 Linux/系统/PLT&amp;GOT 表以及延迟绑定机制 | 
+	 
+	Max&#39;s Blog
+	</title>
+	
+	<!-- keywords,description -->
+	 
+
+	<!-- favicon -->
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+  
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+	
+		
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+
+		
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+	
+	
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">Max's Blog</a>
+
+	<ul id="menu">
+		<li class="menu-item">
+			<a href="/about" class="menu-item-link">ABOUT</a>
+		</li>
+		
+		<li class="menu-item">
+			<a href="https://github.com/wujun234/uid-generator-spring-boot-starter" class="menu-item-link" target="_blank">
+				UidGenerator
+			</a>
+		</li>
+		<li class="menu-item">
+			<a href="https://github.com/zqc-hhg" class="menu-item-link" target="_blank">
+				<i class="fa fa-github fa-2x"></i>
+			</a>
+		</li>
+	</ul>
+</header>
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="text" placeholder="search...">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										00 踩坑
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/08/23/00%20%E8%B8%A9%E5%9D%91/%E8%A7%A3%E5%86%B3%E2%80%9C%E9%87%8D%E6%96%B0%E5%AE%89%E8%A3%85vmware-tools%E2%80%9D%E7%81%B0%E8%89%B2%E8%80%8C%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/">
+										解决“重新安装vmware-tools”灰色而无法安装问题
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										01 算法
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										01 算法思想
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										5 分治
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/02/04/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.0%20%E5%88%86%E6%B2%BB%E6%A6%82%E8%BF%B0/">
+										5.0 分治概述
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.1%20%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/">
+										5.1 二分搜索
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.2%20%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/">
+										5.2 大整数乘法
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.3%20Strassen%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/">
+										5.3 Strassen矩阵乘法
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.4%20%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96/">
+										5.4 棋盘覆盖
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.5%20%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
+										5.5 归并排序
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.6%20%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
+										5.6 快速排序
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										7 动态规划
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/02/09/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/7%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/7.0%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A6%82%E8%BF%B0/">
+										7.0 动态规划概述
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										02 网络
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										01 TCP IP
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/02/14/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/00%20OSI%E6%A8%A1%E5%9E%8B%E7%AE%80%E4%BB%8B/">
+										00 OSI模型简介
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/15/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/01%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+										01 网络基础知识
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/18/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/02%20TCP%20IP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+										02 TCP IP基础知识
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/28/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/03%20%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">
+										03 数据链路层
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										03 Linux
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										命令
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/07/03%20Linux/%E5%91%BD%E4%BB%A4/01%20%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
+										01 用户管理
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/07/03%20Linux/%E5%91%BD%E4%BB%A4/02%20%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">
+										02 文件管理
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Vim编辑器与Shell命令脚本
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/20/03%20Linux/%E5%91%BD%E4%BB%A4/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/Vim%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8/">
+										Vim文本编辑器
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/20/03%20Linux/%E5%91%BD%E4%BB%A4/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/%E7%BC%96%E5%86%99Shell%E8%84%9A%E6%9C%AC/">
+										编写Shell脚本
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E6%9C%8D%E5%8A%A1%E7%A8%8B%E5%BA%8F/">
+										计划任务服务程序
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										基本命令
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E4%BD%9C%E5%91%BD%E4%BB%A4/">
+										常用系统工作命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E6%89%93%E5%8C%85%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%90%9C%E7%B4%A2%E5%91%BD%E4%BB%A4/">
+										打包压缩与搜索命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/">
+										文件目录管理命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91%E5%91%BD%E4%BB%A4/">
+										文本文件编辑命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										用户身份与文件权限
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E5%BD%92%E5%B1%9E/">
+										文件权限与归属
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%83%BD%E5%8A%9B/">
+										用户身份与能力
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										鸟叔的linux私房菜
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/16/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/00%20%20%E5%B8%AE%E5%8A%A9/">
+										00  帮助
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/06/26/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/00%20Linux%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/">
+										00 Linux的前世今生
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/11/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/03%20Linux%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/">
+										03 Linux文件权限与目录配置
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/13/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/04%20Linux%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/">
+										04 Linux文件与目录管理
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/08/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E5%B8%AE%E5%8A%A9%E5%91%BD%E4%BB%A4/">
+										帮助命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/06/26/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E5%BC%80%E6%BA%90VS%E9%97%AD%E6%BA%90/">
+										开源VS闭源
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/08/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E6%AD%A3%E7%A1%AE%E5%85%B3%E6%9C%BA/">
+										正确关机
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/07/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/">
+										磁盘分区
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E7%AE%A1%E9%81%93%E7%AC%A6%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">
+										管道符、重定向与环境变量
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/06/26/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E8%AE%BA/">
+										计算机概论
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										系统
+									</a>
+									
+							<ul>
+								<li class="file active">
+									<a href="/2020/10/04/03%20Linux/%E7%B3%BB%E7%BB%9F/PLT&GOT%20%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A%E6%9C%BA%E5%88%B6/">
+										PLT&GOT 表以及延迟绑定机制
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										04 其他
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/02/04%20%E5%85%B6%E4%BB%96/hello-world/">
+										hello-world
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/01/19/04%20%E5%85%B6%E4%BB%96/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%E5%8F%8A%E5%B0%8F%E6%8A%80%E5%B7%A7%EF%BC%88%E4%B8%80)/">
+										程序设计的注意事项及小技巧（一)
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										05 工具使用
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/09/29/05%20%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E4%BD%BF%E7%94%A8gdb%E8%B0%83%E8%AF%95%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">
+										使用gdb调试应用程序
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										06 pwn
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										00 栈溢出
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/10/05/06%20pwn/00%20%E6%A0%88%E6%BA%A2%E5%87%BA/%5BOGeek2019%5Dbabyrop%20%E9%A2%98%E8%A7%A3/">
+										[OGeek2019]babyrop 题解
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										07 C语言
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/09/29/07%20C%E8%AF%AD%E8%A8%80/read/">
+										read
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/09/29/07%20C%E8%AF%AD%E8%A8%80/replace/">
+										replace
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/02/hello-world/">
+										hello-world
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content">
+		<h1 id="article-title">
+
+	PLT&GOT 表以及延迟绑定机制
+</h1>
+<div class="article-meta">
+	
+		<span>
+			阅读量:<span id="/2020/10/04/03%20Linux/%E7%B3%BB%E7%BB%9F/PLT&amp;GOT%20%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A%E6%9C%BA%E5%88%B6/" class="leancloud_visitors" data-flag-title="03 Linux/系统/PLT&GOT 表以及延迟绑定机制"></span>
+		</span>
+	
+	<span>max</span>
+	<span>2020-10-04 10:22:04</span>
+    
+		<div id="article-categories">
+            
+		</div>
+    
+</div>
+
+<div id="article-content">
+	<p>linux 下的动态链接是通过 PLT&amp;GOT 来实现的，这里做一个实验，通过这个实验来理解</p>
+<p>使用如下源代码 test.c：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_banner</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Welcome to World of PLT and GOT\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    print_banner();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>依次使用下列命令进行编译：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -Wall -g -o test.o -c test.c -m32</span><br><span class="line">gcc -o test test.o -m32</span><br></pre></td></tr></table></figure>
+<p>这样除了原有的 test.c 还有个 test.o 以及可执行文件 test</p>
+<p>通过 objdump -d test.o 可以查看反汇编</p>
+<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_4YBDSW67P6KWC6K.jpg" alt=""></p>
+<p>printf () 和函数是在 glibc 动态库里面的，只有当程序运行起来的时候才能确定地址，所以此时的 printf () 函数先用 fc ff ff ff 也就是有符号数的 -4 代替</p>
+<p>运行时进行重定位是无法修改代码段的，只能将 printf 重定位到数据段，但是已经编译好的程序，调用 printf 的时候怎么才能找到这个地址呐？</p>
+<p>链接器会额外生成一小段代码，通过这段代码来获取 printf () 的地址，像下面这样，进行链接的时候只需要对 printf_stub () 进行重定位操作就可以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.text</span><br><span class="line">...</span><br><span class="line">&#x2F;&#x2F; 调用printf的call指令</span><br><span class="line">call printf_stub</span><br><span class="line">...</span><br><span class="line">printf_stub:</span><br><span class="line">    mov rax, [printf函数的储存地址] &#x2F;&#x2F; 获取printf重定位之后的地址</span><br><span class="line">    jmp rax &#x2F;&#x2F; 跳过去执行printf函数</span><br><span class="line">.data</span><br><span class="line">...</span><br><span class="line">printf函数的储存地址,这里储存printf函数重定位后的地址</span><br></pre></td></tr></table></figure>
+<p>总体来说，动态链接每个函数需要两个东西：</p>
+<p>1、用来存放外部函数地址的数据段</p>
+<p>2、用来获取数据段记录的外部函数地址的代码</p>
+<p>对应有两个表，一个用来存放外部的函数地址的数据表称为全局偏移表（GOT, Global Offset Table），那个存放额外代码的表称为程序链接表（PLT，Procedure Link Table）</p>
+<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_4EMZFRKNEXE9XVJ.jpg" alt=""></p>
+<p>可执行文件里面保存的是 PLT 表的地址，对应 PLT 地址指向的是 GOT 的地址，GOT 表指向的就是 glibc 中的地址</p>
+<p>那我们可以发现，在这里面想要通过 plt 表获取函数的地址，首先要保证 got 表已经获取了正确的地址，但是在一开始就进行所有函数的重定位是比较麻烦的，为此，linux 引入了延迟绑定机制</p>
+<p>只有动态库函数在被调用时，才会地址解析和重定位工作，为此可以使用类似这样的代码来实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一开始没有重定位的时候将 printf@got 填成 lookup_printf 的地址</span></span><br><span class="line"><span class="keyword">void</span> <span class="built_in">printf</span>@plt()</span><br><span class="line">&#123;</span><br><span class="line">address_good:</span><br><span class="line">    jmp *<span class="built_in">printf</span>@got  </span><br><span class="line">lookup_printf:</span><br><span class="line">    调用重定位函数查找 <span class="built_in">printf</span> 地址，并写到 <span class="built_in">printf</span>@got</span><br><span class="line">    <span class="keyword">goto</span> address_good;<span class="comment">//再返回去执行address_good</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明一下这段代码工作流程，一开始，printf@got 是 lookup_printf 函数的地址，这个函数用来寻找 printf () 的地址，然后写入 printf@got，lookup_printf 执行完成后会返回到 address_good，这样再 jmp 的话就可以直接跳到 printf 来执行了</p>
+<p>也就是说这样的机制的话如果不知道 printf 的地址，就去找一下，知道的话就直接去 jmp 执行 printf 了</p>
+<p>接下来，我们就来看一下这个 “找” 的工作是怎么实现的：</p>
+<p>通过 objdump -d test &gt; test.asm 可以看到其中 plt 表项有三条指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Disassembly of section .plt:</span><br><span class="line">080482d0 &lt;common@plt&gt;:</span><br><span class="line"> 80482d0:   ff 35 04 a0 04 08       pushl  0x804a004</span><br><span class="line"> 80482d6:   ff 25 08 a0 04 08       jmp    *0x804a008</span><br><span class="line"> 80482dc:   00 00                   add    %al,(%eax)</span><br><span class="line">    ...</span><br><span class="line">080482e0 &lt;puts@plt&gt;:</span><br><span class="line"> 80482e0:   ff 25 0c a0 04 08       jmp    *0x804a00c</span><br><span class="line"> 80482e6:   68 00 00 00 00          push   $0x0</span><br><span class="line"> 80482eb:   e9 e0 ff ff ff          jmp    80482d0 &lt;_init+0x28&gt;</span><br><span class="line">080482f0 &lt;__libc_start_main@plt&gt;:</span><br><span class="line"> 80482f0:   ff 25 10 a0 04 08       jmp    *0x804a010</span><br><span class="line"> 80482f6:   68 08 00 00 00          push   $0x8</span><br><span class="line"> 80482fb:   e9 d0 ff ff ff          jmp    80482d0 &lt;_init+0x28&gt;</span><br></pre></td></tr></table></figure>
+<p>ps. 这里 plt 表的第一项使用 objdump 的时候给没有符号名的一项自动改成了离他最近的一项，为了避免引起误会，改成了 common，而且随着不断深入，会发现，确实可以叫 common</p>
+<p>其中除第一个表项以外，plt 表的第一条都是跳转到对应的 got 表项，而 got 表项的内容我们可以通过 gdb 来看一下，如果函数还没有执行的时候，这里的地址是对应 plt 表项的下一条命令，即 push 0x0</p>
+<p>（说一下怎么查看，先 gdb test 然后 b main，再 run， 再 x/x jmp的那个地址 就可以）</p>
+<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_3QNTDTTWNXBKS5Z.jpg" alt=""></p>
+<p>还记得之前我们说的，在还没有执行过函数之前 printf@got 的内容是 lookup_printf 函数的地址吗，这就是要去找 printf 函数的地址了</p>
+<p>现在要做的是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push   $0x0    &#x2F;&#x2F;将数据压到栈上，作为将要执行的函数的参数</span><br><span class="line">jmp    0x80482d0   &#x2F;&#x2F;去到了第一个表项</span><br></pre></td></tr></table></figure>
+<p>接下来继续</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">080482d0 &lt;common@plt&gt;:</span><br><span class="line">pushl  0x804a004  &#x2F;&#x2F;将数据压到栈上，作为后面函数的参数</span><br><span class="line">jmp    *0x804a008 &#x2F;&#x2F;跳转到函数</span><br><span class="line">add    %al,(%eax)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>我们同样可以使用 gdb 来看一下这里面到底是什么，可以看到，在没有执行之前是全 0</p>
+<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_5Z8XUGEXSED5RXF.jpg" alt=""></p>
+<p>当执行后他有了值</p>
+<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_SFBGWHQ8YEMKNDP.jpg" alt=""></p>
+<p>这个值对应的函数是 _dl_runtime_resolve</p>
+<p>那现在做一个小总结：</p>
+<p>在想要调用的函数没有被调用过，想要调用他的时候，是按照这个过程来调用的</p>
+<p>xxx@plt -&gt; xxx@got -&gt; xxx@plt -&gt; 公共 @plt -&gt; _dl_runtime_resolve</p>
+<p>到这里我们还需要知道</p>
+<ol>
+<li><p>_dl_runtime_resolve 是怎么知道要查找 printf 函数的  </p>
+</li>
+<li><p>_dl_runtime_resolve 找到 printf 函数地址之后，它怎么知道回填到哪个 GOT 表项  </p>
+</li>
+</ol>
+<p>第一个问题，在 xxx@plt 中，我们在 jmp 之前 push 了一个参数，每个 xxx@plt 的 push 的操作数都不一样，那个参数就相当于函数的 id，告诉了 _dl_runtime_resolve 要去找哪一个函数的地址</p>
+<p>在 elf 文件中 .rel.plt 保存了重定位表的信息，使用 readelf -r test 命令可以查看 test 可执行文件中的重定位信息</p>
+<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_FM29NGMC75ENVMM.jpg" alt=""></p>
+<p>这里有些问题，对应着大佬博客说 plt 中 push 的操作数，就是对应函数在.rel.plt 段的偏移量，但是没对比出来</p>
+<p>第二个问题，看 .rel.plt 的位置就对应着 xxx@plt 里 jmp 的地址</p>
+<p>在 i386 架构下，除了每个函数占用一个 GOT 表项外，GOT 表项还保留了３个公共表项，也即 got 的前３项，分别保存：</p>
+<ul>
+<li><p>got [0]: 本 ELF 动态段 (.dynamic 段）的装载地址  </p>
+</li>
+<li><p>got [1]：本 ELF 的 link_map 数据结构描述符地址  </p>
+</li>
+<li><p>got [2]：_dl_runtime_resolve 函数的地址  </p>
+</li>
+</ul>
+<p>动态链接器在加载完 ELF 之后，都会将这３地址写到 GOT 表的前３项</p>
+<p>跟着大佬的流程图来走一遍：</p>
+<p>第一次调用</p>
+<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_MQGWQW873JW6S7M.jpg" alt=""></p>
+<p>之后再次调用<img src="https://bbs.pediy.com/upload/attach/202002/837755_9TZYGD6KKPXZXJ9.jpg" alt=""></p>
+<p>参考：</p>
+<p><a href="https://blog.csdn.net/linyt/article/details/51635768" target="_blank" rel="noopener">https://blog.csdn.net/linyt/article/details/51635768</a>  </p>
+<p><a href="https://blog.csdn.net/linyt/article/details/51636753" target="_blank" rel="noopener">https://blog.csdn.net/linyt/article/details/51636753</a>  </p>
+<p><a href="https://blog.csdn.net/linyt/article/details/51637832" target="_blank" rel="noopener">https://blog.csdn.net/linyt/article/details/51637832</a>  </p>
+<p><a href="https://blog.csdn.net/linyt/article/details/51893258" target="_blank" rel="noopener">https://blog.csdn.net/linyt/article/details/51893258</a>  </p>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+              <a href="/2020/10/05/06%20pwn/00%20%E6%A0%88%E6%BA%A2%E5%87%BA/%5BOGeek2019%5Dbabyrop%20%E9%A2%98%E8%A7%A3/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  [OGeek2019]babyrop 题解
+              </a>
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/09/29/07%20C%E8%AF%AD%E8%A8%80/read/">
+                
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: 'SPu2VRL8GBwy0tz4XPGRVVM8-gzGzoHsz',
+			appKey: 'wmFJLexGHhIBOmhlio1SFhCt',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+    // 显示次数
+		function showTime(Counter) {
+			var query = new AV.Query("Counter");
+			if($(".leancloud_visitors").length > 0){
+				var url = $(".leancloud_visitors").attr('id').trim();
+				// where field
+				query.equalTo("words", url);
+				// count
+				query.count().then(function (number) {
+					// There are number instances of MyClass where words equals url.
+					$(document.getElementById(url)).text(number?  number : '--');
+				}, function (error) {
+					// error is an instance of AVError.
+				});
+			}
+		}
+		// 追加pv
+		function addCount(Counter) {
+			var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'wujun234.github.io';
+			var Counter = AV.Object.extend("Counter");
+			var query = new Counter;
+			query.save({
+				words: url
+			}).then(function (object) {
+			})
+		}
+		$(function () {
+			var Counter = AV.Object.extend("Counter");
+			addCount(Counter);
+			showTime(Counter);
+		});
+	
+</script>
+	</div>
+	<div id="footer" style="display: none">
+	<p>
+	©2019-<span id="footerYear"></span> 
+<header id="header">
+    <a id="title" href="/" class="logo">Max's Blog</a>
+
+	<ul id="menu">
+		<li class="menu-item">
+			<a href="/about" class="menu-item-link">ABOUT</a>
+		</li>
+		
+		<li class="menu-item">
+			<a href="https://github.com/wujun234/uid-generator-spring-boot-starter" class="menu-item-link" target="_blank">
+				UidGenerator
+			</a>
+		</li>
+		<li class="menu-item">
+			<a href="https://github.com/zqc-hhg" class="menu-item-link" target="_blank">
+				<i class="fa fa-github fa-2x"></i>
+			</a>
+		</li>
+	</ul>
+</header>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
