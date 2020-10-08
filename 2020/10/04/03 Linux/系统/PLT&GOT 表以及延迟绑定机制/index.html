@@ -718,7 +718,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -Wall -g -o test.o -c test.c -m32</span><br><span class="line">gcc -o test test.o -m32</span><br></pre></td></tr></table></figure>
 <p>这样除了原有的 test.c 还有个 test.o 以及可执行文件 test</p>
 <p>通过 objdump -d test.o 可以查看反汇编</p>
-<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_4YBDSW67P6KWC6K.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/zqc-hhg/img/master/blog/20201008121414.png" alt=""></p>
 <p>printf () 和函数是在 glibc 动态库里面的，只有当程序运行起来的时候才能确定地址，所以此时的 printf () 函数先用 fc ff ff ff 也就是有符号数的 -4 代替</p>
 <p>运行时进行重定位是无法修改代码段的，只能将 printf 重定位到数据段，但是已经编译好的程序，调用 printf 的时候怎么才能找到这个地址呐？</p>
 <p>链接器会额外生成一小段代码，通过这段代码来获取 printf () 的地址，像下面这样，进行链接的时候只需要对 printf_stub () 进行重定位操作就可以</p>
@@ -727,7 +727,7 @@
 <p>1、用来存放外部函数地址的数据段</p>
 <p>2、用来获取数据段记录的外部函数地址的代码</p>
 <p>对应有两个表，一个用来存放外部的函数地址的数据表称为全局偏移表（GOT, Global Offset Table），那个存放额外代码的表称为程序链接表（PLT，Procedure Link Table）</p>
-<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_4EMZFRKNEXE9XVJ.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/zqc-hhg/img/master/blog/20201008121700.png" alt=""></p>
 <p>可执行文件里面保存的是 PLT 表的地址，对应 PLT 地址指向的是 GOT 的地址，GOT 表指向的就是 glibc 中的地址</p>
 <p>那我们可以发现，在这里面想要通过 plt 表获取函数的地址，首先要保证 got 表已经获取了正确的地址，但是在一开始就进行所有函数的重定位是比较麻烦的，为此，linux 引入了延迟绑定机制</p>
 <p>只有动态库函数在被调用时，才会地址解析和重定位工作，为此可以使用类似这样的代码来实现：</p>
@@ -740,16 +740,16 @@
 <p>ps. 这里 plt 表的第一项使用 objdump 的时候给没有符号名的一项自动改成了离他最近的一项，为了避免引起误会，改成了 common，而且随着不断深入，会发现，确实可以叫 common</p>
 <p>其中除第一个表项以外，plt 表的第一条都是跳转到对应的 got 表项，而 got 表项的内容我们可以通过 gdb 来看一下，如果函数还没有执行的时候，这里的地址是对应 plt 表项的下一条命令，即 push 0x0</p>
 <p>（说一下怎么查看，先 gdb test 然后 b main，再 run， 再 x/x jmp的那个地址 就可以）</p>
-<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_3QNTDTTWNXBKS5Z.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/zqc-hhg/img/master/blog/20201008121802.png" alt=""></p>
 <p>还记得之前我们说的，在还没有执行过函数之前 printf@got 的内容是 lookup_printf 函数的地址吗，这就是要去找 printf 函数的地址了</p>
 <p>现在要做的是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push   $0x0    &#x2F;&#x2F;将数据压到栈上，作为将要执行的函数的参数</span><br><span class="line">jmp    0x80482d0   &#x2F;&#x2F;去到了第一个表项</span><br></pre></td></tr></table></figure>
 <p>接下来继续</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">080482d0 &lt;common@plt&gt;:</span><br><span class="line">pushl  0x804a004  &#x2F;&#x2F;将数据压到栈上，作为后面函数的参数</span><br><span class="line">jmp    *0x804a008 &#x2F;&#x2F;跳转到函数</span><br><span class="line">add    %al,(%eax)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
 <p>我们同样可以使用 gdb 来看一下这里面到底是什么，可以看到，在没有执行之前是全 0</p>
-<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_5Z8XUGEXSED5RXF.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/zqc-hhg/img/master/blog/20201008131226.png" alt=""></p>
 <p>当执行后他有了值</p>
-<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_SFBGWHQ8YEMKNDP.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/zqc-hhg/img/master/blog/20201008131321.png" alt=""></p>
 <p>这个值对应的函数是 _dl_runtime_resolve</p>
 <p>那现在做一个小总结：</p>
 <p>在想要调用的函数没有被调用过，想要调用他的时候，是按照这个过程来调用的</p>
@@ -763,7 +763,7 @@
 </ol>
 <p>第一个问题，在 xxx@plt 中，我们在 jmp 之前 push 了一个参数，每个 xxx@plt 的 push 的操作数都不一样，那个参数就相当于函数的 id，告诉了 _dl_runtime_resolve 要去找哪一个函数的地址</p>
 <p>在 elf 文件中 .rel.plt 保存了重定位表的信息，使用 readelf -r test 命令可以查看 test 可执行文件中的重定位信息</p>
-<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_FM29NGMC75ENVMM.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/zqc-hhg/img/master/blog/20201008131415.png" alt=""></p>
 <p>这里有些问题，对应着大佬博客说 plt 中 push 的操作数，就是对应函数在.rel.plt 段的偏移量，但是没对比出来</p>
 <p>第二个问题，看 .rel.plt 的位置就对应着 xxx@plt 里 jmp 的地址</p>
 <p>在 i386 架构下，除了每个函数占用一个 GOT 表项外，GOT 表项还保留了３个公共表项，也即 got 的前３项，分别保存：</p>
@@ -778,8 +778,9 @@
 <p>动态链接器在加载完 ELF 之后，都会将这３地址写到 GOT 表的前３项</p>
 <p>跟着大佬的流程图来走一遍：</p>
 <p>第一次调用</p>
-<p><img src="https://bbs.pediy.com/upload/attach/202002/837755_MQGWQW873JW6S7M.jpg" alt=""></p>
-<p>之后再次调用<img src="https://bbs.pediy.com/upload/attach/202002/837755_9TZYGD6KKPXZXJ9.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/zqc-hhg/img/master/blog/20201008131744.png" alt=""></p>
+<p>之后再次调用</p>
+<p><img src="https://raw.githubusercontent.com/zqc-hhg/img/master/blog/20201008131850.png" alt=""></p>
 <p>参考：</p>
 <p><a href="https://blog.csdn.net/linyt/article/details/51635768" target="_blank" rel="noopener">https://blog.csdn.net/linyt/article/details/51635768</a>  </p>
 <p><a href="https://blog.csdn.net/linyt/article/details/51636753" target="_blank" rel="noopener">https://blog.csdn.net/linyt/article/details/51636753</a>  </p>
@@ -888,20 +889,5 @@
 	</ul>
 </header>
 	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
