@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		03 Linux/命令/Vim编辑器与Shell命令脚本/计划任务服务程序 | 
+		09 汇编语言/一些容易弄错的指令 | 
 	 
 	Max&#39;s Blog
 	</title>
@@ -341,7 +341,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file active">
+								<li class="file">
 									<a href="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E6%9C%8D%E5%8A%A1%E7%A8%8B%E5%BA%8F/">
 										计划任务服务程序
 									</a>
@@ -720,7 +720,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/10/12/09%20%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E4%B8%80%E4%BA%9B%E5%AE%B9%E6%98%93%E5%BC%84%E9%94%99%E7%9A%84%E6%8C%87%E4%BB%A4/">
 										一些容易弄错的指令
 									</a>
@@ -749,16 +749,16 @@
 	<div id="content">
 		<h1 id="article-title">
 
-	计划任务服务程序
+	一些容易弄错的指令
 </h1>
 <div class="article-meta">
 	
 		<span>
-			阅读量:<span id="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E6%9C%8D%E5%8A%A1%E7%A8%8B%E5%BA%8F/" class="leancloud_visitors" data-flag-title="03 Linux/命令/Vim编辑器与Shell命令脚本/计划任务服务程序"></span>
+			阅读量:<span id="/2020/10/12/09%20%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/%E4%B8%80%E4%BA%9B%E5%AE%B9%E6%98%93%E5%BC%84%E9%94%99%E7%9A%84%E6%8C%87%E4%BB%A4/" class="leancloud_visitors" data-flag-title="09 汇编语言/一些容易弄错的指令"></span>
 		</span>
 	
 	<span>max</span>
-	<span>2020-03-21 11:00:46</span>
+	<span>2020-10-12 15:07:48</span>
     
 		<div id="article-categories">
             
@@ -767,19 +767,75 @@
 </div>
 
 <div id="article-content">
-	<h3 id="一次性计划任务（at）"><a href="#一次性计划任务（at）" class="headerlink" title="一次性计划任务（at）"></a>一次性计划任务（at）</h3><p>创建任务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@linuxprobe ~]# at 23:30</span><br><span class="line">at &gt; systemctl restart httpd</span><br><span class="line">at &gt; 此处请同时按下Ctrl+d来结束编写计划任务</span><br><span class="line">job 3 at Mon Apr 27 23:30:00 2015</span><br><span class="line">[root@linuxprobe ~]# at -l</span><br><span class="line">3 Mon Apr 27 23:30:00 2016 a root</span><br></pre></td></tr></table></figure>
-<p>删除任务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@linuxprobe ~]# at -l</span><br><span class="line">3 Mon Apr 27 23:30:00 2016 a root</span><br><span class="line">4 Mon Apr 27 23:30:00 2016 a root</span><br><span class="line">[root@linuxprobe ~]# atrm 3</span><br><span class="line">[root@linuxprobe ~]# at -l</span><br><span class="line">4 Mon Apr 27 23:30:00 2016 a root</span><br></pre></td></tr></table></figure>
-<h3 id="长期性计划任务（crontab）"><a href="#长期性计划任务（crontab）" class="headerlink" title="长期性计划任务（crontab）"></a>长期性计划任务（crontab）</h3><p><img src="https://www.linuxprobe.com/wp-content/uploads/2015/02/cron%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%8F%82%E6%95%B0.png" alt=""></p>
-<p><strong>!!!命令需要地址</strong> </p>
-<p>创建任务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@linuxprobe ~]# crontab -e</span><br><span class="line">no crontab for root - using an empty one</span><br><span class="line">crontab: installing new crontab</span><br><span class="line">[root@linuxprobe ~]# crontab -l</span><br><span class="line">25 3 * * 1,3,5 &#x2F;usr&#x2F;bin&#x2F;tar -czvf backup.tar.gz &#x2F;home&#x2F;wwwroot</span><br></pre></td></tr></table></figure>
-<p>删除任务</p>
-<blockquote>
-<p>crontab -r</p>
-<p>在crond服务的配置参数中，可以像Shell脚本那样以#号开头写上注释信息，这样在日后回顾这段命令代码时可以快速了解其功能、需求以及编写人员等重要信息。<br>计划任务中的“分”字段必须有数值，绝对不能为空或是*号，而“日”和“星期”字段不能同时使用，否则就会发生冲突。</p>
-</blockquote>
+	<h4 id="数据传送指令"><a href="#数据传送指令" class="headerlink" title="数据传送指令"></a>数据传送指令</h4><ul>
+<li><p><strong>movsx 符号扩展后传送</strong></p>
+<p>传送目标的字节数大于源字节数时，需要扩展后传送</p>
+<p>符号扩展意思是：对于正数高位补0，对于负数高位全补1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">;  例子</span><br><span class="line"></span><br><span class="line">movsx edx,  byte ptr  \[ebp+edx-28\]</span><br><span class="line"></span><br><span class="line">;  将地址为ebp+edx-28的一个字节(byte)的内容传送到edx，如果该字节为正(&lt;&#x3D;0x7F)，则前三字节全补0，如果该字节为负，则补的三字节全为1(即0xFFF)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>movzx 补零后传送</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">;  例子</span><br><span class="line"></span><br><span class="line">movzx edx,  byte ptr  \[ebp+edx-28\]</span><br><span class="line"></span><br><span class="line">;  将地址为ebp+edx-28的一个字节(byte)的内容转送到edx，前三个字节均补0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="算数运算指令"><a href="#算数运算指令" class="headerlink" title="算数运算指令"></a>算数运算指令</h4><ul>
+<li><p><strong>mul 无符号乘法</strong></p>
+<p>如果参数是8位，把 al 做乘数，结果放在 ax</p>
+<p>如果参数是16位，把 ax 做乘数，结果放在 eax</p>
+<p>如果参数是32位，把 eax 做乘数，结果放在 edx:eax (edx是高32位，eax是低32位)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">;  例子</span><br><span class="line"></span><br><span class="line">mul bx;  eax  &#x3D;  bx  *  ax</span><br><span class="line"></span><br><span class="line">mul esi ;  edx:eax  &#x3D;  esi  *  eax  (因为32位*32位结果可以有64位,所以要放在两个32位寄存器)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>imul 有符号乘法</strong></p>
+<p>操作数乘数和存放结果的寄存器与<strong>mul指令相同</strong>，乘数均为正时结果与mul相同，乘数为负时结果与mul不同</p>
+<p>有三个操作数时，结果存放在第一个操作数中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">;  例子</span><br><span class="line"></span><br><span class="line">imul bx,  ax,  2h ;  bx  &#x3D;  ax  *  2</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><strong>div 无符号除法</strong></p>
+<p>如果参数是8位，把 ax 作为被除数，商放在 al，余数放在 dl</p>
+<p>如果参数是16位，把 eax 作为被除数，商放在 ax，余数放在 dx</p>
+<p>如果参数是32位，把 edx:eax 作为被除数，商放在 eax，余数放在 edx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">;  例子</span><br><span class="line"></span><br><span class="line">mov edx,  0</span><br><span class="line"></span><br><span class="line">mov eax,  7</span><br><span class="line"></span><br><span class="line">mov ebx,  2</span><br><span class="line"></span><br><span class="line">div ebx ;  eax  &#x3D;  edx:eax  &#x2F;  ebx  &#x3D;  3,  edx  &#x3D;  edx:eax  %  ebx  &#x3D;  13</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><strong>idiv 有符号除法</strong></p>
+<ul>
+<li><strong>cdq 扩展被除数</strong></li>
+</ul>
+<p>由于32位除法要求被除数为64位，执行idiv指令前需要先执行cdq指令</p>
+<p>cdq(Convert Double to Quad)指令用于扩展被除数(将eax扩展成edx:eax)，当eax为正数时，将edx置为0，当eax为负数时，将edx置为0xFFFFFFFF</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">;  例子</span><br><span class="line"></span><br><span class="line">mov eax,  -17</span><br><span class="line"></span><br><span class="line">cdq ;  扩展被除数，因为eax是负数，所以edx&#x3D;0xFFFFFFFF</span><br><span class="line"></span><br><span class="line">mov ecx,  3;  ecx  是除数</span><br><span class="line"></span><br><span class="line">idiv ecx;  商  eax  &#x3D;  -5，余数  edx  &#x3D;  -2</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><strong>xor 异或</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xor eax,  eax;  自己异或自己，无论eax是什么结果都为0，相当于mov eax,  0</span><br></pre></td></tr></table></figure>
+<h4 id="比较和转移指令"><a href="#比较和转移指令" class="headerlink" title="比较和转移指令"></a>比较和转移指令</h4><ul>
+<li><p><strong>cmp 比较两个操作数</strong> (以<strong>作减法</strong>的方式)，一般在后面接跳转指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmp  dword ptr  \[ebp-30\],  0D;  比较(int类型的)局部变量\[ebp-30\]和0x0D</span><br><span class="line">jge short  00BE1148;  如果(int类型的)变量\[ebp-30\]大于等于0x0D，则跳转</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>test 比较两个操作数</strong> (以<strong>作逻辑与</strong>的方式)，一般在后面接跳转指令</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test  eax,  eax ;  自己和自己作逻辑与，相当于之间判断eax</span><br><span class="line">jnz short  00BE121B;  eax不为0时候，跳转</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>跳转类指令</strong> 见下表</p>
+<p>| 指令 | 英文全称 | 跳转条件 | 有无符号 |<br>| —- | —- | —- | —- |<br>| je/jz | equal/zero | 为0或相等 | – |<br>| jne/jnz | not equal/not zero | 不为0或不相等 | – |<br>| jb | below | &lt; | 无符号 |<br>| jae | above equal | &gt;= | 无符号 |<br>| ja | above | &gt; | 无符号 |<br>| jbe | below equal | &lt;= | 无符号 |<br>| jl | lower | &lt; | 有符号 |<br>| jge | greater equal | &gt;= | 有符号 |<br>| jg | greater | &gt; | 有符号 |<br>| jle | lower equal | &lt;= | 有符号 |</p>
+</li>
+</ul>
+<p>　　<strong>无符号(unsigned)</strong> 指的是所有数都为正数，0xFF 表示 <strong>255</strong>；<strong>有符号(signed)</strong> 指的是最高位为1时为负，最高位为0时为正，0xFF表示 <strong>-1</strong>。</p>
+<h4 id="装入指令"><a href="#装入指令" class="headerlink" title="装入指令"></a>装入指令</h4><ul>
+<li><strong>lea 将第二个操作数偏移地址装入第一个操作数</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lea edx,  dword ptr  \[ecx+18\] ;  将(int类型的)局部变量\[ecx+18\]的首地址放入edx,即edx  &#x3D;  ecx+18</span><br><span class="line">lea eax,  dword ptr  \[edx+edx*2\];  eax  &#x3D;  edx+edx*2  &#x3D;  edx*3</span><br></pre></td></tr></table></figure>
+<p>​    </p>
+<h4 id="重复指令"><a href="#重复指令" class="headerlink" title="重复指令"></a>重复指令</h4><ul>
+<li><p><strong>rep 重复的前缀</strong></p>
+<p>| 重复前缀 | 终止条件 1 | 终止条件 2 |<br>| —- | —- | —- |<br>| rep | ecx=0 | 无 |<br>| repe/repz | ecx=0 | zf=0 (结果为0时继续重复) |<br>| repne/repnz | ecx=0 | zf=1 |</p>
+</li>
+</ul>
 
 </div>
 
@@ -787,16 +843,11 @@
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%83%BD%E5%8A%9B/">
-                  <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  用户身份与能力
-              </a>
-            
         </div>
         <div class="item right">
             
-              <a href="/2020/03/20/03%20Linux/%E5%91%BD%E4%BB%A4/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/%E7%BC%96%E5%86%99Shell%E8%84%9A%E6%9C%AC/">
-                编写Shell脚本
+              <a href="/2020/10/11/06%20pwn/00%20%E6%A0%88%E6%BA%A2%E5%87%BA/get_started_3dsctf_2016/">
+                00 栈溢出
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
               </a>
             
