@@ -532,26 +532,6 @@
 								
 							</ul>
 			
-							<ul>
-								<li class="directory">
-									<a href="#" class="directory">
-										<i class="fa fa-plus-square-o"></i>
-										系统
-									</a>
-									
-							<ul>
-								<li class="file">
-									<a href="/2020/10/04/03%20Linux/%E7%B3%BB%E7%BB%9F/PLT&GOT%20%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A%E6%9C%BA%E5%88%B6/">
-										PLT&GOT 表以及延迟绑定机制
-									</a>
-								</li>
-								<div class="article-toc" style="display: none;"></div>
-							</ul>
-			
-								</li>
-								
-							</ul>
-			
 								</li>
 								
 							</ul>
@@ -654,6 +634,15 @@
 									
 							<ul>
 								<li class="file">
+									<a href="/2020/10/11/07%20C%E8%AF%AD%E8%A8%80/mprotect/">
+										mprotect
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
 									<a href="/2020/09/29/07%20C%E8%AF%AD%E8%A8%80/read/">
 										read
 									</a>
@@ -665,6 +654,55 @@
 								<li class="file">
 									<a href="/2020/09/29/07%20C%E8%AF%AD%E8%A8%80/replace/">
 										replace
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										08 操作系统
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/10/04/08%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/PLT&GOT%20%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A%E6%9C%BA%E5%88%B6/">
+										PLT&GOT 表以及延迟绑定机制
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/10/11/08%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E5%AD%98%E5%88%86%E9%A1%B5/">
+										内存分页
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										09 汇编语言
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/10/10/09%20%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/MOVZX%E5%92%8CMOVSX%E6%8C%87%E4%BB%A4/">
+										MOVZX和MOVSX指令
 									</a>
 								</li>
 								<div class="article-toc" style="display: none;"></div>
@@ -690,6 +728,121 @@
 	<!-- 引入正文 -->
 	<div id="content">
 		<div id="index">
+	
+		<div class="index-li">
+			<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.1%20%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/">
+				<h2 class="index-title">
+					5.1 二分搜索
+				</h2>
+				<div class="index-brief">
+					问题描述​        二分搜索法，是一种在有序数组中查找某一特定元素的搜索算法。搜索过程从数组的中间元素开始，如果中间元素正好是要查找的元素，则搜索过程结束；如果某一特定元素大于或者小于中间元素，则在数组大于或小于中间元素的那一半中查找，而且跟开始一样从中间元素开始比较。如果在某一步骤数组为空，
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2020-02-06</span>
+                    
+                            
+                    
+                </div>
+		</div>	
+	
+		<div class="index-li">
+			<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.6%20%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
+				<h2 class="index-title">
+					5.6 快速排序
+				</h2>
+				<div class="index-brief">
+					问题描述它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。
+解决思路
+原理分析如上图：
+
+首先取出一个key，一般取第一个元素
+从后往
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2020-02-06</span>
+                    
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/算法/">算法</a>
+										
+											>
+										
+                                    </span>
+                                
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/算法/算法思想/">算法思想</a>
+										
+											>
+										
+                                    </span>
+                                
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/算法/算法思想/5-分治/">5 分治</a>
+										
+                                    </span>
+                                
+                            
+                    
+                </div>
+		</div>	
+	
+		<div class="index-li">
+			<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.5%20%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
+				<h2 class="index-title">
+					5.5 归并排序
+				</h2>
+				<div class="index-brief">
+					问题描述1归并排序（MERGE-SORT）是建立在归并操作上的一种有效的排序算法,该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为二路归并。归并排序
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2020-02-06</span>
+                    
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/算法/">算法</a>
+										
+											>
+										
+                                    </span>
+                                
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/算法/算法思想/">算法思想</a>
+										
+											>
+										
+                                    </span>
+                                
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/算法/算法思想/5-分治/">5 分治</a>
+										
+                                    </span>
+                                
+                            
+                    
+                </div>
+		</div>	
 	
 		<div class="index-li">
 			<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.4%20%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96/">

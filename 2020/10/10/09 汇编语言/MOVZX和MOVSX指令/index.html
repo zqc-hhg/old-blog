@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		09 汇编语言/MOVZX和MOVSX指令 | 
+	 
+	Max&#39;s Blog
+	</title>
+	
+	<!-- keywords,description -->
+	 
+
+	<!-- favicon -->
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+  
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+	
+		
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+
+		
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+	
+	
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">Max's Blog</a>
+
+	<ul id="menu">
+		<li class="menu-item">
+			<a href="/about" class="menu-item-link">ABOUT</a>
+		</li>
+		
+		<li class="menu-item">
+			<a href="https://github.com/wujun234/uid-generator-spring-boot-starter" class="menu-item-link" target="_blank">
+				UidGenerator
+			</a>
+		</li>
+		<li class="menu-item">
+			<a href="https://github.com/zqc-hhg" class="menu-item-link" target="_blank">
+				<i class="fa fa-github fa-2x"></i>
+			</a>
+		</li>
+	</ul>
+</header>
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="text" placeholder="search...">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										00 踩坑
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/08/23/00%20%E8%B8%A9%E5%9D%91/%E8%A7%A3%E5%86%B3%E2%80%9C%E9%87%8D%E6%96%B0%E5%AE%89%E8%A3%85vmware-tools%E2%80%9D%E7%81%B0%E8%89%B2%E8%80%8C%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/">
+										解决“重新安装vmware-tools”灰色而无法安装问题
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										01 算法
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										01 算法思想
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										5 分治
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/02/04/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.0%20%E5%88%86%E6%B2%BB%E6%A6%82%E8%BF%B0/">
+										5.0 分治概述
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.1%20%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/">
+										5.1 二分搜索
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.2%20%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/">
+										5.2 大整数乘法
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/07/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.3%20Strassen%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/">
+										5.3 Strassen矩阵乘法
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.4%20%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96/">
+										5.4 棋盘覆盖
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.5%20%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
+										5.5 归并排序
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/06/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/5%20%E5%88%86%E6%B2%BB/5.6%20%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
+										5.6 快速排序
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										7 动态规划
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/02/09/01%20%E7%AE%97%E6%B3%95/01%20%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/7%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/7.0%20%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A6%82%E8%BF%B0/">
+										7.0 动态规划概述
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										02 网络
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										01 TCP IP
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/02/14/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/00%20OSI%E6%A8%A1%E5%9E%8B%E7%AE%80%E4%BB%8B/">
+										00 OSI模型简介
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/15/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/01%20%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+										01 网络基础知识
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/18/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/02%20TCP%20IP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+										02 TCP IP基础知识
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/02/28/02%20%E7%BD%91%E7%BB%9C/01%20TCP%20IP/03%20%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">
+										03 数据链路层
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										03 Linux
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										命令
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/07/03%20Linux/%E5%91%BD%E4%BB%A4/01%20%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">
+										01 用户管理
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/07/03%20Linux/%E5%91%BD%E4%BB%A4/02%20%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">
+										02 文件管理
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Vim编辑器与Shell命令脚本
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/20/03%20Linux/%E5%91%BD%E4%BB%A4/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/Vim%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8/">
+										Vim文本编辑器
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/20/03%20Linux/%E5%91%BD%E4%BB%A4/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/%E7%BC%96%E5%86%99Shell%E8%84%9A%E6%9C%AC/">
+										编写Shell脚本
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%8EShell%E5%91%BD%E4%BB%A4%E8%84%9A%E6%9C%AC/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E6%9C%8D%E5%8A%A1%E7%A8%8B%E5%BA%8F/">
+										计划任务服务程序
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										基本命令
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E4%BD%9C%E5%91%BD%E4%BB%A4/">
+										常用系统工作命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E6%89%93%E5%8C%85%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%90%9C%E7%B4%A2%E5%91%BD%E4%BB%A4/">
+										打包压缩与搜索命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/">
+										文件目录管理命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91%E5%91%BD%E4%BB%A4/">
+										文本文件编辑命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										用户身份与文件权限
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E5%BD%92%E5%B1%9E/">
+										文件权限与归属
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/21/03%20Linux/%E5%91%BD%E4%BB%A4/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%83%BD%E5%8A%9B/">
+										用户身份与能力
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										鸟叔的linux私房菜
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/16/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/00%20%20%E5%B8%AE%E5%8A%A9/">
+										00  帮助
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/06/26/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/00%20Linux%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/">
+										00 Linux的前世今生
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/11/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/03%20Linux%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/">
+										03 Linux文件权限与目录配置
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/13/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/04%20Linux%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/">
+										04 Linux文件与目录管理
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/08/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E5%B8%AE%E5%8A%A9%E5%91%BD%E4%BB%A4/">
+										帮助命令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/06/26/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E5%BC%80%E6%BA%90VS%E9%97%AD%E6%BA%90/">
+										开源VS闭源
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/08/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E6%AD%A3%E7%A1%AE%E5%85%B3%E6%9C%BA/">
+										正确关机
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/07/07/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/">
+										磁盘分区
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/18/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E7%AE%A1%E9%81%93%E7%AC%A6%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">
+										管道符、重定向与环境变量
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/06/26/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E8%AE%BA/">
+										计算机概论
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										04 其他
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/03/02/04%20%E5%85%B6%E4%BB%96/hello-world/">
+										hello-world
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/01/19/04%20%E5%85%B6%E4%BB%96/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%E5%8F%8A%E5%B0%8F%E6%8A%80%E5%B7%A7%EF%BC%88%E4%B8%80)/">
+										程序设计的注意事项及小技巧（一)
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										05 工具使用
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/10/08/05%20%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/PicGo+GitHub%E5%9B%BE%E5%BA%8A/">
+										PicGo+GitHub图床
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/09/29/05%20%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E4%BD%BF%E7%94%A8gdb%E8%B0%83%E8%AF%95%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">
+										使用gdb调试应用程序
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										06 pwn
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										00 栈溢出
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/10/05/06%20pwn/00%20%E6%A0%88%E6%BA%A2%E5%87%BA/%5BOGeek2019%5Dbabyrop%20%E9%A2%98%E8%A7%A3/">
+										[OGeek2019]babyrop 题解
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										07 C语言
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/10/11/07%20C%E8%AF%AD%E8%A8%80/mprotect/">
+										mprotect
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/09/29/07%20C%E8%AF%AD%E8%A8%80/read/">
+										read
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/09/29/07%20C%E8%AF%AD%E8%A8%80/replace/">
+										replace
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										08 操作系统
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/10/04/08%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/PLT&GOT%20%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A%E6%9C%BA%E5%88%B6/">
+										PLT&GOT 表以及延迟绑定机制
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/10/11/08%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E5%AD%98%E5%88%86%E9%A1%B5/">
+										内存分页
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										09 汇编语言
+									</a>
+									
+							<ul>
+								<li class="file active">
+									<a href="/2020/10/10/09%20%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/MOVZX%E5%92%8CMOVSX%E6%8C%87%E4%BB%A4/">
+										MOVZX和MOVSX指令
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/03/02/hello-world/">
+										hello-world
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content">
+		<h1 id="article-title">
+
+	MOVZX和MOVSX指令
+</h1>
+<div class="article-meta">
+	
+		<span>
+			阅读量:<span id="/2020/10/10/09%20%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/MOVZX%E5%92%8CMOVSX%E6%8C%87%E4%BB%A4/" class="leancloud_visitors" data-flag-title="09 汇编语言/MOVZX和MOVSX指令"></span>
+		</span>
+	
+	<span>max</span>
+	<span>2020-10-10 16:57:07</span>
+    
+		<div id="article-categories">
+            
+		</div>
+    
+</div>
+
+<div id="article-content">
+	<p>尽管 MOV 指令不能直接将较小的操作数复制到较大的操作数中，但是程序员可以想办法解决这个问题。假设要将 count（无符号，16 位）传送到 ECX（32 位），可以先将 ECX 设置为 0，然后将 count 传送到 CX：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1.  .data</span><br><span class="line">2.  count WORD 1</span><br><span class="line">3.  .code</span><br><span class="line">4.  mov ecx,0</span><br><span class="line">5.  mov cx,count</span><br></pre></td></tr></table></figure>
+<p>如果对一个有符号整数 -16 进行同样的操作会发生什么呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1.  .data</span><br><span class="line">2.  signedVal SWORD -16      ; FFF0h （-16）</span><br><span class="line">3.  .code</span><br><span class="line">4.  mov ecx,0</span><br><span class="line">5.  mov cx,signedVal         ; ECX &#x3D; 0000FFF0h（+ 65,52 0）</span><br></pre></td></tr></table></figure>
+<p>ECX 中的值（+65 520）与 -16 完全不同。但是，如果先将 ECX 设置为 FFFFFFFFh，然后再把 signedVal 复制到 CX，那么最后的值就是完全正确的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1.  mov ecx,0FFFFFFFFh</span><br><span class="line">2.  mov cx,signedVal    ;ECX &#x3D; FFFFFFF0h（-16）</span><br></pre></td></tr></table></figure>
+<p>本例的有效结果是用源操作数的最高位（1）来填充目的操作数 ECX 的高 16 位，这种技术称为符号扩展（sign extension）。当然，不能总是假设源操作数的最高位是 1。幸运的是，Intel 的工程师在设计指令集时已经预见到了这个问题，因此，设置了 MOVZX 和 MOVSX 指令来分别处理无符号整数和有符号整数。</p>
+<h2 id="MOVZX-指令"><a href="#MOVZX-指令" class="headerlink" title="MOVZX 指令"></a>MOVZX 指令</h2><p>MOVZX 指令（进行全零扩展并传送）将源操作数复制到目的操作数，并把目的操作数 0 扩展到 16 位或 32 位。这条指令只用于无符号整数，有三种不同的形式：</p>
+<p>MOVZX reg32,reg/mem8<br>MOVZX reg32,reg/mem16<br>MOVZX reg16,reg/mem8</p>
+<p>在三种形式中，第一个操作数（寄存器）是目的操作数，第二个操作数是源操作数。注意，源操作数不能是常数。下例将二进制数 1000 1111 进行全零扩展并传送到 AX：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1.  .data</span><br><span class="line">2.  byteVal BYTE 10001111b</span><br><span class="line">3.  .code</span><br><span class="line">4.  movzx ax,byteVal ;AX &#x3D; 0000000010001111b</span><br></pre></td></tr></table></figure>
+<p>下图展示了如何将源操作数进行全零扩展，并送入 16 位目的操作数。</p>
+<p><img src="http://c.biancheng.net/uploads/allimg/190429/4-1Z4291K50I28.gif" alt=""></p>
+<p>下面例子的操作数是各种大小的寄存器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1.  mov bx, 0A69Bh</span><br><span class="line">2.  movzx eax, bx     ;EAX &#x3D; 0000A69Bh</span><br><span class="line">3.  movzx edx, bl     ;EDX &#x3D; 0000009Bh</span><br><span class="line">4.  movzx cx, bl     ;CX &#x3D; 009Bh</span><br></pre></td></tr></table></figure>
+<p>下面例子的源操作数是内存操作数，执行结果是一样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1.  .data</span><br><span class="line">2.  byte1 BYTE  9Bh</span><br><span class="line">3.  word1 WORD 0A69Bh</span><br><span class="line">4.  .code</span><br><span class="line">5.  movzx eax, word1 ;EAX &#x3D; 0000A69Bh</span><br><span class="line">6.  movzx edx, byte1 ;EDX &#x3D; 0000009Bh</span><br><span class="line">7.  movzx ex, byte1     ;CX &#x3D; 009Bh</span><br></pre></td></tr></table></figure>
+<h2 id="MOVSX-指令"><a href="#MOVSX-指令" class="headerlink" title="MOVSX 指令"></a>MOVSX 指令</h2><p>MOVSX 指令（进行符号扩展并传送）将源操作数内容复制到目的操作数，并把目的操作数符号扩展到 16 位或 32 位。这条指令只用于有符号整数，有三种不同的形式：</p>
+<p>MOVSX reg32, reg/mem8<br>MOVSX reg32, reg/mem16<br>MOVSX reg16, reg/mem8</p>
+<p>操作数进行符号扩展时，在目的操作数的全部扩展位上重复（复制）长度较小操作数的最高位。下面的例子是将二进制数 1000 1111b 进行符号扩展并传送到 AX：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1.  .data</span><br><span class="line">2.  byteVal BYTE 10001111b</span><br><span class="line">3.  .code</span><br><span class="line">4.  movsx ax,byteVal      ;AX &#x3D; 1111111110001111b</span><br></pre></td></tr></table></figure>
+<p>如下图所示，复制最低 8 位，同时，将源操作数的最高位复制到目的操作数高 8 位的每一位上。</p>
+<p><img src="http://c.biancheng.net/uploads/allimg/190429/4-1Z4291K614217.gif" alt=""></p>
+<p>如果一个十六进制常数的最大有效数字大于 7，那么它的最高位等于 1。如下例所示，传送到 BX 的十六进制数值为 A69B，因此，数字“A”就意味着最高位是 1。（A69B 前面的 0 是一种方便的表示法，用于防止汇编器将常数误认为标识符。）</p>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+              <a href="/2020/10/11/07%20C%E8%AF%AD%E8%A8%80/mprotect/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  mprotect
+              </a>
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/10/08/05%20%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/PicGo+GitHub%E5%9B%BE%E5%BA%8A/">
+                PicGo+GitHub图床
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: 'SPu2VRL8GBwy0tz4XPGRVVM8-gzGzoHsz',
+			appKey: 'wmFJLexGHhIBOmhlio1SFhCt',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+    // 显示次数
+		function showTime(Counter) {
+			var query = new AV.Query("Counter");
+			if($(".leancloud_visitors").length > 0){
+				var url = $(".leancloud_visitors").attr('id').trim();
+				// where field
+				query.equalTo("words", url);
+				// count
+				query.count().then(function (number) {
+					// There are number instances of MyClass where words equals url.
+					$(document.getElementById(url)).text(number?  number : '--');
+				}, function (error) {
+					// error is an instance of AVError.
+				});
+			}
+		}
+		// 追加pv
+		function addCount(Counter) {
+			var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'wujun234.github.io';
+			var Counter = AV.Object.extend("Counter");
+			var query = new Counter;
+			query.save({
+				words: url
+			}).then(function (object) {
+			})
+		}
+		$(function () {
+			var Counter = AV.Object.extend("Counter");
+			addCount(Counter);
+			showTime(Counter);
+		});
+	
+</script>
+	</div>
+	<div id="footer" style="display: none">
+	<p>
+	©2020-<span id="footerYear"></span> 
+<header id="header">
+    <a id="title" href="/" class="logo">Max's Blog</a>
+
+	<ul id="menu">
+		<li class="menu-item">
+			<a href="/about" class="menu-item-link">ABOUT</a>
+		</li>
+		
+		<li class="menu-item">
+			<a href="https://github.com/wujun234/uid-generator-spring-boot-starter" class="menu-item-link" target="_blank">
+				UidGenerator
+			</a>
+		</li>
+		<li class="menu-item">
+			<a href="https://github.com/zqc-hhg" class="menu-item-link" target="_blank">
+				<i class="fa fa-github fa-2x"></i>
+			</a>
+		</li>
+	</ul>
+</header>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+</body>
+</html>
