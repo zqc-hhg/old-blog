@@ -832,11 +832,14 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lea edx,  dword ptr  \[ecx+18\] ;  将(int类型的)局部变量\[ecx+18\]的首地址放入edx,即edx  &#x3D;  ecx+18</span><br><span class="line">lea eax,  dword ptr  \[edx+edx*2\];  eax  &#x3D;  edx+edx*2  &#x3D;  edx*3</span><br></pre></td></tr></table></figure>
 <p>​    </p>
 <h4 id="重复指令"><a href="#重复指令" class="headerlink" title="重复指令"></a>重复指令</h4><ul>
-<li><p><strong>rep 重复的前缀</strong></p>
-<p>| 重复前缀 | 终止条件 1 | 终止条件 2 |<br>| —- | —- | —- |<br>| rep | ecx=0 | 无 |<br>| repe/repz | ecx=0 | zf=0 (结果为0时继续重复) |<br>| repne/repnz | ecx=0 | zf=1 |</p>
-</li>
+<li><strong>rep 重复的前缀</strong></li>
 </ul>
-
+<pre><code>| 重复前缀 | 终止条件 1 | 终止条件 2 |
+| --- | --- | --- |
+| rep | ecx=0 | 无 |
+| repe/repz | ecx=0 | zf=0 (结果为0时继续重复) |
+| repne/repnz | ecx=0 | zf=1 |
+</code></pre>
 </div>
 
 
