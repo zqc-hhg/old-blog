@@ -96,6 +96,24 @@
 									
 							<ul>
 								<li class="file">
+									<a href="/2020/10/26/00%20%E8%B8%A9%E5%9D%91/DVWA%E4%B9%8BUbuntu%E5%AE%89%E8%A3%85%20/">
+										DVWA之Ubuntu安装 
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/10/28/00%20%E8%B8%A9%E5%9D%91/E_%20could%20not%20get%20lock%20_var_lib_dpkg_lock-frontend%20-%20open%20(11_%20Resource%20temporary%20unavailable)%20E_%20Unable%20to%20acquire%20the%20dpkg%20frontend%20lock%20(_var_lib_dpkg_lock-frontend),%20is%20an%20other%20process%20using%20it%20-%20Jello%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD/">
+										E_ could not get lock _var_lib_dpkg_lock-frontend - open (11_ Resource temporary unavailable) E_ Unable to acquire the dpkg frontend lock (_var_lib_dpkg_lock-frontend), is an other process using it - Jello - 博客园
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
 									<a href="/2020/08/23/00%20%E8%B8%A9%E5%9D%91/%E8%A7%A3%E5%86%B3%E2%80%9C%E9%87%8D%E6%96%B0%E5%AE%89%E8%A3%85vmware-tools%E2%80%9D%E7%81%B0%E8%89%B2%E8%80%8C%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/">
 										解决“重新安装vmware-tools”灰色而无法安装问题
 									</a>
@@ -349,6 +367,15 @@
 			
 								</li>
 								
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2020/10/26/03%20Linux/%E5%91%BD%E4%BB%A4/vi_vim%E4%B8%8B%E5%A6%82%E4%BD%95%E6%90%9C%E7%B4%A2%E5%AD%97%E7%AC%A6%E4%B8%B2%20/">
+										vi_vim下如何搜索字符串 
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
 							</ul>
 			
 							<ul>
@@ -690,6 +717,15 @@
 			
 							<ul>
 								<li class="file">
+									<a href="/2020/10/28/08%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/copy-on-write/">
+										copy-on-write
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
 									<a href="/2020/10/11/08%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E5%AD%98%E5%88%86%E9%A1%B5/">
 										内存分页
 									</a>
@@ -739,6 +775,15 @@
 								<div class="article-toc" style="display: none;"></div>
 							</ul>
 			
+							<ul>
+								<li class="file">
+									<a href="/2020/10/29/%E8%A7%A3%E5%86%B3undefined%20reference%20to%20%60pthread_atfork'_%60pthread_detach'_%60pthread_create'_%60pthread_join'/">
+										解决undefined reference to `pthread_atfork'_`pthread_detach'_`pthread_create'_`pthread_join'
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
 		</div>
 	</div>
 </div>
@@ -746,6 +791,113 @@
 	<!-- 引入正文 -->
 	<div id="content">
 		<div id="index">
+	
+		<div class="index-li">
+			<a href="/2020/10/08/05%20%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/PicGo+GitHub%E5%9B%BE%E5%BA%8A/">
+				<h2 class="index-title">
+					PicGo+GitHub图床
+				</h2>
+				<div class="index-brief">
+					1. 创建GitHub图床之前，需要注册/登陆GitHub账号
+申请GitHub账号很简单，我就不演示了
+
+2. 创建Repository _点击”New repository”按钮_  _最后1234步骤执行_
+
+
+我已经建立过一个同名的repository的，所以第一步会显示红色
+第三步，为re
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2020-10-08</span>
+                    
+                            
+                    
+                </div>
+		</div>	
+	
+		<div class="index-li">
+			<a href="/2020/10/05/06%20pwn/00%20%E6%A0%88%E6%BA%A2%E5%87%BA/%5BOGeek2019%5Dbabyrop%20%E9%A2%98%E8%A7%A3/">
+				<h2 class="index-title">
+					[OGeek2019]babyrop 题解
+				</h2>
+				<div class="index-brief">
+					1.查看保护措施
+发现只有NX保护，32位文件
+2.查看代码
+发现buf是一个随机数（sub_80486BB是初始化缓存区的函数）
+首先，发现函数中有个字符串的比较，如果字符串不相同，则会直接退出程序，而s是main函数中的buf（随机数），所以要想办法直接绕过这个比较，所以v1必须等于0。
+v1 
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2020-10-05</span>
+                    
+                            
+                    
+                </div>
+		</div>	
+	
+		<div class="index-li">
+			<a href="/2020/10/04/08%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/PLT&GOT%20%E8%A1%A8%E4%BB%A5%E5%8F%8A%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A%E6%9C%BA%E5%88%B6/">
+				<h2 class="index-title">
+					PLT&GOT 表以及延迟绑定机制
+				</h2>
+				<div class="index-brief">
+					linux 下的动态链接是通过 PLT&amp;GOT 来实现的，这里做一个实验，通过这个实验来理解
+使用如下源代码 test.c：
+12345678910#include &lt;stdio.h&gt;void print_banner()&#123;    printf("Welcome to 
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2020-10-04</span>
+                    
+                            
+                    
+                </div>
+		</div>	
+	
+		<div class="index-li">
+			<a href="/2020/09/29/07%20C%E8%AF%AD%E8%A8%80/read/">
+				<h2 class="index-title">
+					read
+				</h2>
+				<div class="index-brief">
+					read is a system call used to read data into a buffer.
+Required Include Files1#include &lt;unistd.h&gt;
+Function Definition1ssize_t read(int fildes, v
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2020-09-29</span>
+                    
+                            
+                    
+                </div>
+		</div>	
+	
+		<div class="index-li">
+			<a href="/2020/09/29/05%20%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E4%BD%BF%E7%94%A8gdb%E8%B0%83%E8%AF%95%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">
+				<h2 class="index-title">
+					使用gdb调试应用程序
+				</h2>
+				<div class="index-brief">
+					一、gdb基本使用 GDB是一个由GNU开源组织发布的、UNIX/LINUX操作系统下的、基于命令行的、功能强大的程序调试工具。 对于一名Linux下工作的c++程序员，gdb是必不可少的工具；
+1. 启动gdb 对于C/C++程序，编译的时候需要加上 -g 参数生成调试信息。如:gcc -g he
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2020-09-29</span>
+                    
+                            
+                    
+                </div>
+		</div>	
 	
 		<div class="index-li">
 			<a href="/2020/09/29/07%20C%E8%AF%AD%E8%A8%80/replace/">
@@ -863,106 +1015,10 @@ cout &lt;&lt;
                 </div>
 		</div>	
 	
-		<div class="index-li">
-			<a href="/2020/07/08/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E5%B8%AE%E5%8A%A9%E5%91%BD%E4%BB%A4/">
-				<h2 class="index-title">
-					帮助命令
-				</h2>
-				<div class="index-brief">
-					内建命令与外部命令有一些查看帮助的工具在内建命令与外建命令上是有区别对待的。
-​        内建命令实际上是 shell 程序的一部分，其中包含的是一些比较简单的 Linux 系统命令，这些命令是写在bash源码的builtins里面的，由 shell 程序识别并在 shell 程序内部完成运行
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2020-07-08</span>
-                    
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2020/07/07/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/">
-				<h2 class="index-title">
-					磁盘分区
-				</h2>
-				<div class="index-brief">
-					
-早期磁盘第一个扇区里面含有的重要信息我们称为MBR （Master Boot Record） 格式，但是由于近年来磁盘的容量不断扩大，造成读写上的一些困扰， 甚至有些大于 2TB 以上的磁盘分区已经让某些操作系统无法存取。因此后来又多了一个新的磁盘分区格式，称为 GPT （GUID partiti
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2020-07-07</span>
-                    
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2020/06/26/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E5%BC%80%E6%BA%90VS%E9%97%AD%E6%BA%90/">
-				<h2 class="index-title">
-					开源VS闭源
-				</h2>
-				<div class="index-brief">
-					
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2020-06-26</span>
-                    
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2020/06/26/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/00%20Linux%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/">
-				<h2 class="index-title">
-					00 Linux的前世今生
-				</h2>
-				<div class="index-brief">
-					一、Multics计划
-上世纪六十年代，人们还在用批处理计算机，也就是一次性给一批任务到计算机，然后等待结果，中途不能和计算机进行交互，而且准备作业需要耗费大量时间。于是1965年，贝尔实验室（Bell），麻省理工学院（MIT）和通用电气（GE）准备联手开发“分时多任务处理系统”，即300台以上终端
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2020-06-26</span>
-                    
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2020/06/26/03%20Linux/%E5%91%BD%E4%BB%A4/%E9%B8%9F%E5%8F%94%E7%9A%84linux%E7%A7%81%E6%88%BF%E8%8F%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E8%AE%BA/">
-				<h2 class="index-title">
-					计算机概论
-				</h2>
-				<div class="index-brief">
-					
-计算机的定义为：“接受使用者输入指令与数据，经由中央处理器的数学与逻辑单元运算处理后，以产生或储存成有用的信息”；
-电脑的五大单元包括：输入单元、输出单元、控制单元、算数逻辑单元、存储单元五大部分。其中CPU占有控制、算术逻辑单元，存储单元又包含内存与辅助内存；
-数据会流进/流出内存是CPU所发布
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2020-06-26</span>
-                    
-                            
-                    
-                </div>
-		</div>	
-	
 	
 	<div id="index-paginator">
 		
-			<a class="extend prev" rel="prev" href="/archives/2020/">&lt;</a><a class="page-number" href="/archives/2020/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2020/page/3/">3</a><a class="page-number" href="/archives/2020/page/4/">4</a><a class="page-number" href="/archives/2020/page/5/">5</a><a class="extend next" rel="next" href="/archives/2020/page/3/">&gt;</a>
+			<a class="extend prev" rel="prev" href="/archives/2020/">&lt;</a><a class="page-number" href="/archives/2020/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2020/page/3/">3</a><a class="page-number" href="/archives/2020/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2020/page/6/">6</a><a class="extend next" rel="next" href="/archives/2020/page/3/">&gt;</a>
 		
 	</div>
 </div>
